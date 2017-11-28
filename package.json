@@ -1,0 +1,27 @@
+{
+  "name": "newshop",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "standard --fix",
+    "dev": "cross-env DEBUG=newshop:* nodemon ./bin/www",
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "glob": "^7.1.2",
+    "hbs": "~4.0.1",
+    "morgan": "~1.9.0",
+    "mysql2": "^1.5.1",
+    "sequelize": "^4.23.1",
+    "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.1",
+    "nodemon": "^1.12.1",
+    "standard": "^10.0.3"
+  }
+}
