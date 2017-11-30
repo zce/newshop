@@ -1,9 +1,9 @@
 module.exports = {
   database: {
     dialect: 'mysql',
-    host: 'localhost',
-    username: 'root',
-    password: 'wanglei',
+    host: '47.96.21.88',
+    username: 'tom',
+    password: 'jerry',
     database: 'newshop',
     operatorsAliases: false,
     logging: false

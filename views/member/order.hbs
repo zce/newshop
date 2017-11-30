@@ -1,0 +1,443 @@
+{{#block 'styles'}}
+<link rel="stylesheet" type="text/css" href="/css/pages-myOrder.css" />
+{{/block}}
+
+<div id="account">
+  <div class="py-container">
+    <div class="yui3-g home">
+      <!--左侧列表-->
+      <div class="yui3-u-1-6 list">
+        <dl>
+          <dt>
+            <i>·</i> 订单中心</dt>
+          <dd>我的订单</dd>
+          <dd>团购订单</dd>
+          <dd>本地生活订单 </dd>
+          <dd>我的预售</dd>
+          <dd>评价晒单</dd>
+          <dd>取消订单记录</dd>
+        </dl>
+        <dl>
+          <dt>
+            <i>·</i> 关注中心</dt>
+          <dd>关注的商品 </dd>
+          <dd>关注的店铺</dd>
+          <dd>关注的专辑 </dd>
+          <dd>关注的品牌</dd>
+          <dd>关注的活动 </dd>
+          <dd>浏览历史</dd>
+        </dl>
+        <dl>
+          <dt>
+            <i>·</i> 特色业务</dt>
+          <dd>我的营业厅 </dd>
+          <dd>京东通信 </dd>
+          <dd>定期送 </dd>
+          <dd>京东代下单</dd>
+          <dd>我的回收单 </dd>
+          <dd>节能补贴</dd>
+          <dd>医药服务 </dd>
+          <dd>流量加油站 </dd>
+          <dd>黄金托管</dd>
+        </dl>
+        <dl>
+          <dt>
+            <i>·</i> 客户服务</dt>
+          <dd>返修退换货 </dd>
+          <dd>价格保护 </dd>
+          <dd>意见建议 </dd>
+          <dd>购买咨询 </dd>
+          <dd>交易纠纷 </dd>
+          <dd>我的发票</dd>
+        </dl>
+        <dl>
+          <dt>
+            <i>·</i> 设置</dt>
+          <dd>个人信息 </dd>
+          <dd>收货地址 </dd>
+        </dl>
+      </div>
+      <!--右侧主内容-->
+      <div class="yui3-u-5-6 body">
+        <div class="order">
+          <div class="mt">
+            <span class="fl">
+              <strong>我的订单</strong>
+            </span>
+          </div>
+        </div>
+
+        <div class="order-detail">
+
+          <div class="ever">
+            <ul class="sui-nav nav-tabs">
+              <li class="active">
+                <a href="#all" data-toggle="tab">全部订单
+                  <i class="mark">5</i>
+                </a>
+              </li>
+              <li>
+                <a href="#pay" data-toggle="tab">待付款
+                  <i class="mark">2</i>
+                </a>
+              </li>
+              <li>
+                <a href="#receive" data-toggle="tab">待收货
+                  <i class="mark">1</i>
+                </a>
+              </li>
+              <li>
+                <a href="#remark" data-toggle="tab">待评价
+                  <i class="mark">2</i>
+                </a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+
+            <div class="tab-content">
+              <div class="chosetype">
+                <table class="sui-table table-bordered-simple">
+                  <thead>
+                    <tr>
+                      <th width="29%">
+                        <span class="sui-dropdown dropdown-bordered">
+                          <span class="dropdown-inner">
+                            <a role="button" href="javascript:void(0);" data-toggle="dropdown" data-trigger="hover" class="dropdown-toggle">近三个月订单
+                              <i class="arrow">
+                                <img src="/img/barrow.png" />
+                              </i>
+                            </a>
+                            <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                              <li role="presentation" class="active">
+                                <a role="menuitem" tabindex="-1" href="#">近三个月订单</a>
+                              </li>
+                              <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">2016年订单</a>
+                              </li>
+                              <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">2015年订单</a>
+                              </li>
+                              <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">2014年订单</a>
+                              </li>
+                            </ul>
+                          </span>
+                        </span>
+                      </th>
+                      <th width="31%">订单详情</th>
+                      <th width="13%">收货人</th>
+                      <th>金额</th>
+                      <th>
+                        <span class="sui-dropdown dropdown-bordered">
+                          <span class="dropdown-inner">
+                            <a role="button" href="javascript:void(0);" data-toggle="dropdown" data-trigger="hover" class="dropdown-toggle">全部状态
+                              <i class="arrow">
+                                <img src="/img/barrow.png" />
+                              </i>
+                            </a>
+                            <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                              <li role="presentation" class="active">
+                                <a role="menuitem" tabindex="-1" href="#">全部状态</a>
+                              </li>
+
+                              <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">等待付款</a>
+                              </li>
+                              <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">等待收货</a>
+                              </li>
+                              <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">已完成</a>
+                              </li>
+                              <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">已取消</a>
+                              </li>
+                            </ul>
+                          </span>
+                        </span>
+                      </th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  </tbody>
+                </table>
+              </div>
+              <div id="all" class="tab-pane active">
+                <div class="orders">
+
+
+                  <table class="sui-table table-bordered">
+                    <thead>
+                      <tr>
+                        <th colspan="5">
+                          <span class="ordertitle">2017-02-11 11:59　订单编号：7867473872181848
+                            <span class="pull-right delete">
+                              <img src="/img/delete.png" />
+                            </span>
+                          </span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td width="60%">
+                          <div class="typographic">
+                            <img src="/img/goods.png" />
+                            <a href="#" class="block-text">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
+                            <span>x1</span>
+                            <ul class="unstyled list-inline">
+                              <li>申请售后</li>
+                            </ul>
+                          </div>
+                        </td>
+                        <td rowspan="2" width="8%" class="center">小丽</td>
+                        <td rowspan="2" width="13%" class="center">
+                          <ul class="unstyled">
+                            <li>总金额¥138.00</li>
+                            <li>在线支付</li>
+
+                          </ul>
+                        </td>
+                        <td rowspan="2" width="8%" class="center">
+                          <a href="#" class="btn">已完成 </a>
+                        </td>
+                        <td rowspan="2" width="13%" class="center">
+                          <ul class="unstyled">
+                            <li>
+                              <a href="mycomment.html" target="_blank">评价|晒单</a>
+                            </li>
+
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="50%">
+                          <div class="typographic">
+                            <img src="/img/goods.png" />
+                            <a href="#" class="block-text">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
+                            <span>x1</span>
+                            <ul class="unstyled">
+                              <li>申请售后</li>
+
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table class="sui-table table-bordered">
+                    <thead>
+                      <tr>
+                        <th colspan="5">
+                          <span class="ordertitle">
+                            <i id="order-time">2017-03-11 12:59</i>　订单编号：
+                            <i id="order-num">7867473872555</i>
+                            <span class="pull-right delete">
+                              <img src="/img/delete.png" />
+                            </span>
+                          </span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td width="60%">
+                          <div class="typographic">
+                            <img src="/img/goods.png" />
+                            <a href="#" class="block-text">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
+                            <span>x1</span>
+                            <ul class="unstyled list-inline">
+                              <li>申请售后</li>
+                            </ul>
+                          </div>
+                        </td>
+                        <td rowspan="2" width="8%" class="center">小丽</td>
+                        <td rowspan="2" width="13%" class="center">
+                          <ul class="unstyled">
+                            <li>总金额¥138.00</li>
+                            <li>在线支付</li>
+
+                          </ul>
+                        </td>
+                        <td rowspan="2" width="8%" class="center">
+                          <a href="#" class="btn">已完成 </a>
+                        </td>
+                        <td rowspan="2" width="13%" class="center">
+                          <ul class="unstyled">
+                            <li>
+                              <a href="mycomment.html" target="_blank">评价|晒单</a>
+                            </li>
+
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="50%">
+                          <div class="typographic">
+                            <img src="/img/goods.png" />
+                            <a href="#" class="block-text">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
+                            <span>x1</span>
+                            <ul class="unstyled">
+                              <li>申请售后</li>
+
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+
+              <div id="pay" class="tab-pane">
+                <p>待付款</p>
+              </div>
+              <div id="receive" class="tab-pane">
+                <p>待收货</p>
+              </div>
+              <div id="remark" class="tab-pane">
+                <p>待评价</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="order">
+          <div class="mt">
+            <span class="fl">
+              <strong>猜你喜欢</strong>
+            </span>
+          </div>
+        </div>
+        <div class="like-list">
+          <ul class="yui3-g">
+            <li class="yui3-u-1-4">
+              <div class="list-wrap">
+                <div class="p-img">
+                  <img src="/img/_/itemlike01.png" />
+                </div>
+                <div class="attr">
+                  <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                </div>
+                <div class="price">
+                  <strong>
+                    <em>¥</em>
+                    <i>3699.00</i>
+                  </strong>
+                </div>
+                <div class="commit">
+                  <i class="command">已有6人评价</i>
+                </div>
+              </div>
+            </li>
+            <li class="yui3-u-1-4">
+              <div class="list-wrap">
+                <div class="p-img">
+                  <img src="/img/_/itemlike02.png" />
+                </div>
+                <div class="attr">
+                  <em>Apple苹果iPhone 6s/6s Plus 16G 64G 128G</em>
+                </div>
+                <div class="price">
+                  <strong>
+                    <em>¥</em>
+                    <i>4388.00</i>
+                  </strong>
+                </div>
+                <div class="commit">
+                  <i class="command">已有700人评价</i>
+                </div>
+              </div>
+            </li>
+            <li class="yui3-u-1-4">
+              <div class="list-wrap">
+                <div class="p-img">
+                  <img src="/img/_/itemlike03.png" />
+                </div>
+                <div class="attr">
+                  <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                </div>
+                <div class="price">
+                  <strong>
+                    <em>¥</em>
+                    <i>4088.00</i>
+                  </strong>
+                </div>
+                <div class="commit">
+                  <i class="command">已有700人评价</i>
+                </div>
+              </div>
+            </li>
+            <li class="yui3-u-1-4">
+              <div class="list-wrap">
+                <div class="p-img">
+                  <img src="/img/_/itemlike04.png" />
+                </div>
+                <div class="attr">
+                  <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                </div>
+                <div class="price">
+                  <strong>
+                    <em>¥</em>
+                    <i>4088.00</i>
+                  </strong>
+                </div>
+                <div class="commit">
+                  <i class="command">已有700人评价</i>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#block 'scripts'}}
+<script type="text/javascript" src="/js/plugins/jquery.easing/jquery.easing.min.js"></script>
+<script type="text/javascript" src="/js/plugins/sui/sui.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
+<script type="text/javascript" src="/js/widget/nav.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $("#service").hover(function () {
+      $(".service").show();
+    }, function () {
+      $(".service").hide();
+    });
+    $("#shopcar").hover(function () {
+      $("#shopcarlist").show();
+    }, function () {
+      $("#shopcarlist").hide();
+    });
+  })
+  /*商品分类*/
+  $(function () {
+    $('.all-sort-list2 > .item').hover(function () {
+      //父类分类列表容器的高度
+      $(this).addClass('hover');
+      $(this).children('.item-list').css('display', 'block');
+    }, function () {
+      $(this).removeClass('hover');
+      $(this).children('.item-list').css('display', 'none');
+    });
+
+    $('.item > .item-list > .close').click(function () {
+      $(this).parent().parent().removeClass('hover');
+      $(this).parent().hide();
+    });
+  });
+  $(function () {
+    $('.all-sorts-list').hover(function () {
+      $(this).children('.sort').css('display', 'block')
+    }, function () {
+      $(this).children('.sort').css('display', 'none')
+    })
+  });
+</script>
+{{/block}}
