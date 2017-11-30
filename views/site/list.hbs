@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
-<p>Category Id: {{category}}</p>
+<p>Category name: {{category.cat_name}}</p>
 <ul>
   {{#each goods}}
-  <li>{{goods_name}}</li>
+  <li><a href="/item/{{goods_id}}">{{goods_name}}</a></li>
   {{/each}}
 </ul>

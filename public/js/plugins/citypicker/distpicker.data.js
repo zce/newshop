@@ -11,12 +11,13 @@
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as anonymous module.
-    define('ChineseDistricts', [], factory)
+    define('ChineseDistricts', [], factory);
   } else {
     // Browser globals.
-    factory()
+    factory();
   }
 })(function () {
+
   var ChineseDistricts = {
     86: {
       110000: '北京市',
@@ -4017,11 +4018,12 @@
       820007: '路凼填海区',
       820008: '圣方济各堂区'
     }
-  }
+  };
 
   if (typeof window !== 'undefined') {
-    window.ChineseDistricts = ChineseDistricts
+    window.ChineseDistricts = ChineseDistricts;
   }
 
-  return ChineseDistricts
-})
+  return ChineseDistricts;
+
+});

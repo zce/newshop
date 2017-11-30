@@ -52,6 +52,7 @@
              {"tit":"待评价","url":"seckillorder-evaluate.html"},
              {"tit":"我的收藏","url":"seckillperson-collect.html"},
              {"tit":"我的足迹","url":"seckillperson-footmark.html"},
+             {"tit":"我的评价","url":"mycomment.html"},
              {"tit":"个人信息","url":"seckillsetting-info.html"},
              {"tit":"地址管理","url":"seckillsetting-address.html"},
              {"tit":"安全管理","url":"seckillsetting-safe.html"},

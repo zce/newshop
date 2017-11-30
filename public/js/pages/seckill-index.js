@@ -1,11 +1,11 @@
-// 列表数据加载
+//列表数据加载
 $(function () {
     // 鼠标经过增加边框
-  $('.seckill-item').hover(function () {
-    $(this).css('border-color', '#b1191a')
-  }, function () {
-    $(this).css('border-color', 'transparent')
-  })
+            $(".seckill-item").hover(function () {
+                $(this).css("border-color","#b1191a");
+            },function(){
+                $(this).css("border-color","transparent");
+            })
 //    $.ajax ({
 //        type:"GET",
 //        url:"../data/list-data.json",
@@ -24,29 +24,31 @@ $(function () {
 //                 + "<a class='sui-btn btn-block btn-buy' href='seckill-item.html' target='_blank'>立即抢购</a>"
 //                 + "</li >"
 //             );
-
+            
 //         })
 //        }
 //    })
-})
-// go to top
-$(document).ready(function ($) {
-  var offset = 300,
-    offset_opacity = 1200,
-    scroll_top_duration = 700,
-    $back_to_top = $('.cd-top')
 
-  $(window).scroll(function () {
-    ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out')
-    if ($(this).scrollTop() > offset_opacity) {
-      $back_to_top.addClass('cd-fade-out')
-    }
-  })
-  $back_to_top.on('click', function (event) {
-    event.preventDefault()
-    $('body,html').animate({
-      scrollTop: 0
-    }, scroll_top_duration
-        )
-  })
 })
+//go to top
+$(document).ready(function ($) {
+    var offset = 300,
+        offset_opacity = 1200,
+        scroll_top_duration = 700,
+        $back_to_top = $('.cd-top');
+
+    $(window).scroll(function () {
+        ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if ($(this).scrollTop() > offset_opacity) {
+            $back_to_top.addClass('cd-fade-out');
+        }
+    });
+    $back_to_top.on('click', function (event) {
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0,
+        }, scroll_top_duration
+        );
+    });
+
+});

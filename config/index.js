@@ -5,6 +5,7 @@ module.exports = {
     username: 'root',
     password: 'wanglei',
     database: 'newshop',
-    operatorsAliases: false
+    operatorsAliases: false,
+    logging: false
   }
 }

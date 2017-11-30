@@ -8,16 +8,21 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "express-session": "^1.15.6",
     "glob": "^7.1.2",
     "hbs": "~4.0.1",
+    "http-errors": "^1.6.2",
     "morgan": "~1.9.0",
     "mysql2": "^1.5.1",
     "sequelize": "^4.23.1",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "uuid": "^3.1.0",
+    "validator": "^9.1.2"
   },
   "devDependencies": {
     "cross-env": "^5.1.1",
