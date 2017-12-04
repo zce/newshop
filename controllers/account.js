@@ -1,8 +1,9 @@
 const uuid = require('uuid')
-const validator = require('validator')
 const bcrypt = require('bcryptjs')
+const validator = require('validator')
 
 const { User } = require('../models')
+const mailer = require('../utils/mailer')
 
 exports.index = (req, res) => {
   res.redirect('/account/login')
@@ -60,10 +61,16 @@ exports.registerPost = (req, res) => {
     })
     .then(user => {
       if (!user) throw new Error('注册失败，请稍后再试')
+      const activeLink = `${req.protocol}://${req.get('host')}/member/active?code=${user.user_email_code}`
+      const html = `<p>请点击以下超链接，激活账号</p><a href="${activeLink}">${activeLink}</a>`
+      return mailer.send('品优购账号激活', html, user.user_email)
+    })
+    .then(result => {
       // 注册成功跳转到登录页面
       res.redirect('/account/login')
     })
     .catch(err => {
+      console.log(err)
       res.locals.message = err.message
       res.locals.raw = req.body
       res.render('account/register', { layout: null })

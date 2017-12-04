@@ -1,5 +1,10 @@
 {{#block 'styles'}}
-<link rel="stylesheet" type="text/css" href="/css/pages-seckillOrder.css" />
+<link rel="stylesheet"  href="/css/pages-seckillOrder.css">
+<style>
+  .avatar-box input {
+    display: none !important;
+  }
+</style>
 {{/block}}
 
 <div id="account">
@@ -7,7 +12,6 @@
     <div class="yui3-g home">
       <!--左侧列表-->
       <div class="yui3-u-1-6 list">
-
         <div class="person-info">
           <div class="person-photo">
             <img src="/img/_/photo.png" alt="">
@@ -70,167 +74,96 @@
       <!--右侧主内容-->
       <div class="yui3-u-5-6">
         <div class="body userInfo">
-          <ul class="sui-nav nav-tabs nav-large nav-primary ">
-            <li class="active">
-              <a href="#one" data-toggle="tab">基本资料</a>
-            </li>
-            <li>
-              <a href="#two" data-toggle="tab">头像照片</a>
-            </li>
-          </ul>
-          <div class="tab-content ">
-            <div id="one" class="tab-pane active">
-              <form id="form-msg" class="sui-form form-horizontal">
-                <div class="control-group">
-                  <label for="inputName" class="control-label">昵称：</label>
-                  <div class="controls">
-                    <input type="text" id="inputName" name="email" placeholder="昵称">
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label for="inputGender" class="control-label">性别：</label>
-                  <div class="controls">
-                    <label data-toggle="radio" class="radio-pretty inline">
-                      <input type="radio" name="gender" value="1">
-                      <span>男</span>
-                    </label>
-                    <label data-toggle="radio" class="radio-pretty inline">
-                      <input type="radio" name="gender" value="2">
-                      <span>女</span>
-                    </label>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label for="inputPassword" class="control-label">生日：</label>
-                  <div class="controls">
-                    <select id="select_year2" rel="1990"></select>年
-                    <select id="select_month2" rel="4"></select>月
-                    <select id="select_day2" rel="3"></select>日
-                  </div>
-                </div>
-
-
-                <div class="control-group">
-                  <label for="inputPassword" class="control-label">所在地：</label>
-                  <div class="controls">
-                    <div data-toggle="distpicker">
-                      <div class="form-group area">
-                        <select class="form-control" id="province1"></select>
-                      </div>
-                      <div class="form-group area">
-                        <select class="form-control" id="city1"></select>
-                      </div>
-                      <div class="form-group area">
-                        <select class="form-control" id="district1"></select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label for="inputJob" class="control-label">职业：</label>
-                  <div class="controls">
-                    <span class="sui-dropdown dropdown-bordered select">
-                      <span class="dropdown-inner">
-                        <a role="button" data-toggle="dropdown" href="#" class="dropdown-toggle">
-                          <input name="job" type="hidden" data-rules="required">
-                          <i class="caret"></i>
-                          <span>请选择</span>
-                        </a>
-                        <ul id="menu4" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
-                          <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);" value="bj">程序员</a>
-                          </li>
-                          <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);" value="sb">产品经理</a>
-                          </li>
-                          <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);" value="sb">UI设计师</a>
-                          </li>
-                        </ul>
-                      </span>
-                    </span>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label for="sanwei" class="control-label"></label>
-                  <div class="controls">
-                    <button type="submit" class="sui-btn btn-primary">立即注册</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div id="two" class="tab-pane">
-
-              <div class="new-photo">
-                <p>当前头像：</p>
-                <div class="upload">
-                  <img id="imgShow_WU_FILE_0" width="100" height="100" src="/img/_/photo_icon.png" alt="">
-                  <input type="file" id="up_img_WU_FILE_0" />
-                </div>
-
+          <form id="form-msg" class="sui-form form-horizontal" action="/member/profile" method="post" enctype="multipart/form-data">
+            <div class="control-group">
+              <label for="username" class="control-label">用户名：</label>
+              <div class="controls">
+                <input type="text" id="username" value="{{currentUser.username}}" readonly>
               </div>
             </div>
-          </div>
-
+            <div class="control-group">
+              <label for="avatar" class="control-label">头像：</label>
+              <div class="controls">
+                <label class="avatar-box">
+                  <img src="/avatar/{{currentUser.user_id}}.png" width="80">
+                  <input type="file" id="avatar" name="avatar">
+                </label>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">性别：</label>
+              <div class="controls">
+                <label>
+                  <input type="radio" name="user_sex" value="男"{{#equal currentUser.user_sex '男'}} checked{{/equal}}>
+                  <span>男</span>
+                </label>
+                <label>
+                  <input type="radio" name="user_sex" value="女"{{#equal currentUser.user_sex '女'}} checked{{/equal}}>
+                  <span>女</span>
+                </label>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="user_qq" class="control-label">QQ：</label>
+              <div class="controls">
+                <input type="text" id="user_qq" name="user_qq" value="{{currentUser.user_qq}}">
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="user_tel" class="control-label">手机：</label>
+              <div class="controls">
+                <input type="text" id="user_tel" name="user_tel" value="{{currentUser.user_tel}}">
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="user_xueli" class="control-label">学历：</label>
+              <div class="controls">
+                <select name="user_xueli" id="user_xueli">
+                  <option{{#equal currentUser.user_xueli '小学'}} selected{{/equal}}>小学</option>
+                  <option{{#equal currentUser.user_xueli '初中'}} selected{{/equal}}>初中</option>
+                  <option{{#equal currentUser.user_xueli '高中'}} selected{{/equal}}>高中</option>
+                  <option{{#equal currentUser.user_xueli '专科'}} selected{{/equal}}>专科</option>
+                  <option{{#equal currentUser.user_xueli '本科'}} selected{{/equal}}>本科</option>
+                  <option{{#equal currentUser.user_xueli '硕士'}} selected{{/equal}}>硕士</option>
+                  <option{{#equal currentUser.user_xueli '博士'}} selected{{/equal}}>博士</option>
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="user_hobby" class="control-label">兴趣：</label>
+              <div class="controls">
+                <textarea id="user_hobby" name="user_hobby" cols="80" rows="3">{{currentUser.user_hobby}}</textarea>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="user_introduce" class="control-label">简介：</label>
+              <div class="controls">
+                <textarea id="user_introduce" name="user_introduce" cols="80" rows="6">{{currentUser.user_introduce}}</textarea>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label"></label>
+              <div class="controls">
+                <button type="submit" class="sui-btn btn-primary">保存</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
 {{#block 'scripts'}}
-<script type="text/javascript" src="/js/plugins/jquery.easing/jquery.easing.min.js"></script>
-<script type="text/javascript" src="/js/plugins/sui/sui.min.js"></script>
-<script type="text/javascript" src="/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
-<script type="text/javascript" src="/js/widget/nav.js"></script>
-<script type="text/javascript" src="/js/plugins/birthday/birthday.js"></script>
-<script type="text/javascript" src="/js/plugins/citypicker/distpicker.data.js"></script>
-<script type="text/javascript" src="/js/plugins/citypicker/distpicker.js"></script>
-<script type="text/javascript" src="/js/plugins/upload/uploadPreview.js"></script>
 <script type="text/javascript" src="/js/pages/main.js"></script>
 <script>
-  $(function () {
-    $.ms_DatePicker({
-      YearSelector: "#select_year2",
-      MonthSelector: "#select_month2",
-      DaySelector: "#select_day2"
-    });
-  });
-  $(function () {
-    $("#service").hover(function () {
-      $(".service").show();
-    }, function () {
-      $(".service").hide();
-    });
-    $("#shopcar").hover(function () {
-      $("#shopcarlist").show();
-    }, function () {
-      $("#shopcarlist").hide();
-    });
-
-  })
-  /*商品分类*/
-  $(function () {
-    $('.all-sort-list2 > .item').hover(function () {
-      //父类分类列表容器的高度
-      $(this).addClass('hover');
-      $(this).children('.item-list').css('display', 'block');
-    }, function () {
-      $(this).removeClass('hover');
-      $(this).children('.item-list').css('display', 'none');
-    });
-
-    $('.item > .item-list > .close').click(function () {
-      $(this).parent().parent().removeClass('hover');
-      $(this).parent().hide();
-    });
-  });
-  $(function () {
-    $('.all-sorts-list').hover(function () {
-      $(this).children('.sort').css('display', 'block')
-    }, function () {
-      $(this).children('.sort').css('display', 'none')
+  $(function ($) {
+    $('#avatar').on('change', function () {
+      var files = $(this).prop('files');
+      if (!files.length) return;
+      var file = files[0];
+      var link = URL.createObjectURL(file)
+      $(this).siblings('img').attr('src', link)
     })
   });
 </script>

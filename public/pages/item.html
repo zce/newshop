@@ -8,10 +8,9 @@
 	<title>产品详情页</title>
 	 <link rel="icon" href="/assets/img/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="../css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="../css/all.css" />
     <link rel="stylesheet" type="text/css" href="../css/pages-item.css" />
     <link rel="stylesheet" type="text/css" href="../css/pages-zoom.css" />
-    <link rel="stylesheet" type="text/css" href="../css/widget-cartPanelView.css" />
 </head>
 
 <body>
@@ -488,56 +487,6 @@
 	</div>
 </div>
 
-
-<script type="text/javascript" src="../js/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript">
-	$(function () {
-		$("#service").hover(function () {
-			$(".service").show();
-		}, function () {
-			$(".service").hide();
-		});
-		$("#shopcar").hover(function () {
-			$("#shopcarlist").show();
-		}, function () {
-			$("#shopcarlist").hide();
-		});
-
-	})
-	/*商品分类*/
-	$(function () {
-		$('.all-sort-list2 > .item').hover(function () {
-			//父类分类列表容器的高度
-			$(this).addClass('hover');
-			$(this).children('.item-list').css('display', 'block');
-		}, function () {
-			$(this).removeClass('hover');
-			$(this).children('.item-list').css('display', 'none');
-		});
-
-		$('.item > .item-list > .close').click(function () {
-			$(this).parent().parent().removeClass('hover');
-			$(this).parent().hide();
-		});
-	});
-	$(function() {
-		$('.all-sorts-list').hover(function() {
-			$(this).children('.sort').css('display','block')
-		},function() {
-			$(this).children('.sort').css('display','none')
-		})
-	});
-
-	
-</script>
-<script type="text/javascript" src="../js/model/cartModel.js"></script>
-<script type="text/javascript" src="../js/plugins/jquery.easing/jquery.easing.min.js"></script>
-<script type="text/javascript" src="../js/plugins/sui/sui.min.js"></script>
-<script type="text/javascript" src="../js/plugins/jquery.jqzoom/jquery.jqzoom.js"></script>
-<script type="text/javascript" src="../js/plugins/jquery.jqzoom/zoom.js"></script>
-<script type="text/javascript" src="../js/pages/index.js"></script>
-<script type="text/javascript" src="../js/pages/item.js"></script>
-</body>
 	<div class="py-container">
 		<div id="item">
 			<div class="crumb-wrap">
@@ -1340,7 +1289,6 @@
 	</div>
 </div>
 <!--页面底部END-->
-	
 	<!--侧栏面板开始-->
 <div class="J-global-toolbar">
 	<div class="toolbar-wrap J-wrap">
@@ -1476,6 +1424,10 @@
 	</div>
 </script>
 <!--侧栏面板结束-->
-undefined
+
+<script type="text/javascript" src="../js/all.js"></script>
+<script type="text/javascript" src="../js/pages/index.js"></script>
+<script type="text/javascript" src="../js/pages/item.js"></script>
+</body>
 
 </html>

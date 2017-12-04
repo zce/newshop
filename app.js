@@ -1,3 +1,4 @@
+const debug = require('debug')('newshop:app')
 const express = require('express')
 const path = require('path')
 // const favicon = require('serve-favicon')
@@ -34,12 +35,17 @@ hbs.registerHelper('block', (key, opts) => {
   const block = blocks[key] = blocks[key] || []
   if (opts.fn) {
     // 此时是开闭标签
-    block.push(opts.fn(this))
+    block.push(opts.fn(opts.data.root))
   } else {
     // 单标签
     delete blocks[key]
     return new hbs.SafeString(block.join('\n'))
   }
+})
+
+hbs.registerHelper('equal', (a, b, opts) => {
+  // console.log(opts.inverse)
+  return a === b ? opts.fn(opts.data.root) : opts.inverse(opts.data.root)
 })
 
 app.set('views', path.join(__dirname, 'views'))
@@ -89,6 +95,7 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500)
   res.render('shared/error', { layout: null })
+  debug(err)
 })
 
 module.exports = app

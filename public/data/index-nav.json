@@ -1,0 +1,68 @@
+{
+  "list": [{
+    "title": "主要页面",
+    "dataList":[
+      {"tit":"首页","url":"./JD-index.html"},
+      {"tit":"列表页","url":"./list.html"},
+      {"tit":"详情页","url":"./item.html"},
+      {"tit":"购物车","url":"./cart.html"},
+      {"tit":"成功加入购物车","url":"./success-cart.html"},
+      {"tit":"结算页","url":"./getOrderInfo.html"},
+      {"tit":"支付页","url":"./pay.html"},
+      {"tit":"微信支付页","url":"./weixinpay.html"},
+      {"tit":"支付成功页","url":"./paysuccess.html"},
+      {"tit":"支付失败页","url":"./payfail.html"}]
+  },{
+    "title": "个人中心",
+    "dataList":[
+      {"tit":"我的品优购","url":"./home.html"},
+      {"tit":"我的订单页","url":"./myOrder.html"},
+      {"tit":"收货地址","url":"./addressList.html"}]
+  },{
+    "title": "登录注册",
+    "dataList":[
+      {"tit":"登录","url":"./login.html"},
+      {"tit":"我的订单页","url":"./myOrder.html"},
+      {"tit":"注册","url":"./register.html"}]
+  },{
+    "title": "秒杀页面",
+    "dataList":[
+      {"tit":"首页","url":"./seckill-index.html"},
+      {"tit":"详情页","url":"./seckill-item.html"}]
+  },{
+    "title": "我的订单",
+    "dataList": [
+      {"tit": "我的订单页","url": "seckillOrder.html"},
+      {"tit": "待付款","url": "seckillorder-pay.html"},
+      {"tit": "待发货","url": "seckillorder-send.html"},
+      {"tit": "待收货","url": "seckillorder-receive.html"},
+      {"tit": "待评价","url": "seckillorder-evaluate.html"},
+      {"tit": "我的收藏","url": "seckillperson-collect.html"},
+      {"tit": "我的足迹","url": "seckillperson-footmark.html"},
+      {"tit": "我的评价","url": "mycomment.html"},
+      {"tit": "个人信息","url": "seckillsetting-info.html"},
+      {"tit": "地址管理","url": "seckillsetting-address.html"},
+      {"tit": "安全管理","url": "seckillsetting-safe.html"},
+      {"tit": "绑定新手机号","url": "seckillsetting-address-phone.html"},
+      {"tit": "手机号绑定成功","url": "seckillsetting-address-complete.html"}
+    ]
+  },{
+    "title": "店铺",
+    "dataList": [
+      {"tit": "首页","url": "shop.html"}
+    ]
+  },{
+    "title": "商家",
+    "dataList": [
+      {"tit": "商家登录","url": "shoplogin.html"},
+      {"tit": "合作招商","url": "cooperation.html"},
+      {"tit": "成为供应商","url": "sampling.html"}
+    ]
+  },
+  {
+    "title": "后台",
+    "dataList": [
+      { "tit": "后台登录","url": "login-manage.html"}
+    ]
+  }]
+}

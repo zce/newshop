@@ -8,7 +8,7 @@
     <title>我的收藏</title>
      <link rel="icon" href="/assets/img/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="../css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="../css/all.css" />
     <link rel="stylesheet" type="text/css" href="../css/pages-seckillOrder.css" />
 </head>
 
@@ -486,53 +486,6 @@
 	</div>
 </div>
 
-
-<script type="text/javascript" src="../js/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript">
-	$(function () {
-		$("#service").hover(function () {
-			$(".service").show();
-		}, function () {
-			$(".service").hide();
-		});
-		$("#shopcar").hover(function () {
-			$("#shopcarlist").show();
-		}, function () {
-			$("#shopcarlist").hide();
-		});
-
-	})
-	/*商品分类*/
-	$(function () {
-		$('.all-sort-list2 > .item').hover(function () {
-			//父类分类列表容器的高度
-			$(this).addClass('hover');
-			$(this).children('.item-list').css('display', 'block');
-		}, function () {
-			$(this).removeClass('hover');
-			$(this).children('.item-list').css('display', 'none');
-		});
-
-		$('.item > .item-list > .close').click(function () {
-			$(this).parent().parent().removeClass('hover');
-			$(this).parent().hide();
-		});
-	});
-	$(function() {
-		$('.all-sorts-list').hover(function() {
-			$(this).children('.sort').css('display','block')
-		},function() {
-			$(this).children('.sort').css('display','none')
-		})
-	});
-
-	
-</script>
-<script type="text/javascript" src="../js/plugins/jquery.easing/jquery.easing.min.js"></script>
-<script type="text/javascript" src="../js/plugins/sui/sui.min.js"></script>
-<script type="text/javascript" src="../js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
-<script type="text/javascript" src="../js/widget/nav.js"></script>
-</body>
     <!--header-->
     <div id="account">
         <div class="py-container">
@@ -886,6 +839,8 @@
 	</div>
 </div>
 <!--页面底部END-->
-undefined
+
+<script type="text/javascript" src="../js/all.js"></script>
+</body>
 
 </html>
