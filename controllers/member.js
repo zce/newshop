@@ -3,7 +3,7 @@ const fs = require('mz/fs')
 const _ = require('lodash')
 const createError = require('http-errors')
 const multer  = require('multer')
-const { User } = require('../models')
+const { User, Consignee } = require('../models')
 const upload = multer()
 
 /**
@@ -30,7 +30,6 @@ exports.profile = (req, res) => {
 exports.profilePost = [upload.single('avatar'), (req, res, next) => {
   // 保存文件
   const avatarPath = `/avatar/${req.session.currentUser.user_id}.png`
-  const userInfo = _.pick(req.body, ['user_sex', 'user_qq', 'user_tel', 'user_xueli', 'user_hobby', 'user_introduce'])
   Promise.resolve()
     .then(() => {
       if (!req.file) return
@@ -40,6 +39,7 @@ exports.profilePost = [upload.single('avatar'), (req, res, next) => {
       return User.findOne({ where: { user_id: req.session.currentUser.user_id } })
     })
     .then(user => {
+      const userInfo = _.pick(req.body, ['user_sex', 'user_qq', 'user_tel', 'user_xueli', 'user_hobby', 'user_introduce'])
       Object.assign(user, userInfo)
       return user.save()
     })
@@ -48,14 +48,33 @@ exports.profilePost = [upload.single('avatar'), (req, res, next) => {
       res.locals.currentUser = user
       res.render('member/profile', { title: '我的个人资料' })
     })
-    .catch(err => next(err))
+    .catch(next)
 }]
 
 /**
  * 地址管理
  */
-exports.address = (req, res) => {
-  res.render('member/address', { title: '我的地址簿' })
+exports.address = (req, res, next) => {
+  Consignee.findAll({ where: { user_id: req.session.currentUser.user_id } })
+    .then(records => {
+      res.locals.addresses = records
+      res.render('member/address', { title: '我的地址簿' })
+    })
+    .catch(next)
+}
+
+exports.addressPost = (req, res, next) => {
+  const data = _.pick(req.body, ['cgn_name', 'cgn_address', 'cgn_tel', 'cgn_code'])
+  data.user_id = req.session.currentUser.user_id
+  Consignee.create(data)
+    .then(() => {
+      return Consignee.findAll({ where: { user_id: req.session.currentUser.user_id } })
+    })
+    .then(records => {
+      res.locals.addresses = records
+      res.render('member/address', { title: '我的地址簿' })
+    })
+    .catch(next)
 }
 
 /**

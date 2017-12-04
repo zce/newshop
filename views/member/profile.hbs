@@ -14,7 +14,7 @@
       <div class="yui3-u-1-6 list">
         <div class="person-info">
           <div class="person-photo">
-            <img src="/img/_/photo.png" alt="">
+            <img src="/avatar/{{currentUser.user_id}}.png" alt="{{currentUser.username}}" width="50">
           </div>
           <div class="person-account">
             <span class="name">{{currentUser.username}}</span>
@@ -27,7 +27,7 @@
             <dt>
               <i>·</i> 订单中心</dt>
             <dd>
-              <a href="seckillOrder.html">我的订单</a>
+              <a href="/member/order">我的订单</a>
             </dd>
             <dd>
               <a href="seckillorder-pay.html">待付款</a>
@@ -60,10 +60,10 @@
             <dt>
               <i>·</i> 设置</dt>
             <dd>
-              <a href="seckillsetting-info.html" class="list-active">个人信息</a>
+              <a href="/member/profile" class="list-active">个人信息</a>
             </dd>
             <dd>
-              <a href="seckillsetting-address.html">地址管理</a>
+              <a href="/member/address">地址管理</a>
             </dd>
             <dd>
               <a href="seckillsetting-safe.html">安全管理</a>

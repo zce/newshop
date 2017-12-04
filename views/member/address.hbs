@@ -35,113 +35,45 @@
         <div class="address-detail">
           <div class="addbtn">
             <a data-toggle="modal" data-target=".edit" data-keyboard="false" class="sui-btn btn-bordered btn-xlarge btn-info">新增收货地址</a>
-            <span class="topnum">您已创建4 个收货地址，最多可创建20个</span>
+            <span class="topnum">您已创建 {{addresses.length}} 个收货地址</span>
           </div>
           <div class="addresses">
+            {{#each addresses}}
             <div class="address-item">
-              <div class="smt">王小丫&nbsp;&nbsp;
-                <a id="J_set" href="javascript:void(0)" data-toggle="tooltip" data-trigger="click" title="" data-original-title="更改收货人姓名&nbsp;&nbsp;<button class='sui-btn btn-small btn-danger'>保存</button><br><input type=&quot;text&quot;>">设置 </a>&nbsp;&nbsp;
-                <i class="sui-btn btn-warning">默认地址</i>
+              <div class="smt">
+                <span>{{cgn_name}}</span>
                 <a href="#" class="pull-right delete">删除</a>
               </div>
-
               <div class="smc">
                 <div class="item">
                   <span class="fl label">收货人：</span>
-                  <div class="detail">王小丫</div>
+                  <div class="detail">{{cgn_name}}</div>
                   <div class="clearfix"></div>
                 </div>
-
-              </div>
-              <div class="smc">
-                <div class="item">
-                  <span class="fl label">所在地区：</span>
-                  <div class="detail">北京海淀区</div>
-                  <div class="clearfix"></div>
-                </div>
-
               </div>
               <div class="smc">
                 <div class="item">
                   <span class="fl label">地址：</span>
-                  <div class="detail">北京市海淀区东北旺西路8号中关村软件园9号楼国际软件大厦</div>
+                  <div class="detail">{{cgn_address}}</div>
                   <div class="clearfix"></div>
                 </div>
-
               </div>
               <div class="smc">
                 <div class="item">
                   <span class="fl label">手机：</span>
-                  <div class="detail">15897895641</div>
+                  <div class="detail">{{cgn_tel}}</div>
                   <div class="clearfix"></div>
                 </div>
-
               </div>
               <div class="smc">
                 <div class="item">
-                  <span class="fl label">固定电话：</span>
-                  <div class="detail">15897895641</div>
+                  <span class="fl label">邮编：</span>
+                  <div class="detail">{{cgn_code}}</div>
                   <div class="clearfix"></div>
                 </div>
               </div>
-              <div class="pull-right operate">
-                <a href="#" data-toggle="modal" data-target=".editinfo" data-keyboard="false">使用一键购</a>
-                <a href="#" data-toggle="modal" data-target=".edit" data-keyboard="false">编辑</a>
-              </div>
-              <div class="clearfix"></div>
             </div>
-            <div class="address-item">
-              <div class="smt">周全&nbsp;&nbsp;
-                <a id="J_set" href="javascript:void(0)" data-toggle="tooltip" data-trigger="click" title="" data-original-title="更改收货人姓名&nbsp;&nbsp;<button class='sui-btn btn-small btn-danger'>保存</button><br><input type=&quot;text&quot;>">设置 </a>&nbsp;&nbsp;
-                <i class="sui-btn btn-warning">默认地址</i>
-                <a href="#" class="pull-right delete">删除</a>
-              </div>
-
-              <div class="smc">
-                <div class="item">
-                  <span class="fl label">收货人：</span>
-                  <div class="detail">周全</div>
-                  <div class="clearfix"></div>
-                </div>
-
-              </div>
-              <div class="smc">
-                <div class="item">
-                  <span class="fl label">所在地区：</span>
-                  <div class="detail">北京海淀区</div>
-                  <div class="clearfix"></div>
-                </div>
-
-              </div>
-              <div class="smc">
-                <div class="item">
-                  <span class="fl label">地址：</span>
-                  <div class="detail">北京市海淀区东北旺西路8号中关村软件园9号楼国际软件大厦</div>
-                  <div class="clearfix"></div>
-                </div>
-
-              </div>
-              <div class="smc">
-                <div class="item">
-                  <span class="fl label">手机：</span>
-                  <div class="detail">15897895641</div>
-                  <div class="clearfix"></div>
-                </div>
-
-              </div>
-              <div class="smc">
-                <div class="item">
-                  <span class="fl label">固定电话：</span>
-                  <div class="detail">15897895641</div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-              <div class="pull-right operate">
-                <a href="#" data-toggle="modal" data-target=".editinfo" data-keyboard="false">使用一键购</a>
-                <a href="#" data-toggle="modal" data-target=".edit" data-keyboard="false">编辑</a>
-              </div>
-              <div class="clearfix"></div>
-            </div>
+            {{/each}}
           </div>
           <!--弹层内容-->
           <!--添加地址-->
@@ -150,159 +82,47 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
-                  <h4 id="myModalLabel" class="modal-title">添加收货地址</h4>
+                  <h4 class="modal-title">添加收货地址</h4>
                 </div>
                 <div class="modal-body">
-                  <form action="" class="sui-form form-horizontal">
+                  <form class="sui-form form-horizontal" method="post">
                     <div class="control-group">
                       <label class="control-label">收货人：</label>
                       <div class="controls">
-                        <input type="text" class="input-medium">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label">所在地区：</label>
-                      <div class="controls">
-                        <select id="province" data-default="江苏"></select>&nbsp;&nbsp;
-                        <select id="city" data-default="淮安"></select>&nbsp;&nbsp;
-                        <select id="district" data-default="涟水县"></select>
+                        <input type="text" name="cgn_name" class="input-medium">
                       </div>
                     </div>
                     <div class="control-group">
                       <label class="control-label">详细地址：</label>
                       <div class="controls">
-                        <input type="text" class="input-large">
+                        <input type="text" name="cgn_address" class="input-large">
                       </div>
                     </div>
                     <div class="control-group">
                       <label class="control-label">联系电话：</label>
                       <div class="controls">
-                        <input type="text" class="input-medium">
+                        <input type="mobile" name="cgn_tel" class="input-medium">
                       </div>
                     </div>
                     <div class="control-group">
-                      <label class="control-label">邮箱：</label>
+                      <label class="control-label">邮编：</label>
                       <div class="controls">
-                        <input type="text" class="input-medium">
+                        <input type="number" name="cgn_code" class="input-medium" max="999999">
                       </div>
                     </div>
                     <div class="control-group">
-                      <label class="control-label">地址别名：</label>
+                      <label class="control-label"></label>
                       <div class="controls">
-                        <input type="text" class="input-medium">
-                      </div>
-                      <div class="othername">
-                        建议填写常用地址：
-                        <a href="#" class="sui-btn btn-default">家里</a>
-                        <a href="#" class="sui-btn btn-default">父母家</a>
-                        <a href="#" class="sui-btn btn-default">公司</a>
+                        <button class="sui-btn btn-primary btn-large">确定</button>
                       </div>
                     </div>
                   </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确定</button>
-                  <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
-                </div>
               </div>
             </div>
           </div>
-          <!--确认地址-->
-          <div tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade editinfo">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
-                  <h4 id="myModalLabel" class="modal-title">设置支付和配送方式</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="address-item">
-
-
-                    <h5>收货人信息</h5>
-
-                    <div class="smc">
-                      <div class="item">
-                        <span class="fl label">收货人：</span>
-                        <div class="detail">周全</div>
-                        <div class="clearfix"></div>
-                      </div>
-
-                    </div>
-                    <div class="smc">
-                      <div class="item">
-                        <span class="fl label">所在地区：</span>
-                        <div class="detail">北京海淀区</div>
-                        <div class="clearfix"></div>
-                      </div>
-
-                    </div>
-                    <div class="smc">
-                      <div class="item">
-                        <span class="fl label">地址：</span>
-                        <div class="detail">北京市海淀区东北旺西路8号中关村软件园9号楼国际软件大厦</div>
-                        <div class="clearfix"></div>
-                      </div>
-
-                    </div>
-                    <div class="smc">
-                      <div class="item">
-                        <span class="fl label">手机：</span>
-                        <div class="detail">15897895641</div>
-                        <div class="clearfix"></div>
-                      </div>
-
-                    </div>
-                    <div class="smc">
-                      <div class="item">
-                        <span class="fl label">固定电话：</span>
-                        <div class="detail">15897895641</div>
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <h5>支付方式</h5>
-                    <label data-toggle="radio">
-                      <input type="radio" checked="checked">
-                      <span>在线支付</span>
-                    </label>
-                    <label data-toggle="radio">
-                      <input type="radio">
-                      <span>货到付款</span>
-                    </label>
-                    <label data-toggle="radio">
-                      <input type="radio">
-                      <span>公司转账</span>
-                    </label>
-                    <label data-toggle="radio">
-                      <input type="radio">
-                      <span>邮局汇款</span>
-                    </label>
-                    <h5>配送方式</h5>
-                    <input type="radio" checked="checked">
-                    <span>品优购快递</span>
-                    </label>
-                    <label data-toggle="radio">
-                      <input type="radio">
-                      <span>上门自提</span>
-                    </label>
-
-                  </div>
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确定</button>
-                  <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
-
       </div>
-
     </div>
   </div>
 </div>
