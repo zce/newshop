@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(32),
       allowNull: false
     },
-    type_id: {
+    cat_id: {
       type: DataTypes.INTEGER(5).UNSIGNED,
       allowNull: false
     },

@@ -8,6 +8,10 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const hbs = require('hbs')
 
+const config = require('./config')
+const helpers = require('./helpers')
+const get = require('./helpers/get')
+
 const account = require('./middlewares/account')
 
 const siteRouter = require('./routes/site')
@@ -26,27 +30,13 @@ const app = express()
 app.locals.site_name = 'Itcast Shop'
 // 利用公共变量设置默认模版
 app.locals.layout = 'shared/layout'
+app.locals.config = config
 // 将app的locals中所有的属性都作为模版的变量
 // 此处的变量设置是全局的
 hbs.localsAsTemplateData(app)
 
-const blocks = {}
-hbs.registerHelper('block', (key, opts) => {
-  const block = blocks[key] = blocks[key] || []
-  if (opts.fn) {
-    // 此时是开闭标签
-    block.push(opts.fn(opts.data.root))
-  } else {
-    // 单标签
-    delete blocks[key]
-    return new hbs.SafeString(block.join('\n'))
-  }
-})
-
-hbs.registerHelper('equal', (a, b, opts) => {
-  // console.log(opts.inverse)
-  return a === b ? opts.fn(opts.data.root) : opts.inverse(opts.data.root)
-})
+hbs.registerHelper(helpers)
+hbs.registerAsyncHelper('get', get)
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')

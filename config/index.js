@@ -21,5 +21,8 @@ module.exports = {
     greetingTimeout: 1000,
     socketTimeout: 2000,
     debug: process.env.NODE_ENV === 'development'
+  },
+  image: {
+    url: 'http://47.96.21.88:8888'
   }
 }

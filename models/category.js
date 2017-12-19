@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('Category', {
+  const model = sequelize.define('Category', {
     cat_id: {
       type: DataTypes.INTEGER(32),
       allowNull: false,
@@ -14,11 +14,26 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER(32),
       allowNull: true
     },
-    cat_lvl: {
+    cat_level: {
       type: DataTypes.INTEGER(4),
       allowNull: true
     }
   }, {
     tableName: 'sp_category'
   })
+
+  model.findCascading = function () {
+    return this.findAll()
+      .then(records => {
+        const recursion = pid => records
+          .filter(r => r.cat_pid === pid)
+          .map(r => {
+            r.children = recursion(r.cat_id)
+            return r
+          })
+        return recursion(0)
+      })
+  }
+
+  return model
 }

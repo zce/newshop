@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: '0'
     },
-    type_id: {
+    cat_id: {
       type: DataTypes.INTEGER(5).UNSIGNED,
       allowNull: false,
       defaultValue: '0'
