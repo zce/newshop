@@ -1,7 +1,7 @@
 const url = require('url')
 
 const createError = require('http-errors')
-const { Category, Goods } = require('../models')
+const { Category, Goods, GoodsPics } = require('../models')
 
 const getPageLink = (current, page) => {
   const urlObj = url.parse(current, true)
@@ -31,7 +31,7 @@ exports.list = (req, res, next) => {
   Category.findOne({ where: { cat_id: catId } })
     .then(category => {
       // 未找到分类 404
-      if (!category) throw createError(404, '未找到对应分类')
+      if (!category) return next(createError(404, '未找到对应分类'))
 
       // 挂载分类信息到视图
       res.locals.category = category
@@ -45,7 +45,7 @@ exports.list = (req, res, next) => {
       res.locals.totalPages = Math.ceil(count / limit)
 
       if (res.locals.totalPages < page) {
-        throw createError(404, '未找到对应数据')
+        return next(createError(404, '未找到对应数据'))
       }
 
       const urlObj = url.parse(req.url, true)
@@ -71,6 +71,20 @@ exports.list = (req, res, next) => {
     .catch(next)
 }
 
-exports.item = (req, res) => {
-  res.render('site/item', { title: '详细页', product: req.params.id })
+exports.item = (req, res, next) => {
+  if (isNaN(req.params.id)) return next(createError(404))
+
+  Goods.findOne({ where: { goods_id: req.params.id } })
+    .then(goods => {
+      if (!goods) return next(createError(404))
+      res.locals.goods = goods
+
+      return GoodsPics.findAll({ where: { goods_id: goods.goods_id} })
+    })
+    .then(images => {
+      res.locals.images = images
+
+      res.render('site/item', { title: '详细页', product: req.params.id })
+    })
+    .catch(next)
 }
