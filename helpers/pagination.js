@@ -13,7 +13,7 @@ module.exports = (start, total, url, opts) => {
   let result = '<div class="sui-pagination pagination-large"><ul>'
 
   // 上一页
-  result += `<li class="prev${start > 1 ? '' : 'disabled'}"><a href="${url.replace('*p', start - 1)}">«上一页</a></li>`
+  result += `<li class="prev${start > 1 ? '' : ' disabled'}"><a href="${start > 1 ? url.replace('*p', start - 1) : 'javascript:;'}">«上一页</a></li>`
 
   // 省略号
   if (begin > 1) {
@@ -22,8 +22,7 @@ module.exports = (start, total, url, opts) => {
 
   // 数字页码
   for (let i = begin; i <= end; i++) {
-    const activeClass = i == start ? ' class="active"' : ''
-    result += `<li${activeClass}><a href="${url.replace('*p', i)}">${i}</a></li>`
+    result += `<li${i == start ? ' class="active"' : ''}><a href="${i == start ? 'javascript:;' : url.replace('*p', i)}">${i}</a></li>`
   }
 
   // 省略号
@@ -32,7 +31,7 @@ module.exports = (start, total, url, opts) => {
   }
 
   // 下一页
-  result += `<li class="next${end < total ? '' : 'disabled'}"><a href="${url.replace('*p', start + 1)}">下一页»</a></li>`
+  result += `<li class="next${end < total ? '' : ' disabled'}"><a href="${end < total ? url.replace('*p', start + 1) : 'javascript:;'}">下一页»</a></li>`
 
   //
   result += `</ul><div><form>共${total}页&nbsp; 到第 <input type="text" class="page-num" name="page"> 页 <button class="page-confirm">确定</button></form></div></div>`

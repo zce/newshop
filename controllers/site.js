@@ -84,6 +84,11 @@ exports.item = (req, res, next) => {
     .then(images => {
       res.locals.images = images
 
+      return Category.findOne({ where: { cat_id: res.locals.goods.cat_id } })
+    })
+    .then(category => {
+      res.locals.category = category
+
       res.render('site/item', { title: '详细页', product: req.params.id })
     })
     .catch(next)
