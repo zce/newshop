@@ -2,7 +2,7 @@ const uuid = require('uuid')
 const bcrypt = require('bcryptjs')
 const validator = require('validator')
 
-const { User } = require('../models')
+const { User, UserCart } = require('../models')
 const mailer = require('../utils/mailer')
 
 exports.index = (req, res) => {
@@ -109,9 +109,47 @@ exports.loginPost = (req, res) => {
 
       // 将用户信息存入 Session
       req.session.currentUser = user
+
+      // 同步购物车信息
+      if (req.cookies['cart_info']) {
+        return UserCart.findOrBuild({
+          where: { user_id: user.user_id },
+          defaults: {
+            user_id: user.user_id,
+            cart_info: '[]',
+            created_at: new Date(),
+            updated_at: new Date()
+          }
+        })
+      }
+    })
+    .then(carts => {
+      if (carts && carts[0]) {
+        const cookieCartInfo = req.cookies['cart_info']
+        const dbCartInfo = JSON.parse(carts[0].cart_info)
+        cookieCartInfo.forEach(c => {
+          const exists = dbCartInfo.find(d => d.goods_id === c.goods_id)
+          if (exists) {
+            exists.amount += c.amount
+          } else {
+            dbCartInfo.push(c)
+          }
+        })
+        carts[0].cart_info = JSON.stringify(dbCartInfo)
+
+        return carts[0].save()
+      }
+    })
+    .then(cart => {
+      if (cart) {
+        delete req.cookies['cart_info']
+        res.clearCookie('cart_info')
+      }
+
       res.redirect(req.query.redirect || '/member')
     })
     .catch(err => {
+      console.error(err)
       res.locals.message = err.message
       res.locals.raw = req.body
       res.render('account/login', { layout: null })

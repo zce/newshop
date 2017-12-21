@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   model.findCascading = function () {
-    return this.findAll()
+    return this.findAll({ where: { cat_deleted: 0 } })
       .then(records => {
         const recursion = pid => records
           .filter(r => r.cat_pid === pid)
