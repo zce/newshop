@@ -17,7 +17,7 @@
         <div class="zoom">
           <!--默认第一个预览-->
           <div id="preview" class="spec-preview">
-            <span class="jqzoom"><img jqimg="{{images.0.pics_big}}" src="{{images.0.pics_mid}}" /></span>
+            <span class="jqzoom"><img jqimg="{{img images.0.pics_big}}" src="{{img images.0.pics_mid}}" /></span>
           </div>
           <!--下方的缩略图-->
           <div class="spec-scroll">
@@ -26,7 +26,7 @@
             <div class="items">
               <ul>
                 {{#each images}}
-                <li><img src="{{pics_sma}}" bimg="{{pics_mid}}" onmousemove="preview(this)" /></li>
+                <li><img src="{{img pics_mid}}" bimg="{{img pics_big}}" onmousemove="preview(this)" /></li>
                 {{/each}}
               </ul>
             </div>
