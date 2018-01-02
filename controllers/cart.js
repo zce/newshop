@@ -3,34 +3,7 @@ const createError = require('http-errors')
 const { Goods, UserCart } = require('../models')
 
 exports.index = (req, res, next) => {
-  Promise.resolve()
-    .then(() => {
-      if (req.session.currentUser) {
-        return UserCart.findOne({ where: { user_id: req.session.currentUser.user_id } })
-          .then(cart => JSON.parse(cart.cart_info))
-      } else  {
-        return req.cookies['cart_info'] || []
-      }
-    })
-    .then(cartInfo => {
-      res.locals.carts = cartInfo
-
-      return Promise.all(cartInfo.map(c => {
-        return Goods
-          .findOne({ where: { goods_id: c.goods_id } })
-          .then(goods => {
-            c.goods = goods
-            c.price = (goods.goods_price * c.amount).toFixed(2)
-            return c.price
-          })
-      }))
-    })
-    .then(prices => {
-      res.locals.totalPrice = prices.length && prices.reduce((a, b) => parseFloat(a) + parseFloat(b))
-      res.locals.totalCount = prices.length
-      res.render('cart/index', { title: '购物车' })
-    })
-    .catch(next)
+  res.render('cart/index', { title: '购物车' })
 }
 
 exports.add = (req, res, next) => {
@@ -57,8 +30,13 @@ exports.add = (req, res, next) => {
         res.render('cart/add', { title: '加入购物车成功' })
       } else {
         // 已经登录
-        UserCart.findOne({ where: { user_id: req.currentUser.user_id } })
+        UserCart.findOne({ where: { user_id: req.session.currentUser.user_id } })
           .then(cart => {
+            cart = cart || UserCart.build({
+              user_id: req.session.currentUser.user_id,
+              cart_info: '[]'
+            })
+
             const cartInfo = JSON.parse(cart.cart_info)
 
             const goodsInfo = cartInfo.find(c => c.goods_id === goods.goods_id)

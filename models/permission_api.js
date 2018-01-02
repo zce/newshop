@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
     ps_api_path: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    ps_api_order: {
+      type: DataTypes.INTEGER(4),
+      allowNull: true
     }
   }, {
     tableName: 'sp_permission_api'

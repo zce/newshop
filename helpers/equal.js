@@ -1,4 +1,4 @@
-module.exports = (a, b, opts) => {
-  // console.log(opts.inverse)
-  return a === b ? opts.fn(opts.data.root) : opts.inverse(opts.data.root)
+module.exports = (a, b, context) => {
+  // console.log(context.inverse)
+  return a === b ? context.fn(context.data.root) : context.inverse(context.data.root)
 }

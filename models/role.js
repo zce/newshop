@@ -11,11 +11,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     ps_ids: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING(512),
       allowNull: false,
       defaultValue: ''
     },
     ps_ca: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    role_desc: {
       type: DataTypes.TEXT,
       allowNull: true
     }

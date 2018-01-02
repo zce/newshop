@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: '0.00'
     },
     order_pay: {
-      type: DataTypes.ENUM('1', '2', '3'),
+      type: DataTypes.ENUM('0', '1', '2', '3'),
       allowNull: false,
       defaultValue: '1'
     },

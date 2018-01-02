@@ -1,7 +1,7 @@
 const { SafeString } = require('hbs')
 
-module.exports = (start, total, url, opts) => {
-  const { visibles = 7 } = opts.hash
+module.exports = (start, total, url, context) => {
+  const { visibles = 7 } = context.hash
 
   let begin = start - Math.floor(visibles / 2)
   begin = begin < 1 ? 1 : begin

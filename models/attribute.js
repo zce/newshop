@@ -25,9 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'manual'
     },
     attr_vals: {
-      type: DataTypes.STRING(256),
-      allowNull: false,
-      defaultValue: ''
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     delete_time: {
       type: DataTypes.INTEGER(11),

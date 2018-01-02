@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     goods_name: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING(255),
       allowNull: false,
       unique: true
     },
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: '0.00'
     },
     goods_number: {
-      type: DataTypes.INTEGER(3).UNSIGNED,
+      type: DataTypes.INTEGER(8).UNSIGNED,
       allowNull: false,
       defaultValue: '0'
     },
@@ -62,11 +62,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    cat_id: {
-      type: DataTypes.INTEGER(5),
-      allowNull: true,
-      defaultValue: '0'
-    },
     cat_one_id: {
       type: DataTypes.INTEGER(5),
       allowNull: true,
@@ -89,6 +84,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     is_promote: {
       type: DataTypes.INTEGER(5),
+      allowNull: true,
+      defaultValue: '0'
+    },
+    goods_state: {
+      type: DataTypes.INTEGER(11),
       allowNull: true,
       defaultValue: '0'
     }

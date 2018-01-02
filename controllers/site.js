@@ -26,27 +26,41 @@ exports.list = (req, res, next) => {
 
   const limit = 20
   const offset = (page - 1) * limit
+  const where = { is_del: '0' }
 
   // 查询当前分类信息
   Category.findOne({ where: { cat_id: catId } })
     .then(category => {
       // 未找到分类 404
-      if (!category) return next(createError(404, '未找到对应分类'))
+      if (!category) throw createError(404, '未找到对应分类')
 
       // 挂载分类信息到视图
       res.locals.category = category
 
-      return Goods.count({
-        where: { cat_id: catId, is_del: '0' }
-      })
+      switch (category.cat_level) {
+        case 0:
+          where.cat_one_id = catId
+          break
+        case 1:
+          where.cat_two_id = catId
+          break
+        case 2:
+          where.cat_three_id = catId
+          break
+        default:
+          where.cat_id = catId
+          break
+      }
+
+      return Goods.count({ where })
     })
     .then(count => {
       res.locals.total = count
       res.locals.totalPages = Math.ceil(count / limit)
 
-      if (res.locals.totalPages < page) {
-        return next(createError(404, '未找到对应数据'))
-      }
+      // if (res.locals.totalPages < page) {
+      //   throw createError(404, '未找到该分类对应的商品数据')
+      // }
 
       const urlObj = url.parse(req.url, true)
       urlObj.query.page = '*p'
@@ -55,7 +69,7 @@ exports.list = (req, res, next) => {
 
       // 查询当前分类下的全部商品信息
       return Goods.findAll({
-        where: { cat_id: catId, is_del: '0' },
+        where: where,
         order: [[order, 'DESC']],
         offset: offset,
         limit: limit
@@ -76,7 +90,7 @@ exports.item = (req, res, next) => {
 
   Goods.findOne({ where: { goods_id: req.params.id } })
     .then(goods => {
-      if (!goods) return next(createError(404))
+      if (!goods) throw createError(404, '未找到对应商品')
       res.locals.goods = goods
 
       return GoodsPics.findAll({ where: { goods_id: goods.goods_id} })

@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('mz/fs')
 const _ = require('lodash')
 const createError = require('http-errors')
-const multer  = require('multer')
+const multer = require('multer')
 const { User, Consignee } = require('../models')
 const upload = multer()
 

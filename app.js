@@ -10,9 +10,10 @@ const hbs = require('hbs')
 
 const config = require('./config')
 const helpers = require('./helpers')
-const get = require('./helpers/get')
+const categoriesHelper = require('./helpers/categories')
 
 const account = require('./middlewares/account')
+const cart = require('./middlewares/cart')
 
 const siteRouter = require('./routes/site')
 const accountRouter = require('./routes/account')
@@ -36,7 +37,7 @@ app.locals.config = config
 hbs.localsAsTemplateData(app)
 
 hbs.registerHelper(helpers)
-hbs.registerAsyncHelper('get', get)
+hbs.registerAsyncHelper('categories', categoriesHelper)
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
@@ -60,6 +61,10 @@ app.use(session({ secret: 'zce.me', resave: true, saveUninitialized: true }))
 
 // resolve logged in user
 app.use(account.resolve)
+
+// resolve cart info
+app.use(cart)
+
 app.use('/', siteRouter)
 app.use('/cart', cartRouter)
 app.use('/account', accountRouter)

@@ -65,7 +65,7 @@
         <div class="py-container">
           <div class="yui3-g Logo">
             <div class="yui3-u Left logoArea">
-              <a class="logo-bd" title="品优购" href="JD-index.html" target="_blank"></a>
+              <a class="logo-bd" title="品优购" href="/"></a>
             </div>
             <div class="yui3-u Center searchArea">
               <div class="search">
@@ -96,10 +96,18 @@
                   <span class="car"></span>
                   <a class="sui-btn btn-default btn-xlarge" href="/cart" target="_blank">
                     <span>我的购物车</span>
-                    <i class="shopnum">0</i>
+                    <i class="shopnum">{{totalCount}}</i>
                   </a>
                   <div class="clearfix shopcarlist" id="shopcarlist" style="display:none">
+                    {{#if totalCount}}
+                    <ul>
+                      {{#each carts}}
+                      <li>{{goods.goods_name}}</li>
+                      {{/each}}
+                    </ul>
+                    {{else}}
                     <p>"啊哦，你的购物车还没有商品哦！"</p>
+                    {{/if}}
                   </div>
                 </div>
               </div>
@@ -107,7 +115,7 @@
           </div>
 
           <div class="yui3-g NavList">
-            {{#get 'categories'}}
+            {{#categories}}
             <div class="all-sorts-list">
               <div class="yui3-u Left all-sort">
                 <h4>全部商品分类</h4>
@@ -140,7 +148,7 @@
                 </div>
               </div>
             </div>
-            {{/get}}
+            {{/categories}}
             <div class="yui3-u Center navArea">
               <ul class="nav">
                 <li class="f-item">服装城</li>
@@ -311,7 +319,7 @@
       </div>
     </div>
   </div>
-  <script src="../js/all.js"></script>
+  <script src="/js/all.js"></script>
   {{block 'scripts'}}
 </body>
 

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     attr_value: {
-      type: DataTypes.STRING(32),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     add_price: {

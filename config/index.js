@@ -1,9 +1,12 @@
 module.exports = {
   database: {
     dialect: 'mysql',
-    host: '47.96.21.88',
-    username: 'tom',
-    password: 'jerry',
+    // host: '47.96.21.88',
+    // username: 'tom',
+    // password: 'jerry',
+    host: '127.0.0.1',
+    username: 'root',
+    password: 'wanglei',
     database: 'newshop',
     operatorsAliases: false,
     logging: false
