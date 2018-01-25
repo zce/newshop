@@ -3,7 +3,7 @@
  */
 
 exports.index = (req, res) => {
-  res.send('<h1>首页</h1>')
+  res.render('index', { title: 'newshop' })
 }
 
 exports.list = (req, res) => {
