@@ -10,8 +10,12 @@ em,i {
 	overflow: hidden;
 }
 
-.bread,.selector,.details,.hot-sale {
+.bread,.details,.hot-sale {
 	margin-bottom: 5px;
+}
+
+.selector {
+	margin-bottom: 25px;
 }
 
 .bread .form-dark {

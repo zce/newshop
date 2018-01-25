@@ -3,9 +3,9 @@
  */
 
 exports.index = (req, res) => {
-  res.send('<h1>结算页</h1>')
+  res.render('checkout', { title: '结算' })
 }
 
 exports.pay = (req, res) => {
-  res.send('<h1>结算支付页</h1>')
+  res.render('checkout-pay', { title: '支付' })
 }

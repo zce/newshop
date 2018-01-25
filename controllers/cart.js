@@ -3,9 +3,9 @@
  */
 
 exports.index = (req, res) => {
-  res.send('<h1>购物车列表页</h1>')
+  res.render('cart', { title: '我的购物车' })
 }
 
 exports.add = (req, res) => {
-  res.send('<h1>添加购物车页</h1>')
+  res.render('cart-add', { title: '添加购物车成功' })
 }

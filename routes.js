@@ -14,8 +14,8 @@ router.get('/list/:cat_id(\\d+)', siteController.list)
 router.get('/item/:goods_id(\\d+)', siteController.item)
 
 // account
-router.get('/login', accountController.login)
-router.get('/register', accountController.register)
+router.get('/account/login', accountController.login)
+router.get('/account/register', accountController.register)
 
 // member
 router.get('/member', memberController.index)

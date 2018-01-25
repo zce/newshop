@@ -3,9 +3,9 @@
  */
 
 exports.login = (req, res) => {
-  res.send('<h1>登录</h1>')
+  res.render('login', { title: '登录' })
 }
 
 exports.register = (req, res) => {
-  res.send('<h1>注册</h1>')
+  res.render('register', { title: '注册' })
 }

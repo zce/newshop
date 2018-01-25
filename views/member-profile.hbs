@@ -1,0 +1,89 @@
+{{!< layout}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-member.css"></layout>
+{{/contentFor}}
+
+<div class="py-container">
+  <div class="yui3-g home">
+    {{> member-sidebar}}
+    <div class="yui3-u-5-6 body">
+      <form class="sui-form form-horizontal profile-form" action="/member/profile" method="post" enctype="multipart/form-data">
+        <div class="control-group">
+          <label for="username" class="control-label">用户名：</label>
+          <div class="controls">
+            <input type="text" id="username" class="input-xfat" value="zce" readonly>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="avatar" class="control-label">头像：</label>
+          <div class="controls">
+            <label class="avatar-box">
+              <img src="/uploads/photo.jpg" width="80">
+              <input type="file" id="avatar" name="avatar">
+            </label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">性别：</label>
+          <div class="controls">
+            <label>
+              <input type="radio" name="user_sex" value="男" checked>
+              <span>男</span>
+            </label>
+            <label>
+              <input type="radio" name="user_sex" value="女">
+              <span>女</span>
+            </label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="user_qq" class="control-label">QQ：</label>
+          <div class="controls">
+            <input type="text" id="user_qq" class="input-xfat" name="user_qq" value="27102514">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="user_tel" class="control-label">手机：</label>
+          <div class="controls">
+            <input type="text" id="user_tel" class="input-xfat" name="user_tel" value="">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="user_xueli" class="control-label">学历：</label>
+          <div class="controls">
+            <select name="user_xueli" id="user_xueli" class="input-xfat">
+              <option>小学</option>
+              <option>初中</option>
+              <option>高中</option>
+              <option>专科</option>
+              <option selected>本科</option>
+              <option>硕士</option>
+              <option>博士</option>
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="user_hobby" class="control-label">兴趣：</label>
+          <div class="controls">
+            <textarea id="user_hobby" class="input-xfat" name="user_hobby" cols="80" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="user_introduce" class="control-label">简介：</label>
+          <div class="controls">
+            <textarea id="user_introduce" class="input-xfat" name="user_introduce" cols="80" rows="6"></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">&nbsp;</label>
+          <div class="controls">
+            <button type="submit" class="sui-btn btn-primary btn-xlarge">保存</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{{#contentFor 'scripts'}}{{/contentFor}}

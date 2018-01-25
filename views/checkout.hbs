@@ -1,0 +1,140 @@
+{{!< layout}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-cart.css"></layout>
+{{/contentFor}}
+
+<div class="checkout py-container">
+  <div class="checkout-tit"><h4 class="tit-txt">填写并核对订单信息</h4></div>
+  <div class="checkout-steps">
+    <!--收件人信息-->
+    <div class="step-tit">
+      <h5>
+        <span>收件人信息</span>
+        <a class="newadd" data-toggle="modal" data-target="#add_address" data-keyboard="false" href="#">新增收货地址</a>
+      </h5>
+    </div>
+    <div class="step-cont">
+      <div class="addressInfo">
+        <ul class="addr-detail">
+          <li class="addr-item selected">
+            <div class="con name"><a href="#">张默</a></div>
+            <div class="con address">张默 北京市海淀区三环内 中关村软件园9号楼 <span>159****3201</span></div>
+          </li>
+          <li class="addr-item">
+            <div class="con name"><a href="#">张默</a></div>
+            <div class="con address">张默 北京市海淀区三环内 中关村软件园9号楼 <span>159****3201</span></div>
+          </li>
+          <li class="addr-item">
+            <div class="con name"><a href="#">张默</a></div>
+            <div class="con address">张默 北京市海淀区三环内 中关村软件园9号楼 <span>159****3201</span></div>
+          </li>
+        </ul>
+      </div>
+      <div id="add_address" class="sui-modal hide fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
+              <h4 id="myModalLabel" class="modal-title">添加收货地址</h4>
+            </div>
+            <div class="modal-body">
+              <form action="" class="sui-form form-horizontal">
+                <div class="control-group">
+                  <label class="control-label">收货人：</label>
+                  <div class="controls">
+                    <input type="text" class="input-xfat">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">详细地址：</label>
+                  <div class="controls">
+                    <input type="text" class="input-xfat input-xlarge">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">手机：</label>
+                  <div class="controls">
+                    <input type="text" class="input-xfat">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">邮编：</label>
+                  <div class="controls">
+                    <input type="text" class="input-xfat">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确定</button>
+              <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <!--支付和送货-->
+    <div class="payshipInfo">
+      <div class="step-tit">
+        <h5>支付方式</h5>
+      </div>
+      <div class="step-cont">
+        <ul class="payType">
+          <li class="selected">微信</li>
+          <li>支付宝</li>
+        </ul>
+      </div>
+      <div class="hr"></div>
+      <div class="step-tit">
+        <h5>送货清单</h5>
+      </div>
+      <div class="step-cont">
+        <ul class="send-detail">
+          <li>
+            <div class="sendGoods">
+              <span>商品清单：</span>
+              <ul class="yui3-g">
+                <li class="yui3-u-1-6">
+                  <img src="uploads/mobile.png">
+                </li>
+                <li class="yui3-u-2-3">
+                  <div class="desc">Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机硅胶透明防摔软壳 本色系列</div>
+                </li>
+                <li class="yui3-u-1-12">
+                  <div class="price">￥5399.00</div>
+                </li>
+                <li class="yui3-u-1-12">
+                  <div class="num">x<strong>1</strong></div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div class="hr"></div>
+    </div>
+    <div class="linkInfo">
+      <div class="step-tit">
+        <h5>发票信息</h5>
+      </div>
+      <div class="step-cont">
+        <span>普通发票（电子）</span>
+        <span>个人</span>
+        <span>明细</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="order-summary py-container">
+  <div class="static fl"><i class="number">1</i> 件商品，总商品金额 <i>¥5399.00</i></div>
+  <a class="sui-btn btn-danger btn-xlarge fr" href="/checkout/pay?order_id=1">提交订单</a>
+</div>
+
+{{#contentFor 'scripts'}}
+<script src="/assets/js/sui.tab.js"></script>
+<script src="/assets/js/sui.transition.js"></script>
+{{/contentFor}}

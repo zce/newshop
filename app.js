@@ -21,8 +21,12 @@ const app = express()
  * view engine setup
  */
 
-app.engine('hbs', hbs.express4())
 app.set('view engine', 'hbs')
+app.set('views', path.join(__dirname, 'views'))
+
+app.engine('hbs', hbs.express4({
+  partialsDir: path.join(app.get('views'), 'partials')
+}))
 
 /**
  * use middlewares

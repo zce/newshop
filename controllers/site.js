@@ -3,13 +3,13 @@
  */
 
 exports.index = (req, res) => {
-  res.render('index', { title: 'newshop' })
+  res.render('index')
 }
 
 exports.list = (req, res) => {
-  res.send('<h1>列表页</h1>')
+  res.render('list', { title: '[分类名]' })
 }
 
 exports.item = (req, res) => {
-  res.send('<h1>详细页</h1>')
+  res.render('item', { title: '[商品名] &laquo; [分类名]' })
 }

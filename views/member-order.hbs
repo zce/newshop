@@ -1,0 +1,75 @@
+{{!< layout}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-member.css"></layout>
+{{/contentFor}}
+
+<div class="py-container">
+  <div class="yui3-g home">
+    {{> member-sidebar}}
+    <div class="yui3-u-5-6 body">
+      <div class="order-detail">
+        <div class="ever">
+          <ul class="sui-nav nav-tabs">
+            <li class="active"><a href="#all" data-toggle="tab">全部订单<i class="mark">5</i></a></li>
+            <li><a href="#pay" data-toggle="tab">待付款<i class="mark">2</i></a></li>
+            <li><a href="#receive" data-toggle="tab">待收货<i class="mark">1</i></a></li>
+            <li><a href="#remark" data-toggle="tab">待评价<i class="mark">2</i></a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="all" class="tab-pane active">
+              <div class="orders">
+                <table class="sui-table table-bordered">
+                  <thead>
+                    <tr>
+                      <th colspan="4">
+                        <span class="ordertitle">2017-02-11 11:59　订单编号：7867473872181848</span>
+                        <span class="pull-right delete"><img src="/assets/img/delete.png"></span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="goods-info">
+                          <img src="/uploads/mobile.png" height="100">
+                          <a href="#" class="block-text">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
+                          <span>x1</span>
+                        </div>
+                        <div class="goods-info">
+                          <img src="/uploads/mobile.png" height="100">
+                          <a href="#" class="block-text">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
+                          <span>x1</span>
+                        </div>
+                      </td>
+                      <td width="10%" class="center">小丽</td>
+                      <td width="13%" class="center">
+                        <p>总金额¥138.00</p>
+                        <p>在线支付</p>
+                      </td>
+                      <td width="10%" class="center">已完成</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="pay" class="tab-pane">
+              <p>待付款</p>
+            </div>
+            <div id="receive" class="tab-pane">
+              <p>待收货</p>
+            </div>
+            <div id="remark" class="tab-pane">
+              <p>待评价</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#contentFor 'scripts'}}
+<script src="/assets/js/sui.tab.js"></script>
+<script src="/assets/js/sui.transition.js"></script>
+{{/contentFor}}
