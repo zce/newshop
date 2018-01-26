@@ -18,15 +18,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     created_at: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
     updated_at: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
     delete_time: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER(11),
       allowNull: true
     }
   }, {
