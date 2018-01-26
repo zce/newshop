@@ -94,3 +94,7 @@ app.use((err, req, res, next) => {
 })
 
 module.exports = app
+
+// update sp_goods, sp_goods_pics 
+// set sp_goods.goods_big_logo = sp_goods_pics.pics_big, sp_goods.goods_small_logo = sp_goods_pics.pics_sma
+// where sp_goods.goods_id = sp_goods_pics.goods_id

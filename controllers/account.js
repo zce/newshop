@@ -117,8 +117,8 @@ exports.loginPost = (req, res) => {
           defaults: {
             user_id: user.user_id,
             cart_info: '[]',
-            created_at: new Date(),
-            updated_at: new Date()
+            created_at: Date.now() / 1000,
+            updated_at: Date.now() / 1000
           }
         })
       }
@@ -136,6 +136,7 @@ exports.loginPost = (req, res) => {
           }
         })
         carts[0].cart_info = JSON.stringify(dbCartInfo)
+        console.log(carts[0])
 
         return carts[0].save()
       }
