@@ -1,6 +1,7 @@
 /**
  * 订单商品表模型
  */
+
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('OrderGoods', {
     id: {

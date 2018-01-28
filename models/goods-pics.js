@@ -1,6 +1,7 @@
 /**
  * 商品图片表模型
  */
+
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('GoodsPics', {
     pics_id: {

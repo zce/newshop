@@ -1,6 +1,7 @@
 /**
  * 收货地址表模型
  */
+
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('Consignee', {
     cgn_id: {

@@ -1,6 +1,7 @@
 /**
  * 用户表模型
  */
+
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('User', {
     user_id: {

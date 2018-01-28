@@ -1,6 +1,7 @@
 /**
  * 属性表模型
  */
+
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('Attribute', {
     attr_id: {

@@ -1,10 +1,6 @@
 module.exports = {
   database: {
     dialect: 'mysql',
-    // host: '47.96.21.88',
-    // username: 'tom',
-    // password: 'jerry',
-    // database: 'mydb',
     host: '127.0.0.1',
     username: 'root',
     password: 'wanglei',
@@ -22,8 +18,5 @@ module.exports = {
     greetingTimeout: 1000,
     socketTimeout: 2000,
     debug: process.env.NODE_ENV === 'development'
-  },
-  image: {
-    url: 'http://47.96.21.88:8888'
   }
 }

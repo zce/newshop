@@ -1,6 +1,7 @@
 /**
  * 购物车表模型
  */
+
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('UserCart', {
     cart_id: {
