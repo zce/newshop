@@ -1,0 +1,35 @@
+{
+  "name": "newshop",
+  "version": "0.1.0",
+  "description": "newshop frontend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zce/newshop-frontend.git"
+  },
+  "keywords": [
+    "newshop",
+    "frontend",
+    "zce"
+  ],
+  "author": "zce <w@zce.me> (https://zce.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zce/newshop-frontend/issues"
+  },
+  "homepage": "https://github.com/zce/newshop-frontend#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-hbs": "^1.0.4",
+    "express-session": "^1.15.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.1"
+  }
+}
