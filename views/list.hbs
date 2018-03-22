@@ -62,7 +62,7 @@
         <ul class="yui3-g">
           {{#each products}}
           <li class="yui3-u-1-5">
-            <div class="p-img"><a href="/item/{{id}}"><img src="{{thumbnail}}"></a></div>
+            <div class="p-img"><a href="/item/{{id}}"><img data-src="{{thumbnail}}"></a></div>
             <div class="price"><strong><em>¥</em><i>{{price}}</i></strong></div>
             <div class="attr"><em>{{name}}</em></div>
             <div class="commit"><i class="command">已售出{{sales}}</i></div>
@@ -83,7 +83,8 @@
 </div>
 
 {{#contentFor 'scripts'}}
+<script src="/assets/js/lazyload.min.js"></script>
 <script>
-
+  $('.goods-list img').lazyload()
 </script>
 {{/contentFor}}
