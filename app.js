@@ -38,7 +38,7 @@ app.use((req, res) => {
 })
 
 // 错误处理器
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   res.locals.status = err.status || 500
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}

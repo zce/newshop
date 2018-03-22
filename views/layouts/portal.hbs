@@ -54,13 +54,9 @@
             </div>
             <div class="hotwords">
               <ul>
-                <li class="f-item">品优购首发</li>
-                <li class="f-item">亿元优惠</li>
-                <li class="f-item">9.9元团购</li>
-                <li class="f-item">每满99减30</li>
-                <li class="f-item">亿元优惠</li>
-                <li class="f-item">9.9元团购</li>
-                <li class="f-item">办公用品</li>
+                {{#each settings.search_hotwords}}
+                <li class="f-item">{{this}}</li>
+                {{/each}}
               </ul>
             </div>
           </div>
@@ -214,8 +210,7 @@
           <li>友情链接<span class="space"></span></li>
           <li>关于我们</li>
         </ul>
-        <p>地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100</p>
-        <p>京ICP备08001421号京公网安备110108007702</p>
+        {{{settings.site_footer}}}
       </div>
     </div>
   </div>
