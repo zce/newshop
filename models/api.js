@@ -6,7 +6,7 @@ const axios = require('axios')
 
 const config = require('../config')
 
-const api = axios.create({
+module.exports = axios.create({
   baseURL: config.api.base,
   timeout: 3000,
   auth: {
@@ -15,14 +15,16 @@ const api = axios.create({
   }
 })
 
-api.interceptors.request.use(config => {
-  const { method, url, params } = config
+// module.exports.interceptors.response.use(response => {
+//   const { config, data } = response
+//   const { method, url, params } = config
 
-  console.log(`[${method}] ${url}`)
-  console.log(params)
-  console.log('================================================================')
+//   console.log(`[${method}] ${url}`)
+//   console.log('--------------------------------------------------')
+//   console.log('→', JSON.stringify(params))
+//   console.log('--------------------------------------------------')
+//   console.log('←', JSON.stringify(data))
+//   console.log('====================================================================================================')
 
-  return config;
-}, error => Promise.reject(error));
-
-module.exports = api
+//   return response;
+// }, error => Promise.reject(error));

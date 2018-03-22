@@ -25,11 +25,13 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "express-hbs": "^1.0.4",
-    "express-session": "^1.15.6"
+    "express-session": "^1.15.6",
+    "http-errors": "^1.6.2",
+    "serve-static": "^1.13.2"
   },
   "devDependencies": {
-    "nodemon": "^1.17.1"
+    "nodemon": "^1.17.2"
   }
 }

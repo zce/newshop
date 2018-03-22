@@ -2,19 +2,17 @@
  * Home Controller
  */
 
-const slide = require('../models/slide')
-const product = require('../models/product')
+const { Product } = require('../models')
 
 exports.index = (req, res) => {
-  slide.find()
-    .then(slides => {
-      res.locals.slides = slides
-
-      return product.findLikes()
-    })
+  Product.getLikeProducts()
     .then(likes => {
       res.locals.likes = likes
-
       res.render('index')
     })
+}
+
+exports.likes = (req, res) => {
+  Product.getLikeProducts()
+    .then(likes => res.json(likes))
 }

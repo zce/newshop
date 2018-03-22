@@ -138,6 +138,11 @@ ul.logo-list li {
 	color: #fff;
 }
 
+.sui-navbar .sui-nav>.active>a:hover {
+	background: #d01926;
+	color: #fff;
+}
+
 .goods-list {
 	margin: 20px 0;
 }
@@ -187,51 +192,17 @@ ul.logo-list li {
 	height: 66px;
 }
 
-.sui-pagination ul>.active>a {
-	border-color: #fff;
-	background-color: #fff;
-	color: #c81623;
-	cursor: default;
+
+.sui-pagination ul>.active>a, .sui-pagination ul>.active>span {
+	border-color: #e8351f;
+	background-color: #ea4a36;
 }
 
-.sui-pagination ul>.active>a:hover {
-	border: 1px solid #ddd;
-	background: #ccc;
+.sui-pagination ul>li>a, .sui-pagination ul>li>span {
+	color: #555;
 }
 
-.sui-pagination ul>li {
-	display: inline-block;
-	*display: inline;
-	*zoom: 1;
-}
-
-.pagination-large ul>li>a,.pagination-large ul>li>span {
-	padding: 9px 18px;
-	color: #333;
-}
-
-.sui-pagination ul>li>a:hover {
-	border: 1px solid #ddd;
-	background: #ccc;
-}
-
-.sui-pagination ul>.dotted>span,.sui-pagination ul>.dotted>a {
-	border: 0;
-}
-
-.pagination-large div .page-num {
-	padding: 9px 18px;
-}
-
-.pagination-large div .page-num+.page-confirm {
-	padding: 7px 16px;
-	border: 1px solid #ddd;
-	background-color: #f6f6f6;
-	color: #666;
-}
-
-.sui-pagination div {
-	display: inline-block;
-	*display: inline;
-	*zoom: 1;
+.sui-pagination ul>.active>a:focus, .sui-pagination ul>.active>a:hover, .sui-pagination ul>.active>span:focus, .sui-pagination ul>.active>span:hover {
+	border-color: #e33019;
+	background-color: #e64630;
 }

@@ -3,5 +3,5 @@
  */
 
 module.exports = (input, opts) => {
-  return parseFloat(input).toFixed(opts.hash.length || 2)
+  return parseFloat(input).toFixed(opts.hash.decimals || 2)
 }

@@ -208,21 +208,11 @@ a.carousel-control {
 	height: 142px;
 }
 
-.like ul li .like-text {
-	padding: 0;
-	width: 142px;
-	border-right: 1px solid #e4e4e4;
-}
-
-.like ul li:last-child .like-text {
-	border-right: 0;
-}
-
-.like-text h3 {
+.like ul li h3 {
 	color: #df3033;
 }
 
-.like-text p {
+.like ul li p {
 	margin-bottom: 0;
 	height: 35px;
 	overflow: hidden;
@@ -452,26 +442,21 @@ ul.brand-list li {
 	cursor: pointer;
 }
 
-#picLBxxl li,.picLB li {
-	height: 250px;
-}
-
-.picLB li {
-	position: relative;
-	overflow: hidden;
-	margin: 0 -1px;
-	background: #fff;
-}
-
 .picLB {
 	overflow: hidden;
-	padding: 0 10px;
-	zoom: 1;
 }
 
 .picLB li {
 	float: left;
 	display: inline;
+	height: 250px;
+	padding: 20px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.picLB li + li {
+	border-left: 1px solid #eee;
 }
 
 .picDl {

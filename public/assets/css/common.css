@@ -9011,8 +9011,8 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 }
 
 .sui-pagination ul>li>a:focus,.sui-pagination ul>li>a:hover {
-	border-color: #4cb9fc;
-	background-color: #4cb9fc;
+	border-color: #e8351f;
+	background-color: #ea4a36;
 	color: #fff;
 }
 
@@ -9027,11 +9027,6 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 	border-color: #28a3ef;
 	background-color: #28a3ef;
 	color: #fff;
-}
-
-.sui-pagination ul>.dotted>a,.sui-pagination ul>.dotted>span {
-	border-top: 0;
-	border-bottom: 0;
 }
 
 .sui-pagination ul>.disabled>a,.sui-pagination ul>.disabled>a:focus,.sui-pagination ul>.disabled>a:hover,.sui-pagination ul>.disabled>span {
@@ -9409,7 +9404,7 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 	margin-bottom: 0;
 	padding: 2px 14px;
 	border: 1px solid #e1e1e1;
-	border: 1px solid #1299ec;
+	border: 1px solid #e8351f;
 	-webkit-border-radius: 2px;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 2px;
@@ -9417,7 +9412,7 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 	border-radius: 2px;
 	border-radius: 0;
 	background-color: #eee;
-	background-color: #28a3ef;
+	background-color: #ea4a36;
 	color: #333;
 	color: #fff;
 	vertical-align: middle;
@@ -9622,8 +9617,8 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 }
 
 .pagination-large div .page-num+.page-confirm:focus,.pagination-large div .page-num+.page-confirm:hover {
-	border: 1px solid #33affc;
-	background-color: #4cb9fc;
+	border: 1px solid #e33019;
+	background-color: #e64630;
 	color: #fff;
 }
 

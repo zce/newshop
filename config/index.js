@@ -14,5 +14,8 @@ module.exports = {
     greetingTimeout: 1000,
     socketTimeout: 2000,
     debug: process.env.NODE_ENV === 'development'
+  },
+  session: {
+    secret: 'MAKE IT BETTER!'
   }
 }

@@ -4,8 +4,43 @@
 
 const api = require('./api')
 
-exports.findLikes = () => {
-  return api.get('/products', { params: { type: 'like', limit: 6 } })
+/**
+ * 获取猜你喜欢的商品
+ * @param {Number} length 数量
+ * @return {Promise<Array>} 返回商品数据的 Promise
+ */
+exports.getLikeProducts = (length = 6) => {
+  if (typeof length !== 'number') throw Error(`Expected a number, got ${typeof length}.`)
+
+  return api.get('/products', { params: { type: 'like', limit: length } })
     .then(res => res.data)
     .catch(e => [])
+}
+
+/**
+ * 根据分类 ID 分页获取商品数据
+ * @param  {Number} catId   分类 ID
+ * @param  {Number} page    页码
+ * @param  {Number} perPage 页大小
+ * @param  {String} sort    排序规则
+ * @return {Promise<Array>} 返回商品数据的 Promise
+ */
+exports.getProducts = (catId, page, perPage, sort) => {
+  if (!catId) throw new Error('Missing required parameter: catId.')
+
+  return api.get(`/categories/${catId}/products?page=${page}&per_page=${perPage}&sort=${sort}`)
+    .then(res => ({ products: res.data, totalPages: ~~res.headers['x-total-pages'] }))
+    .catch(e => ({ products: [], totalPages: 0 }))
+}
+
+/**
+ * 获取单个商品信息
+ * @param  {Number} id      商品 ID
+ * @return {Promise<Array>} 返回商品数据的 Promise
+ */
+exports.getProduct = id => {
+  if (!id) throw new Error('Missing required parameter: id.')
+
+  return api.get(`/products/${id}`)
+    .then(res => res.data)
 }

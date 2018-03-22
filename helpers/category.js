@@ -2,10 +2,10 @@
  * 获取分类数据 helper
  */
 
-const category = require('../models/category')
+const Category = require('../models/category')
 
 module.exports = (opts, done) => {
-  category.findCascading().then(categories => {
+  Category.getCascadingTree().then(categories => {
     done(opts.fn({ categories }))
   })
 }

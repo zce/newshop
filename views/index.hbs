@@ -1,4 +1,8 @@
-{{!< layout}}
+{{!< portal}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-home.css">
+{{/contentFor}}
 
 <!--列表-->
 <div class="py-container">
@@ -7,12 +11,12 @@
       <!--banner轮播-->
       <div id="banner" data-ride="carousel" data-interval="4000" class="sui-carousel slide">
         <ol class="carousel-indicators">
-          {{#each slides}}
+          {{#each settings.home_slides}}
           <li data-target="#banner" data-slide-to="{{@index}}"{{#if @first}} class="active"{{/if}}></li>
           {{/each}}
         </ol>
         <div class="carousel-inner">
-          {{#each slides}}
+          {{#each settings.home_slides}}
           <div class="item{{#if @first}} active{{/if}}"><a href="{{link}}"><img src="{{image}}" alt="{{title}}"></a></div>
           {{/each}}
         </div>
@@ -84,18 +88,14 @@
   <div class="py-container">
     <div class="title">
       <h3 class="fl">猜你喜欢</h3>
-      <a href="#" class="fr tip changeBnt" id="xxlChg"><i></i>换一换</a>
+      <a id="btn_refresh_likes" href="#" class="fr tip changeBnt"><i></i>换一换</a>
     </div>
     <div class="bd">
-      <ul class="clearfix yui3-g Favourate picLB" id="picLBxxl">
+      <ul id="likes_list" class="clearfix yui3-g Favourate picLB">
         {{#each likes}}
         <li class="yui3-u-1-6">
-          <dl class="picDl huozhe">
-            <dd>
-              <a href="item.html" class="pic"><img src="{{thumbnail}}"></a>
-              <div class="like-text"><p>{{name}}</p><h3>¥{{toFixed price}}</h3></div>
-            </dd>
-          </dl>
+          <a href="item.html" class="pic"><img src="{{thumbnail}}"></a>
+          <p>{{name}}</p><h3>¥{{format price}}</h3>
         </li>
         {{/each}}
       </ul>
@@ -247,3 +247,31 @@
     </ul>
   </div>
 </div>
+
+{{#contentFor 'scripts'}}
+<script src="/assets/js/sui.carousel.js"></script>
+<script src="/assets/js/sui.transition.js"></script>
+<script>
+  $(function ($) {
+    var $likesList = $('#likes_list')
+    var likesTemplate = '<li class="yui3-u-1-6">\
+          <a href="item.html" class="pic"><img src="{thumbnail}"></a>\
+          <p>{name}</p><h3>¥{price}</h3>\
+        </li>'
+
+    $('#btn_refresh_likes').on('click', function () {
+      $.get('/likes', function (data) {
+        $likesList.empty()
+        $(data).each(function (i, item) {
+          var li = likesTemplate
+            .replace('{thumbnail}', item.thumbnail)
+            .replace('{name}', item.name)
+            .replace('{price}', item.price)
+          $likesList.append(li)
+        })
+      })
+      return false
+    })
+  })
+</script>
+{{/contentFor}}

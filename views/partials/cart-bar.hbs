@@ -1,0 +1,104 @@
+<!--侧栏面板开始-->
+<div class="J-global-toolbar">
+  <div class="toolbar-wrap">
+    <div class="toolbar">
+      <div class="toolbar-panels">
+        <!-- 购物车 -->
+        <div class="toolbar-panel tbar-panel-cart" style="visibility: hidden;">
+          <h3 class="tbar-panel-header">
+            <a class="title" href="cart.html"><i></i><em class="title">购物车</em></a>
+            <span class="close-panel"></span>
+          </h3>
+          <div class="tbar-panel-main">
+            <div class="tbar-panel-content">
+              <div class="tbar-tipbox hide">
+                <div class="tip-inner">
+                  <span class="tip-text">还没有登录，登录后商品将被保存</span>
+                  <a href="login.html" class="tip-btn">登录</a>
+                </div>
+              </div>
+              <!-- 列表 -->
+              <div class="tbar-cart-list"></div>
+            </div>
+          </div>
+          <!-- 小计 -->
+          <div class="tbar-panel-footer">
+            <div class="tbar-checkout">
+              <div class="jtc-number"><strong>0</strong>件商品</div>
+              <div class="jtc-sum"> 共计：<strong>¥0</strong></div>
+              <a class="jtc-btn" href="cart.html">去购物车结算</a>
+            </div>
+          </div>
+        </div>
+        <!-- 我的关注 -->
+        <div class="toolbar-panel tbar-panel-follow" style="visibility: hidden;">
+          <h3 class="tbar-panel-header">
+            <a class="title" href="#"><i></i><em class="title">我的关注</em></a>
+            <span class="close-panel"></span>
+          </h3>
+          <div class="tbar-panel-main">
+            <div class="tbar-panel-content"></div>
+          </div>
+        </div>
+        <!-- 我的足迹 -->
+        <div class="toolbar-panel tbar-panel-history" style="visibility: hidden;">
+          <h3 class="tbar-panel-header">
+            <a class="title" href="#"><i></i><em class="title">我的足迹</em></a>
+            <span class="close-panel"></span>
+          </h3>
+          <div class="tbar-panel-main">
+            <div class="tbar-panel-content">
+              <div class="jt-history-wrap">
+                <ul>
+                  <!-- <li class="jth-item">
+                    <a class="img-wrap" href="item.html"><img src="#" height="100" width="100"></a>
+                    <a class="add-cart-button" href="cart-add.html">加入购物车</a>
+                    <span class="price">￥498.00</span>
+                  </li>
+                  <li class="jth-item">
+                    <a class="img-wrap" href="item.html"><img src="#" height="100" width="100"></a>
+                    <a class="add-cart-button" href="cart-add.html">加入购物车</a>
+                    <span class="price">￥498.00</span>
+                  </li> -->
+                </ul>
+                <a class="history-bottom-more" href="#">查看更多足迹商品 &gt;&gt;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 侧栏按钮 -->
+      <div class="toolbar-tabs">
+        <div class="toolbar-tab tbar-tab-cart" data-title="购物车" data-target="cart"><i class="tab-ico"></i><em class="tab-text"></em><span class="tab-sub">0</span></div>
+        <div class="toolbar-tab tbar-tab-follow" data-title="我的关注" data-target="follow"><i class="tab-ico"></i><em class="tab-text"></em></div>
+        <div class="toolbar-tab tbar-tab-history" data-title="我的足迹" data-target="history"><i class="tab-ico"></i><em class="tab-text"></em></div>
+      </div>
+      <div class="toolbar-footer">
+        <div class="toolbar-tab tbar-tab-top">
+          <a href="#"><i class="tab-ico"></i><em class="footer-tab-text">顶部</em></a>
+        </div>
+        <div class="toolbar-tab tbar-tab-feedback">
+          <a href="#"><i class="tab-ico"></i><em class="footer-tab-text">反馈</em></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--购物车单元格 模板-->
+<script type="text/template" id="tbar-cart-item-template">
+  <div class="tbar-cart-item">
+    <div class="jtc-item-promo">
+      <em class="promo-tag promo-mz">满赠<i class="arrow"></i></em>
+      <div class="promo-text">已购满600元，您可领赠品</div>
+    </div>
+    <div class="jtc-item-goods">
+      <span class="p-img"><a href="#"><img src="{2}" alt="{1}" height="50" width="50"></a></span>
+      <div class="p-name">
+        <a href="#">{1}</a>
+      </div>
+      <div class="p-price"><strong>¥{3}</strong>×{4} </div>
+      <a class="p-del" href="#">删除</a>
+    </div>
+  </div>
+</script>
