@@ -11,7 +11,7 @@ const api = require('./api')
 exports.getSettings = () => {
   return api.get('/settings')
     .then(res => res.data)
-    .catch(e => null)
+    .catch(e => ({}))
 }
 
 /**

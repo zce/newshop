@@ -94,7 +94,7 @@
       <ul id="likes_list" class="clearfix yui3-g Favourate picLB">
         {{#each likes}}
         <li class="yui3-u-1-6">
-          <a href="item.html" class="pic"><img src="{{thumbnail}}"></a>
+          <a href="/item/{{id}}" class="pic"><img src="{{thumbnail}}"></a>
           <p>{{name}}</p><h3>¥{{price}}</h3>
         </li>
         {{/each}}
@@ -255,7 +255,7 @@
   $(function ($) {
     var $likesList = $('#likes_list')
     var likesTemplate = '<li class="yui3-u-1-6">\
-          <a href="item.html" class="pic"><img src="{thumbnail}"></a>\
+          <a href="/item/{id}" class="pic"><img src="{thumbnail}"></a>\
           <p>{name}</p><h3>¥{price}</h3>\
         </li>'
 
@@ -264,6 +264,7 @@
         $likesList.empty()
         $(data).each(function (i, item) {
           var li = likesTemplate
+            .replace('{id}', item.id)
             .replace('{thumbnail}', item.thumbnail)
             .replace('{name}', item.name)
             .replace('{price}', item.price)

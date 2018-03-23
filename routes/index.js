@@ -4,6 +4,12 @@ const { Router } = require('express')
 const homeController = require('../controllers/home')
 const listController = require('../controllers/list')
 const itemController = require('../controllers/item')
+const accountController = require('../controllers/account')
+const memberController = require('../controllers/member')
+const cartController = require('../controllers/cart')
+const checkoutController = require('../controllers/checkout')
+
+const commonController = require('../controllers/common')
 
 // 创建路由对象
 const router = new Router()
@@ -15,6 +21,14 @@ router.get('/likes', homeController.likes)
 router.get('/list/:id', listController.index)
 
 router.get('/item/:id', itemController.index)
+
+router.get('/account', accountController.index)
+router.get('/account/login', accountController.login)
+router.post('/account/login', accountController.loginPost)
+router.get('/account/register', accountController.register)
+router.post('/account/register', accountController.registerPost)
+
+router.get('/captcha', commonController.captcha)
 
 // 导出路由对象
 module.exports = router

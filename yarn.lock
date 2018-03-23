@@ -1488,6 +1488,12 @@ once@^1.3.0, once@^1.3.3:
   dependencies:
     wrappy "1"
 
+opentype.js@^0.7.3:
+  version "0.7.3"
+  resolved "http://registry.npm.taobao.org/opentype.js/download/opentype.js-0.7.3.tgz#40fb8ce18bfd60e74448efdfe442834098397aab"
+  dependencies:
+    tiny-inflate "^1.0.2"
+
 optimist@^0.6.1:
   version "0.6.1"
   resolved "http://registry.npm.taobao.org/optimist/download/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
@@ -1998,6 +2004,12 @@ supports-color@^5.2.0, supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
+svg-captcha@^1.3.11:
+  version "1.3.11"
+  resolved "http://registry.npm.taobao.org/svg-captcha/download/svg-captcha-1.3.11.tgz#f16e9d68ca0b189627c0557ef8e6a085f7e87ee9"
+  dependencies:
+    opentype.js "^0.7.3"
+
 tar-pack@^3.4.0:
   version "3.4.1"
   resolved "http://registry.npm.taobao.org/tar-pack/download/tar-pack-3.4.1.tgz#e1dbc03a9b9d3ba07e896ad027317eb679a10a1f"
@@ -2032,6 +2044,10 @@ through@2, through@~2.3, through@~2.3.1:
 timed-out@^4.0.0:
   version "4.0.1"
   resolved "http://registry.npm.taobao.org/timed-out/download/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
+
+tiny-inflate@^1.0.2:
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/tiny-inflate/download/tiny-inflate-1.0.2.tgz#93d9decffc8805bd57eae4310f0b745e9b6fb3a7"
 
 to-object-path@^0.3.0:
   version "0.3.0"
