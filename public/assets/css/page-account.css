@@ -238,3 +238,12 @@ h3 .go {
 .copyright ul li:last-child {
 	border-right: 0;
 }
+
+.error-message {
+	color: #f60;
+	margin: -15px 0 5px;
+}
+
+.error-message::before {
+	content: '!!! '
+}

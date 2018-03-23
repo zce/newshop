@@ -9,7 +9,7 @@ exports.captcha = (req, res) => {
     background: '#fff'
   })
   // 生成验证码时将验证码的内容放到当前用户的 session 中
-  req.session.captcha = svg.text
+  req.session.captcha = svg.text.toLowerCase()
 
   // svg 的 mimetype image/svg+xml
   res.type('svg')
