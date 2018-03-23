@@ -167,7 +167,7 @@ ul.logo-list li {
 	height: 245px;
 	background: #fafafa center center no-repeat url(../img/loading.svg);
 	opacity: .4;
-	transition: opacity 2s;
+	transition: opacity 1.5s;
 }
 
 .goods-list .p-img img[src] {

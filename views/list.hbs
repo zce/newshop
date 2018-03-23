@@ -85,6 +85,8 @@
 {{#contentFor 'scripts'}}
 <script src="/assets/js/lazyload.min.js"></script>
 <script>
-  $('.goods-list img').lazyload()
+  $(function ($) {
+    $('.goods-list img').lazyload()
+  })
 </script>
 {{/contentFor}}

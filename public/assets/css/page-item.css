@@ -247,8 +247,12 @@ ul.part-list li {
   float: left;
   width: 50%;
   border-bottom: 1px dashed #ededed;
-  line-height: 18px;
   line-height: 28px;
+}
+
+ul.part-list li a{
+  padding-left: 5px;
+  color: #666;
 }
 
 .sui-nav.nav-tabs.tab-wraped>li {
@@ -290,12 +294,25 @@ ul.part-list li {
 
 ul.goods-list li {
   margin: 5px 0 15px;
-  padding-bottom: 5px;
+  padding: 5px;
   border-bottom: 1px solid #ededed;
 }
 
+ul.goods-list li .attr {
+  height: 36px;
+  overflow: hidden;
+  margin: 5px 0;
+}
+
+ul.goods-intro {
+  overflow: hidden;
+  margin: 20px 10px 30px;
+}
+
 ul.goods-intro li {
-  line-height: 26px;
+  line-height: 22px;
+  width: 50%;
+  float: left;
 }
 
 .suits .list-wrap {
@@ -464,11 +481,31 @@ ul.goods-intro li {
 .com-item .user-info .stars {
   width: 78px;
   height: 18px;
-  background: url(../img/_/star.png) no-repeat;
+  background: url(../img/star.png) no-repeat;
 }
 
-.com-item .user-info .stars.star4 {
+.com-item .user-info .stars.star-5 {
   background-position: 0 0;
+}
+
+.com-item .user-info .stars.star-4 {
+  background-position: -16px 0;
+}
+
+.com-item .user-info .stars.star-3 {
+  background-position: -32px 0;
+}
+
+.com-item .user-info .stars.star-2 {
+  background-position: -48px 0;
+}
+
+.com-item .user-info .stars.star-1 {
+  background-position: -64px 0;
+}
+
+.com-item .user-info .stars.star-0 {
+  background-position: -80px 0;
 }
 
 .com-item .user-info .mini {
@@ -506,105 +543,105 @@ i.icon-tb-wangfill {
 }
 
 .tab {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .tab li,.tab a,.tab-item {
-	float: left;
-	text-align: center;
-	cursor: pointer;
+  float: left;
+  text-align: center;
+  cursor: pointer;
 }
 
 .m,.mt,.mc,.mb {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .mt .extra {
-	float: right;
+  float: right;
 }
 
 .tab {
-	margin-bottom: 10px;
-	border-bottom: 2px solid #BE0000;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #BE0000;
 }
 
 .tab li {
-	position: relative;
-	overflow: hidden;
-	margin-right: 3px;
-	padding: 3px 12px 0;
-	height: 24px;
-	color: #c30;
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 24px;
+  position: relative;
+  overflow: hidden;
+  margin-right: 3px;
+  padding: 3px 12px 0;
+  height: 24px;
+  color: #c30;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 .tab span {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	width: 10px;
-	height: 27px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 10px;
+  height: 27px;
 }
 
 .tab a {
-	float: none;
-	color: #c30;
+  float: none;
+  color: #c30;
 }
 
 .tab .curr {
-	background-position: right -178px;
-	color: #fff;
+  background-position: right -178px;
+  color: #fff;
 }
 
 .tab .curr span {
-	background-position: 0 -178px;
+  background-position: 0 -178px;
 }
 
 .tab .curr a {
-	color: #fff;
+  color: #fff;
 }
 
 .spec-preview {
-	width: 410px;
-	height: 410px;
-	border: 1px solid #DFDFDF;
+  width: 410px;
+  height: 410px;
+  border: 1px solid #DFDFDF;
 }
 
 .spec-scroll {
-	clear: both;
-	overflow: hidden;
-	margin-top: 10px;
-	width: 410px;
+  clear: both;
+  overflow: hidden;
+  margin-top: 10px;
+  width: 410px;
 }
 
 .spec-scroll .prev {
-	float: left;
-	margin-right: 4px;
+  float: left;
+  margin-right: 4px;
 }
 
 .spec-scroll .next {
-	float: right;
+  float: right;
 }
 
 .spec-scroll .prev,.spec-scroll .next {
-	display: block;
-	width: 10px;
-	height: 54px;
-	border: 1px solid #CCC;
-	background: #EBEBEB;
-	text-align: center;
-	text-decoration: none;
-	font-family: "宋体";
-	line-height: 54px;
-	cursor: pointer;
+  display: block;
+  width: 10px;
+  height: 54px;
+  border: 1px solid #CCC;
+  background: #EBEBEB;
+  text-align: center;
+  text-decoration: none;
+  font-family: "宋体";
+  line-height: 54px;
+  cursor: pointer;
 }
 
 .spec-scroll .items {
-	position: relative;
-	float: left;
-	overflow: hidden;
-	width: 380px;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  width: 380px;
 }

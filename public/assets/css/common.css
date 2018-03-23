@@ -8233,7 +8233,7 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 
 .sui-nav.nav-tabs.tab-wraped>li.active>a {
 	padding-top: 18px;
-	border-top: 3px solid #28a3ef;
+	border-top: 3px solid #d2424e;
 	border-bottom: 1px solid #fff;
 	background: #fff;
 	font-weight: 400;

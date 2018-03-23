@@ -6,9 +6,9 @@ const createError = require('http-errors')
 
 const { Category, Product } = require('../models')
 
-exports.index = (req, res) => {
+exports.index = (req, res, next) => {
   const id = ~~req.params.id
-  if (!id) createError(400, 'Bad Request')
+  if (!id) throw createError(400, 'Bad Request')
 
   // 处理参数
   const perPage = 10
@@ -19,7 +19,6 @@ exports.index = (req, res) => {
   res.locals.perPage = perPage
   res.locals.page = page
   res.locals.sort = sort
-  // => `/list/123?page=1`
 
   // 查询数据
   Category.getCategory(id)
@@ -33,7 +32,5 @@ exports.index = (req, res) => {
       res.locals.totalPages = totalPages
       res.render('list')
     })
-    .catch(e => {
-      throw createError(404, 'Not Found')
-    })
+    .catch(e => next(createError(404, e)))
 }

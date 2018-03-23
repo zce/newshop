@@ -6,7 +6,6 @@
   <title>品优购 - 优质！优质！</title>
   <link rel="stylesheet" href="assets/css/common.css">
   <link rel="stylesheet" href="assets/css/page-item.css">
-  <link rel="stylesheet" href="assets/css/xzoom.css">
 </head>
 
 <body>
@@ -215,15 +214,15 @@
           <div class="zoom">
             <!--默认第一个预览-->
             <div id="preview" class="spec-preview">
-              <img class="xzoom" xoriginal="uploads/b1.png" src="uploads/s1.png" width="100%">
+              <img src="uploads/s1.png" width="100%">
             </div>
             <!--下方的缩略图-->
             <div class="spec-scroll">
-              <a href="uploads/b1.png"><img class="xzoom-gallery" src="uploads/s1.png" width="60"></a>
-              <a href="uploads/b2.png"><img class="xzoom-gallery" src="uploads/s2.png" width="60"></a>
-              <a href="uploads/b3.png"><img class="xzoom-gallery" src="uploads/s3.png" width="60"></a>
-              <a href="uploads/b1.png"><img class="xzoom-gallery" src="uploads/s1.png" width="60"></a>
-              <a href="uploads/b2.png"><img class="xzoom-gallery" src="uploads/s2.png" width="60"></a>
+              <a href="uploads/b1.png"><img src="uploads/s1.png" width="60"></a>
+              <a href="uploads/b2.png"><img src="uploads/s2.png" width="60"></a>
+              <a href="uploads/b3.png"><img src="uploads/s3.png" width="60"></a>
+              <a href="uploads/b1.png"><img src="uploads/s1.png" width="60"></a>
+              <a href="uploads/b2.png"><img src="uploads/s2.png" width="60"></a>
             </div>
           </div>
         </div>
@@ -234,7 +233,7 @@
           <div class="summary">
             <div class="summary-wrap">
               <div class="fl title"><i>价　　格</i></div>
-              <div class="fl price"><i>¥</i><em>5299.00</em></div>
+              <div class="fl price"><i>￥</i><em>5299.00</em></div>
               <div class="fr remark"><i>累计评价</i><em>612188</em></div>
             </div>
           </div>
@@ -270,7 +269,7 @@
                 <a href="#" class="increment plus">+</a>
                 <a href="#" class="increment mins">-</a>
               </div>
-              <a href="cart-add.html" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+              <a href="cart-add.html" class="sui-btn btn-danger addshopcar">加入购物车</a>
             </div>
           </div>
         </div>
@@ -382,7 +381,7 @@
                         <div class="usernum">品享值258698</div>
                       </div>
                       <div class="user-info">
-                        <div class="stars star4"></div>
+                        <div class="stars star-4"></div>
                         <p>手机还不错，可以的可以的</p>
                         <div class="guige">
                           <ul class="mini">
@@ -637,13 +636,7 @@
   <script src="assets/js/jquery.js"></script>
   <script src="assets/js/sui.tab.js"></script>
   <script src="assets/js/sui.transition.js"></script>
-  <script src="assets/js/xzoom.min.js"></script>
   <script src="assets/js/common.js"></script>
-  <script>
-    $(function ($) {
-      $('.xzoom, .xzoom-gallery').xzoom({ tint: '#888', Xoffset: 15 })
-    })
-  </script>
 </body>
 
 </html>
