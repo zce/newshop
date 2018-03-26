@@ -6,8 +6,10 @@ const hbs = require('express-hbs')
 const { Category, Setting } = require('../models')
 
 module.exports = (req, res, next) => {
+  const user = req.session.user
+
   hbs.updateTemplateOptions({
-    data: { req, res }
+    data: { req, res, user }
   })
 
   Promise.all([

@@ -26,11 +26,11 @@ middlewares.push(bodyParser.urlencoded({ extended: false }))
 // 支持 Session
 middlewares.push(session({ secret: config.session.secret, resave: false, saveUninitialized: false }))
 
-// 获取全局所需数据
-middlewares.push(globals)
-
 // 自动获取登录用户信息
 middlewares.push(auth.resolve)
+
+// 获取全局所需数据
+middlewares.push(globals)
 
 // 导出模块
 module.exports = middlewares

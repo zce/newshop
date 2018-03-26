@@ -64,7 +64,7 @@ exports.loginPost = (req, res) => {
 
 // GET /account/logout
 exports.logout = (req, res) => {
-  delete req.session.currentUser
+  delete req.session.user
   res.clearCookie('last_logged_in_user')
   res.redirect('/account/login')
 }
