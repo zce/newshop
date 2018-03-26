@@ -48,17 +48,17 @@
           </div>
           <div class="yui3-u Center searchArea">
             <div class="search">
-              <form action="" class="sui-form form-inline">
+              <form action="/search" class="sui-form form-inline">
                 <div class="input-append">
-                  <input type="text" id="autocomplete" type="text" class="input-error input-xxlarge">
-                  <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                  <input type="text" name="q" type="text" class="input-error input-xxlarge" value="{{q}}">
+                  <button class="sui-btn btn-xlarge btn-danger">搜索</button>
                 </div>
               </form>
             </div>
             <div class="hotwords">
               <ul>
                 {{#each settings.search_hotwords}}
-                <li class="f-item">{{this}}</li>
+                <li class="f-item"><a href="/search?q={{this}}">{{this}}</a></li>
                 {{/each}}
               </ul>
             </div>

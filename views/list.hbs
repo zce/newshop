@@ -9,6 +9,9 @@
     <!--bread-->
     <div class="bread">
       <ul class="fl sui-breadcrumb">
+        {{#if q}}
+        <li class="active">搜索 “{{q}}” 的结果</li>
+        {{else}}
         {{#if category.parent.parent}}
         <li><a href="/list/{{category.parent.parent.id}}">{{category.parent.parent.name}}</a></li>
         {{/if}}
@@ -16,6 +19,7 @@
         <li><a href="/list/{{category.parent.id}}">{{category.parent.name}}</a></li>
         {{/if}}
         <li class="active">{{category.name}}</li>
+        {{/if}}
       </ul>
     </div>
     <!--selector-->

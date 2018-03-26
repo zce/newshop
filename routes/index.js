@@ -7,6 +7,7 @@ const auth = require('../middlewares/auth')
 const homeController = require('../controllers/home')
 const listController = require('../controllers/list')
 const itemController = require('../controllers/item')
+const searchController = require('../controllers/search')
 const accountController = require('../controllers/account')
 const memberController = require('../controllers/member')
 const cartController = require('../controllers/cart')
@@ -24,6 +25,8 @@ router.get('/likes', homeController.likes)
 router.get('/list/:id', listController.index)
 
 router.get('/item/:id', itemController.index)
+
+router.get('/search', searchController.index)
 
 router.get('/account', accountController.index)
 router.get('/account/login', accountController.login)

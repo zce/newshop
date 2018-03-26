@@ -2,6 +2,7 @@
  * 商品模型对象（商品相关数据操作）
  */
 
+const qs = require('querystring')
 const api = require('./api')
 
 /**
@@ -30,6 +31,22 @@ exports.getProducts = (catId, page, perPage, sort) => {
   if (!catId) throw new Error('Missing required parameter: catId.')
 
   return api.get(`/products?page=${page}&per_page=${perPage}&sort=${sort}&filter=cat:${catId}`)
+    .then(res => ({ products: res.data, totalPages: ~~res.headers['x-total-pages'] }))
+    .catch(e => ({ products: [], totalPages: 0 }))
+}
+
+/**
+ * 搜索商品数据
+ * @param  {String} q       搜索
+ * @param  {Number} page    页码
+ * @param  {Number} perPage 页大小
+ * @param  {String} sort    排序规则
+ * @return {Promise<Array>} 返回商品数据的 Promise
+ */
+exports.searchProducts = (q, page, perPage, sort) => {
+  if (!q) throw new Error('Missing required parameter: q.')
+
+  return api.get(`/products?q=${qs.escape(q)}&page=${page}&per_page=${perPage}&sort=${sort}`)
     .then(res => ({ products: res.data, totalPages: ~~res.headers['x-total-pages'] }))
     .catch(e => ({ products: [], totalPages: 0 }))
 }

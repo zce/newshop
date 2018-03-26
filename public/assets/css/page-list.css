@@ -175,10 +175,9 @@ ul.logo-list li {
 }
 
 .attr,.cu,.commit {
-	height: 22px;
+	height: 45px;
 	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	line-height: 1.8;
 }
 
 .price {

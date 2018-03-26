@@ -4,8 +4,11 @@
 
 const hbs = require('express-hbs')
 const { Category, Setting } = require('../models')
+const config = require('../config')
 
 module.exports = (req, res, next) => {
+  res.locals.config = config
+
   const user = req.session.user
 
   hbs.updateTemplateOptions({
