@@ -1,4 +1,8 @@
 module.exports = {
+  site: {
+    name: '品优购',
+    url: 'http://localhost:2080',
+  },
   api: {
     base: 'http://newshop.me/api/v1',
     key: 'newshop-frontend',

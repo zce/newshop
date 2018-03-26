@@ -44,7 +44,7 @@
                 <button class="sui-btn btn-block btn-xlarge btn-danger">登&nbsp;&nbsp;录</button>
               </div>
             </form>
-            <a href="/account/register">立即注册</a>
+            <a href="/account/register{{#if @req.query.redirect}}?redirect={{@req.query.redirect}}{{/if}}">立即注册</a>
           </div>
         </div>
       </div>
