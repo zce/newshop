@@ -2,6 +2,7 @@
  * Account Controller
  */
 
+const createError = require('http-errors')
 const { User } = require('../models')
 const { mail } = require('../utils')
 
@@ -42,6 +43,17 @@ exports.loginPost = (req, res) => {
     })
     .then(user => {
       req.session.user = user
+
+      // 处理记住我
+      if (remember) {
+        // redirect + set cookie 把用户名和密码的密文存下来，下次自动登录
+        // cookie 的名称最好无任何意义
+        const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+        // 可以使用可逆加密存储信息
+        // 这个 cookie 一定是设置为 httpOnly（只能在请求响应的时候由服务端设置，不能在客户端由 JavaScript 设置）
+        res.cookie('last_logged_in_user', { uid: user.id, pwd: user.password }, { expires: expires, httpOnly: true })
+      }
+
       res.redirect(req.query.redirect || '/')
     })
     .catch(e => {
@@ -108,5 +120,20 @@ exports.registerPost = (req, res) => {
 }
 
 exports.active = (req, res) => {
+  const { v } = req.query
 
+  if (!v) throw createError(400)
+
+  // 已经取到当前这个验证码匹配的用户，当前登录的用户信息在 Session 中
+  // 判断是否为同一个用户
+  if (req.session.user.email_verify !== v) throw createError(400)
+
+  User.active(req.session.user.id)
+    .then(user => {
+      req.session.user = user
+      res.redirect('/member')
+    })
+    .catch(e => {
+      throw createError(500, '激活失败，请重试')
+    })
 }

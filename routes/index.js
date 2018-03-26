@@ -1,5 +1,8 @@
 const { Router } = require('express')
 
+// 认证中间件
+const auth = require('../middlewares/auth')
+
 // 载入全部控制器
 const homeController = require('../controllers/home')
 const listController = require('../controllers/list')
@@ -28,7 +31,12 @@ router.post('/account/login', accountController.loginPost)
 router.get('/account/logout', accountController.logout)
 router.get('/account/register', accountController.register)
 router.post('/account/register', accountController.registerPost)
-router.get('/account/active', accountController.active)
+router.get('/account/active', auth.required, accountController.active)
+
+router.get('/member', auth.required, memberController.index)
+router.get('/member/order', auth.required, memberController.order)
+router.get('/member/profile', auth.required, memberController.profile)
+router.get('/member/address', auth.required, memberController.address)
 
 router.get('/captcha', commonController.captcha)
 
