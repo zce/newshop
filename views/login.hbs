@@ -33,7 +33,7 @@
               <div class="input-prepend">
                 <span class="add-on logincaptcha"></span>
                 <input type="text" name="captcha" class="span2 input-xfat" placeholder="请输入验证码" style="text-transform:lowercase" autocomplete="off">
-                <img src="/captcha" alt="点击切换验证码">
+                <img id="captcha" src="/captcha" data-src="/captcha" title="点击切换验证码">
               </div>
               <div class="setting">
                 <label class="checkbox inline"><input name="remember" type="checkbox"{{#if @req.body.remember}} checked{{/if}}> 自动登录</label>
@@ -55,3 +55,10 @@
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/sui.tab.js"></script>
 <script src="/assets/js/sui.transition.js"></script>
+<script>
+  $(function ($) {
+    $('#captcha').on('click', function () {
+      $(this).attr('src', $(this).data('src') + '?t' + Date.now())
+    })
+  })
+</script>
