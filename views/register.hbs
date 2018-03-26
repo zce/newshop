@@ -1,6 +1,9 @@
 {{!< basic}}
 
 {{#contentFor 'head'}}
+{{#if flash}}
+<meta http-equiv="refresh" content="5;url=/account/login{{#if @req.query.redirect}}?redirect={{escape @req.query.redirect}}{{/if}}">
+{{/if}}
 <link rel="stylesheet" href="/assets/css/common.css">
 <link rel="stylesheet" href="/assets/css/page-account.css">
 {{/contentFor}}
@@ -10,19 +13,24 @@
   <div class="logoArea"><a href="/" class="logo"></a></div>
   <!--register-->
   <div class="registerArea">
-    <h3>注册新用户<span class="go">我有账号，去<a href="/account/login{{#if @req.query.redirect}}?redirect={{@req.query.redirect}}{{/if}}">登陆</a></span></h3>
+    <h3>注册新用户<span class="go">我有账号，去<a href="/account/login{{#if @req.query.redirect}}?redirect={{escape @req.query.redirect}}{{/if}}">登陆</a></span></h3>
     <div class="info">
-      <form class="sui-form form-horizontal" action="/account/register{{#if @req.query.redirect}}?redirect={{@req.query.redirect}}{{/if}}" method="post">
+      {{#if flash}}
+      <h1>注册成功！</h1>
+      <p>{{flash}}</p>
+      <p><strong>5</strong> 秒后 <a href="/account/login{{#if @req.query.redirect}}?redirect={{escape @req.query.redirect}}{{/if}}">跳转到登录页</a></p>
+      {{else}}
+      <form class="sui-form form-horizontal" action="/account/register{{#if @req.query.redirect}}?redirect={{escape @req.query.redirect}}{{/if}}" method="post">
         <div class="control-group">
           <label for="username" class="control-label">用户名：</label>
           <div class="controls">
-            <input type="text" id="username" name="username" class="input-xfat input-xlarge" placeholder="用户名">
+            <input type="text" id="username" name="username" class="input-xfat input-xlarge" placeholder="用户名" value="{{@req.body.username}}">
           </div>
         </div>
         <div class="control-group">
           <label for="email" class="control-label">邮箱：</label>
           <div class="controls">
-            <input type="text" id="email" name="email" class="input-xfat input-xlarge" placeholder="邮箱">
+            <input type="text" id="email" name="email" class="input-xfat input-xlarge" placeholder="邮箱" value="{{@req.body.email}}">
           </div>
         </div>
         <div class="control-group">
@@ -40,18 +48,19 @@
         <div class="control-group">
           <span class="control-label">&nbsp;</span>
           <label class="controls">
-            <input name="agree" type="checkbox">
+            <input name="agree" type="checkbox"{{#if @req.body.agree}} checked{{/if}}>
             <span>同意协议并注册《品优购用户协议》</span>
           </label>
         </div>
         <div class="control-group">
           <span class="control-label"></span>
           <div class="controls btn-reg">
+            {{#if message}}<p class="error-message"> {{message}}</p>{{/if}}
             <button class="sui-btn btn-block btn-xlarge btn-danger">完成注册</button>
           </div>
         </div>
       </form>
-      <div class="clearfix"></div>
+      {{/if}}
     </div>
   </div>
   {{> footer}}

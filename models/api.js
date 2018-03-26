@@ -15,6 +15,12 @@ module.exports = axios.create({
   }
 })
 
+module.exports.interceptors.response.use(response => response, e => {
+  e.name = e.response.data.error
+  e.message = e.response.data.message
+  return Promise.reject(e)
+})
+
 // module.exports.interceptors.response.use(response => {
 //   const { config, data } = response
 //   const { method, url, params } = config
@@ -27,4 +33,4 @@ module.exports = axios.create({
 //   console.log('====================================================================================================')
 
 //   return response;
-// }, error => Promise.reject(error));
+// }, e => Promise.reject(e));

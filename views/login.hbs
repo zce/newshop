@@ -21,7 +21,7 @@
             <p>没有移动应用的前提下无法实现~</p>
           </div>
           <div id="profile" class="tab-pane active">
-            <form class="sui-form" action="/account/login{{#if @req.query.redirect}}?redirect={{@req.query.redirect}}{{/if}}" method="post">
+            <form class="sui-form" action="/account/login{{#if @req.query.redirect}}?redirect={{escape @req.query.redirect}}{{/if}}" method="post">
               <div class="input-prepend">
                 <span class="add-on loginname"></span>
                 <input type="text" name="username" class="span2 input-xfat" placeholder="用户名/邮箱" value="{{@req.body.username}}">
@@ -32,7 +32,7 @@
               </div>
               <div class="input-prepend">
                 <span class="add-on logincaptcha"></span>
-                <input type="text" name="captcha" class="span2 input-xfat" placeholder="请输入验证码">
+                <input type="text" name="captcha" class="span2 input-xfat" placeholder="请输入验证码" style="text-transform:lowercase">
                 <img src="/captcha" alt="点击切换验证码">
               </div>
               <div class="setting">
@@ -44,7 +44,7 @@
                 <button class="sui-btn btn-block btn-xlarge btn-danger">登&nbsp;&nbsp;录</button>
               </div>
             </form>
-            <a href="/account/register{{#if @req.query.redirect}}?redirect={{@req.query.redirect}}{{/if}}">立即注册</a>
+            <a href="/account/register{{#if @req.query.redirect}}?redirect={{escape @req.query.redirect}}{{/if}}">立即注册</a>
           </div>
         </div>
       </div>

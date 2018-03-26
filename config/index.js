@@ -14,9 +14,9 @@ module.exports = {
     secure: true,
     name: '品优购',
     auth: { user: 'it@zce.me', pass: 'wtfijkthhxuvbjjg' },
-    connectionTimeout: 1000,
-    greetingTimeout: 1000,
-    socketTimeout: 2000,
+    // connectionTimeout: 1000,
+    // greetingTimeout: 1000,
+    // socketTimeout: 2000,
     debug: process.env.NODE_ENV === 'development'
   },
   session: {

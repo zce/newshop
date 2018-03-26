@@ -25,8 +25,10 @@ router.get('/item/:id', itemController.index)
 router.get('/account', accountController.index)
 router.get('/account/login', accountController.login)
 router.post('/account/login', accountController.loginPost)
+router.get('/account/logout', accountController.logout)
 router.get('/account/register', accountController.register)
 router.post('/account/register', accountController.registerPost)
+router.get('/account/active', accountController.active)
 
 router.get('/captcha', commonController.captcha)
 
