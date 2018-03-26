@@ -4,7 +4,7 @@
 
 // GET /member
 exports.index = (req, res) => {
-  res.render('member-index')
+  res.render('member-index', { title: '会员中心' })
 }
 
 // GET /member/order

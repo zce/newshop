@@ -22,5 +22,11 @@ module.exports = {
   },
   session: {
     secret: 'MAKE IT BETTER!'
+  },
+  cookie: {
+    remember_key: 'last_logged_in_user',
+    remember_expires: 7 * 24 * 60 * 60 * 1000,
+    cart_key: 'shopping_cart',
+    cart_expires: 30 * 24 * 60 * 60 * 1000
   }
 }

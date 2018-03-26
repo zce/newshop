@@ -3,8 +3,10 @@
  */
 
 const createError = require('http-errors')
+
 const { User } = require('../models')
 const { mail } = require('../utils')
+const config = require('../config')
 
 // GET /account
 exports.index = (req, res) => {
@@ -48,10 +50,10 @@ exports.loginPost = (req, res) => {
       if (remember) {
         // redirect + set cookie 把用户名和密码的密文存下来，下次自动登录
         // cookie 的名称最好无任何意义
-        const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+        const expires = new Date(Date.now() + config.site.remember_expires)
         // 可以使用可逆加密存储信息
         // 这个 cookie 一定是设置为 httpOnly（只能在请求响应的时候由服务端设置，不能在客户端由 JavaScript 设置）
-        res.cookie('last_logged_in_user', { uid: user.id, pwd: user.password }, { expires: expires, httpOnly: true })
+        res.cookie(config.cookie.remember_key, { uid: user.id, pwd: user.password }, { expires: expires, httpOnly: true })
       }
 
       res.redirect(req.query.redirect || '/')
@@ -65,7 +67,7 @@ exports.loginPost = (req, res) => {
 // GET /account/logout
 exports.logout = (req, res) => {
   delete req.session.user
-  res.clearCookie('last_logged_in_user')
+  res.clearCookie(config.cookie.remember_key)
   res.redirect('/account/login')
 }
 

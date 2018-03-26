@@ -12,6 +12,7 @@ exports.index = (req, res, next) => {
   Product.getProduct(id)
     .then(product => {
       res.locals.product = product
+      res.locals.title = product.name
       // 相关分类数据
       return Promise.all([
         Category.getChildren(product.category.parent.id),

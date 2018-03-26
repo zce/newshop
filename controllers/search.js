@@ -5,6 +5,7 @@
 const createError = require('http-errors')
 
 const { Category, Product } = require('../models')
+const config = require('../config')
 
 exports.index = (req, res, next) => {
   const { q } = req.query
@@ -13,7 +14,7 @@ exports.index = (req, res, next) => {
   res.locals.q = q
 
   // 处理参数
-  const perPage = res.locals.config.site.per_page
+  const perPage = config.site.per_page
   const page = ~~req.query.page || 1
   // commend quantity market_time price -price
   const sort = req.query.sort || 'commend'

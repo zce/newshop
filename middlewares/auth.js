@@ -5,7 +5,9 @@
  */
 
 const qs = require('querystring')
+
 const { User } = require('../models')
+const config = require('../config')
 
 /**
  * 从 session 或者 cookie 中找到当前登录用户信息
@@ -19,13 +21,13 @@ exports.resolve = (req, res, next) => {
   }
 
   // 2. 判断 cookie 中有没有记住我的信息
-  if (!req.cookies.last_logged_in_user) {
+  if (!req.cookies[config.cookie.remember_key]) {
     // session 和 cookie 都没有找到
     return next()
   }
 
   // 如果有 尝试使用 记住我的信息去自动登录
-  const { uid, pwd } = req.cookies.last_logged_in_user
+  const { uid, pwd } = req.cookies[config.cookie.remember_key]
 
   Promise.resolve()
     .then(() => {
@@ -50,7 +52,7 @@ exports.resolve = (req, res, next) => {
     })
     .catch(e => {
       // 记住我的信息登录失败
-      res.clearCookie('last_logged_in_user')
+      res.clearCookie(config.cookie.remember_key)
       next()
     })
 }

@@ -71,14 +71,15 @@
             </dl>
           </div>
 
-          <div class="summary-wrap">
+          <form class="summary-wrap" action="/cart/add">
+            <input type="hidden" name="id" value="{{product.id}}">
             <div class="controls">
-              <input autocomplete="off" type="text" value="1" minnum="1" class="itxt">
+              <input type="text" name="amount" value="1" minnum="{{product.amount}}" autocomplete="off" class="itxt">
               <a href="#" class="increment plus">+</a>
               <a href="#" class="increment mins">-</a>
             </div>
-            <a href="cart-add.html" class="sui-btn btn-danger addshopcar">加入购物车</a>
-          </div>
+            <button class="sui-btn btn-danger addshopcar">加入购物车</button>
+          </form>
         </div>
       </div>
     </div>
@@ -106,7 +107,7 @@
                 <div class="p-img"><img src="{{thumbnail}}"></div>
                 <div class="attr"><em>{{name}}</em></div>
                 <div class="price"><strong>￥{{price}}</strong></div>
-                <div class="operate"><a href="/item/{{id}}" class="sui-btn btn-bordered">加入购物车</a></div>
+                <div class="operate"><a href="/cart/add?id={{id}}" class="sui-btn btn-bordered" target="_blank">加入购物车</a></div>
               </li>
               {{/each}}
             </ul>

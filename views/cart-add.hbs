@@ -1,0 +1,28 @@
+{{!< portal}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-cart.css">
+{{/contentFor}}
+
+<div class="success-cart">
+  <div class="py-container ">
+    <h3>
+      <i class="sui-icon icon-pc-right"></i>商品已成功加入购物车！</h3>
+    <div class="goods">
+      <div class="left-good">
+        <div class="left-pic">
+          {{!-- 如果需要 handlebars 提示属性不存在 可以开启 handlebars 严格模式 --}}
+          <img src="{{product.thumbnail}}" alt="{{product.name}}">
+        </div>
+        <div class="right-info">
+          <p class="title">{{product.name}}</p>
+          <p class="attr">数量：{{amount}}</p>
+        </div>
+      </div>
+      <div class="right-gocart">
+        <a href="/item/{{product.id}}" class="sui-btn btn-xlarge">查看商品详情</a>
+        <a href="/cart" class="sui-btn btn-xlarge btn-danger ">去购物车结算 &gt;</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -36,6 +36,9 @@ router.get('/account/register', accountController.register)
 router.post('/account/register', accountController.registerPost)
 router.get('/account/active', auth.required, accountController.active)
 
+router.get('/cart', cartController.index)
+router.get('/cart/add', cartController.add)
+
 router.get('/member', auth.required, memberController.index)
 router.get('/member/order', auth.required, memberController.order)
 router.get('/member/profile', auth.required, memberController.profile)
