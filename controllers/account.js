@@ -4,7 +4,7 @@
 
 const createError = require('http-errors')
 
-const { User } = require('../models')
+const { User, Cart } = require('../models')
 const { mail } = require('../utils')
 const config = require('../config')
 
@@ -50,12 +50,21 @@ exports.loginPost = (req, res) => {
       if (remember) {
         // redirect + set cookie 把用户名和密码的密文存下来，下次自动登录
         // cookie 的名称最好无任何意义
-        const expires = new Date(Date.now() + config.site.remember_expires)
+        const expires = new Date(Date.now() + config.cookie.remember_expires)
         // 可以使用可逆加密存储信息
         // 这个 cookie 一定是设置为 httpOnly（只能在请求响应的时候由服务端设置，不能在客户端由 JavaScript 设置）
         res.cookie(config.cookie.remember_key, { uid: user.id, pwd: user.password }, { expires: expires, httpOnly: true })
       }
 
+      // 同步离线购物车
+      const cart = req.cookies[config.cookie.cart_key]
+      if (!cart) return
+
+      // 需要同步
+      return cart.reduce((promise, item) => promise.then(() => Cart.add(user.id, item.id, item.amount)), Promise.resolve())
+    })
+    .then(() => {
+      res.clearCookie(config.cookie.cart_key)
       res.redirect(req.query.redirect || '/')
     })
     .catch(e => {
@@ -81,7 +90,7 @@ exports.registerPost = (req, res) => {
   // 处理表单接收逻辑
   const { username, email, password, confirm, agree } = req.body
 
-  let userId = 0;
+  let userId = 0
   Promise.resolve()
     .then(() => {
       // 1. 合法化校验（先挑简单的来）

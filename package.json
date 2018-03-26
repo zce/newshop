@@ -4,6 +4,7 @@
   "description": "newshop frontend",
   "main": "index.js",
   "scripts": {
+    "lint": "standard --fix",
     "dev": "nodemon ."
   },
   "repository": {
@@ -34,6 +35,12 @@
     "svg-captcha": "^1.3.11"
   },
   "devDependencies": {
-    "nodemon": "^1.17.2"
+    "nodemon": "^1.17.2",
+    "standard": "^11.0.1"
+  },
+  "standard": {
+    "ignore": [
+      "public"
+    ]
   }
 }

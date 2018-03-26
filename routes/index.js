@@ -11,7 +11,7 @@ const searchController = require('../controllers/search')
 const accountController = require('../controllers/account')
 const memberController = require('../controllers/member')
 const cartController = require('../controllers/cart')
-const checkoutController = require('../controllers/checkout')
+// const checkoutController = require('../controllers/checkout')
 
 const commonController = require('../controllers/common')
 

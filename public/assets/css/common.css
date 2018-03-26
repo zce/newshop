@@ -410,11 +410,11 @@ ul.brand-list li {
 .shopArea .shopcar {
 	position: relative;
 	margin: 30px auto -1px;
-	width: 180px;
 }
 
 .shopArea .shopcar a {
-	padding: 4px 42px;
+	padding: 4px 30px 4px 42px;
+	/* position: relative; */
 }
 
 .shopArea .car {
@@ -423,7 +423,7 @@ ul.brand-list li {
 	width: 30px;
 	height: 30px;
 	background-image: url(../img/icons.png);
-	background-position: 160px -81px;
+	background-position: -404px -80px;
 }
 
 .shopcar .btn-default {
@@ -435,24 +435,42 @@ ul.brand-list li {
 
 .shopcarlist {
 	display: none;
-	margin: -1px 0 0 -70px;
+	position: absolute;
+	right: 0;
 	padding: 10px;
-	width: 194px;
+	width: 230px;
 	border: 1px solid #dadada;
 	background: #fff;
 }
 
+.shopcarlist li {
+	list-style: none;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	padding: 4px 0;
+}
+
+.shopcarlist li + li {
+	border-top: 1px dotted #eee;
+}
+
+.show-shopcar:hover .shopcarlist {
+	display: block;
+}
+
 .shopnum {
 	position: absolute;
-	top: -5px;
-	right: 62px;
+	top: -8px;
+	right: 10px;
 	padding: 4px;
-	height: 6px;
-	border-radius: 6px;
+	height: 10px;
+	width: 10px;
+	border-radius: 50%;
 	background: #c81623;
 	color: #fff;
-	font-size: 5px;
-	line-height: 6px;
+	font-size: 10px;
+	line-height: 1;
 }
 
 .NavList .all-sort {
@@ -916,8 +934,9 @@ ul.brand-list li {
 
 .tbar-checkout {
 	position: relative;
-	padding: 5px 110px 5px 5px;
+	padding: 5px 120px 5px 5px;
 	height: 40px;
+	text-align: right;
 }
 
 .tbar-checkout .jtc-number strong {
@@ -952,6 +971,10 @@ ul.brand-list li {
 	color: #FFF;
 	text-align: center;
 	font: 16px/35px "微软雅黑";
+}
+
+.tbar-checkout .jtc-btn:hover {
+	text-decoration: none;
 }
 
 .tbar-cart-list {

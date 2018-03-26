@@ -3,7 +3,7 @@ const captcha = require('svg-captcha')
 exports.captcha = (req, res) => {
   const svg = captcha.create({
     size: 4,
-    ignoreChars: '0o1i',
+    ignoreChars: '0o1ilOLI',
     noise: 3,
     color: true,
     background: '#fff'

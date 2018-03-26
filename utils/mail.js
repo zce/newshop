@@ -18,7 +18,7 @@ const render = (name, context) => new Promise((resolve, reject) => {
     const result = hbs.handlebars.compile(content)(context)
     resolve(result)
   })
-});
+})
 
 exports.sendActiveEmail = user => {
   return render('active', { user, config })

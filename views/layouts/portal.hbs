@@ -69,9 +69,19 @@
                 <span class="car"></span>
                 <a class="sui-btn btn-default btn-xlarge" href="/cart">
                   <span>我的购物车</span>
-                  <i class="shopnum">0</i>
+                  <i class="shopnum">{{cart.totalAmount}}</i>
                 </a>
-                <div class="clearfix shopcarlist"></div>
+                <div class="clearfix shopcarlist">
+                  {{#if cart.totalAmount}}
+                  <ul>
+                    {{#each cart.products}}
+                    <li>{{name}}</li>
+                    {{/each}}
+                  </ul>
+                  {{else}}
+                  <p>"啊哦，你的购物车还没有商品哦！"</p>
+                  {{/if}}
+                </div>
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@
 
 const createError = require('http-errors')
 
-const { Category, Product } = require('../models')
+const { Product } = require('../models')
 const config = require('../config')
 
 exports.index = (req, res, next) => {

@@ -22,15 +22,24 @@ module.exports.interceptors.response.use(response => response, e => {
 })
 
 // module.exports.interceptors.response.use(response => {
-//   const { config, data } = response
-//   const { method, url, params } = config
+//   const { config } = response
+//   const { method, url, data } = config
 
-//   console.log(`[${method}] ${url}`)
-//   console.log('--------------------------------------------------')
-//   console.log('→', JSON.stringify(params))
-//   console.log('--------------------------------------------------')
-//   console.log('←', JSON.stringify(data))
-//   console.log('====================================================================================================')
+//   // if (method === 'post' && url === 'http://newshop.me/api/v1/users/41/cart') {
+//   //   console.log(`[${method}] ${url}`)
+//   //   console.log('--------------------------------------------------')
+//   //   console.log('→', data)
+//   //   console.log('--------------------------------------------------')
+//   //   console.log('←', response.data)
+//   //   console.log('====================================================================================================')
+//   // }
+
+//   // console.log(`[${method}] ${url}`)
+//   // console.log('--------------------------------------------------')
+//   // console.log('→', JSON.stringify(params))
+//   // console.log('--------------------------------------------------')
+//   // console.log('←', JSON.stringify(data))
+//   // console.log('====================================================================================================')
 
 //   return response;
 // }, e => Promise.reject(e));
