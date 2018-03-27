@@ -7,6 +7,14 @@ namespace app\controller;
 
 class Cart extends Base
 {
+    private $locker = null;
+
+    function __construct() {
+        // 文件锁，解决并发问题
+        // 在服务端解决并发问题后建议使用并行结构
+        $this->locker = fopen(__DIR__ . '/../../runtime/shopping_cart.lock', 'w+');
+    }
+
     private function getCart($id)
     {
         $id = intval($id);
@@ -37,18 +45,22 @@ class Cart extends Base
      */
     public function index($id)
     {
-        $cart_info = $this->getCart($id)->cart_info;
+        if (flock($this->locker, LOCK_EX)) {
+            $cart_info = $this->getCart($id)->cart_info;
 
-        if (empty($cart_info)) return json();
+            if (empty($cart_info)) return json();
 
-        $cart = json_decode($cart_info) ?: [];
+            $cart = json_decode($cart_info) ?: [];
 
-        foreach ($cart as $item) {
-            $product = model('Goods')::get($item->id);
-            $item->name = $product->goods_name;
-            $item->thumbnail = $product->goods_small_logo;
-            $item->price = $product->goods_price;
-            $item->total = number_format($product->goods_price * $item->amount, 2, '.', '');
+            foreach ($cart as $item) {
+                $product = model('Goods')::get($item->id);
+                $item->name = $product->goods_name;
+                $item->thumbnail = $product->goods_small_logo;
+                $item->price = $product->goods_price;
+                $item->total = number_format($product->goods_price * $item->amount, 2, '.', '');
+            }
+
+            flock($this->locker, LOCK_UN);
         }
 
         return json($cart);
@@ -73,28 +85,32 @@ class Cart extends Base
             abort(422, '商品ID不存在');
         }
 
-        $cart = $this->getCart($id);
+        if (flock($this->locker, LOCK_EX)) {
+            $cart = $this->getCart($id);
 
-        $cart_info = json_decode($cart->cart_info) ?: [];
+            $cart_info = json_decode($cart->cart_info) ?: [];
 
-        foreach ($cart_info as $item) {
-            if ($item->id === $cart_id) {
-                $exists = $item;
+            foreach ($cart_info as $item) {
+                if ($item->id === $cart_id) {
+                    $exists = $item;
+                }
             }
+
+            if (isset($exists)) {
+                $exists->amount += $amount;
+            } else {
+                $cart_info[] = [
+                    'id' => $cart_id,
+                    'amount' => $amount
+                ];
+            }
+
+            $cart->cart_info = json_encode($cart_info);
+
+            $cart->save();
+
+            flock($this->locker, LOCK_UN);
         }
-
-        if (isset($exists)) {
-            $exists->amount += $amount;
-        } else {
-            $cart_info[] = [
-                'id' => $cart_id,
-                'amount' => $amount
-            ];
-        }
-
-        $cart->cart_info = json_encode($cart_info);
-
-        $cart->save();
 
         return $this->index($id);
     }
@@ -120,18 +136,23 @@ class Cart extends Base
             abort(422, '必须提供商品数量');
         }
 
-        $cart = $this->getCart($id);
+        if (flock($this->locker, LOCK_EX)) {
+            $cart = $this->getCart($id);
 
-        $cart_info = json_decode($cart->cart_info) ?: [];
+            $cart_info = json_decode($cart->cart_info) ?: [];
 
-        foreach ($cart_info as $item) {
-            if ($item->id === $cart_id) {
-                $item->amount = $amount;
+            foreach ($cart_info as $item) {
+                if ($item->id === $cart_id) {
+                    $item->amount = $amount;
+                }
             }
-        }
 
-        $cart->cart_info = json_encode($cart_info);
-        $cart->save();
+            $cart->cart_info = json_encode($cart_info);
+
+            $cart->save();
+
+            flock($this->locker, LOCK_UN);
+        }
 
         return $this->index($id);
     }
@@ -151,19 +172,24 @@ class Cart extends Base
             abort(400, '必须提供商品ID');
         }
 
-        $cart = $this->getCart($id);
+        if (flock($this->locker, LOCK_EX)) {
+            $cart = $this->getCart($id);
 
-        $cart_info = json_decode($cart->cart_info) ?: [];
+            $cart_info = json_decode($cart->cart_info) ?: [];
 
-        $remain = [];
-        foreach ($cart_info as $key => $item) {
-            if ($item->id !== $cart_id) {
-                $remain[] = $item;
+            $remain = [];
+            foreach ($cart_info as $key => $item) {
+                if ($item->id !== $cart_id) {
+                    $remain[] = $item;
+                }
             }
-        }
 
-        $cart->cart_info = json_encode($remain);
-        $cart->save();
+            $cart->cart_info = json_encode($remain);
+
+            $cart->save();
+
+            flock($this->locker, LOCK_UN);
+        }
 
         return $this->index($id);
     }

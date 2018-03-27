@@ -1,6 +1,8 @@
 ThinkPHP 5.1
 ===============
 
+<!-- compare link: https://github.com/top-think/think/compare/6eda63b3d642c1bfdf6761091f7c631e8e7eecc6...5.1 -->
+
 ThinkPHP5.1对底层架构做了进一步的改进，减少依赖，其主要特性包括：
 
  + 采用容器统一管理对象
@@ -44,7 +46,7 @@ www  WEB部署目录（或者子目录）
 │  ├─module_name        模块配置目录
 │  │  ├─database.php    数据库配置
 │  │  ├─cache           缓存配置
-│  │  └─ ...            
+│  │  └─ ...
 │  │
 │  ├─app.php            应用配置
 │  ├─cache.php          缓存配置
