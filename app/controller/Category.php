@@ -73,8 +73,8 @@ class Category extends Base
 
         if (is_include('parent')) {
             $query
-                ->leftJoin('category parent', 'current.cat_pid = parent.cat_id')
-                ->leftJoin('category root', 'parent.cat_pid = root.cat_id');
+                ->leftJoin('Category parent', 'current.cat_pid = parent.cat_id')
+                ->leftJoin('Category root', 'parent.cat_pid = root.cat_id');
             $fields .= ', parent.cat_id as parent_id, parent.cat_name as parent_name, parent.cat_pid as parent_pid, parent.cat_level as parent_level';
             $fields .= ', root.cat_id as root_id, root.cat_name as root_name, root.cat_pid as root_pid, root.cat_level as root_level';
         }

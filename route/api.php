@@ -32,10 +32,16 @@ Route::group('api/v1', function () {
     Route::post('users/:id/active', 'User/active');
     Route::delete('users/:id/active', 'User/unactive');
 
-    Route::get('users/:id/cart', 'Cart/index');
-    Route::post('users/:id/cart', 'Cart/save');
-    Route::patch('users/:id/cart/:cart_id', 'Cart/update');
     Route::delete('users/:id/cart/:cart_id', 'Cart/delete');
+    Route::patch('users/:id/cart/:cart_id', 'Cart/update');
+    Route::post('users/:id/cart', 'Cart/save');
+    Route::get('users/:id/cart', 'Cart/index');
+
+    Route::delete('users/:id/order/:number', 'Order/delete');
+    Route::patch('users/:id/order/:number', 'Order/update');
+    Route::get('users/:id/order/:number', 'Order/read');
+    Route::post('users/:id/order', 'Order/save');
+    Route::get('users/:id/order', 'Order/index');
 
     Route::get('users/:id', 'User/read');
     Route::patch('users/:id', 'User/update');

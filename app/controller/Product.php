@@ -40,9 +40,9 @@ class Product extends Base
 
         if (is_include('category')) {
             $query
-                ->join('category category', 'category.cat_id = goods.cat_id')
-                ->join('category primary', 'primary.cat_id = goods.cat_one_id')
-                ->join('category secondary', 'secondary.cat_id = goods.cat_two_id');
+                ->join('Category category', 'category.cat_id = goods.cat_id')
+                ->join('Category primary', 'primary.cat_id = goods.cat_one_id')
+                ->join('Category secondary', 'secondary.cat_id = goods.cat_two_id');
         }
 
         // 如果有分类筛选
