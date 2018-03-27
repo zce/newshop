@@ -437,10 +437,12 @@ ul.brand-list li {
 	display: none;
 	position: absolute;
 	right: 0;
-	padding: 10px;
+	padding: 10px 15px;
 	width: 230px;
 	border: 1px solid #dadada;
 	background: #fff;
+	box-shadow: 0 0 15px #ccc;
+	z-index: 1000;
 }
 
 .shopcarlist li {

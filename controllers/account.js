@@ -61,6 +61,8 @@ exports.loginPost = (req, res) => {
       if (!cart) return
 
       // 需要同步
+      // 由于服务端有并发修改数据问题，所以必须使用串行结构任务
+      // return Promise.all(cart.map(item => Cart.add(user.id, item.id, item.amount)));
       return cart.reduce((promise, item) => promise.then(() => Cart.add(user.id, item.id, item.amount)), Promise.resolve())
     })
     .then(() => {
