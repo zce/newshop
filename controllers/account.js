@@ -60,10 +60,12 @@ exports.loginPost = (req, res) => {
       const cart = req.cookies[config.cookie.cart_key]
       if (!cart) return
 
-      // 需要同步
+      // 需要同步购物车信息
       // 由于服务端有并发修改数据问题，所以必须使用串行结构任务
-      // return Promise.all(cart.map(item => Cart.add(user.id, item.id, item.amount)));
-      return cart.reduce((promise, item) => promise.then(() => Cart.add(user.id, item.id, item.amount)), Promise.resolve())
+      return Promise.all(cart.map(item => Cart.add(user.id, item.id, item.amount)));
+
+      // // 在服务端解决并发问题后建议使用并行结构
+      // return cart.reduce((promise, item) => promise.then(() => Cart.add(user.id, item.id, item.amount)), Promise.resolve())
     })
     .then(() => {
       res.clearCookie(config.cookie.cart_key)
