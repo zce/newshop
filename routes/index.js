@@ -11,7 +11,7 @@ const searchController = require('../controllers/search')
 const accountController = require('../controllers/account')
 const memberController = require('../controllers/member')
 const cartController = require('../controllers/cart')
-// const checkoutController = require('../controllers/checkout')
+const checkoutController = require('../controllers/checkout')
 
 const commonController = require('../controllers/common')
 
@@ -38,6 +38,10 @@ router.get('/account/active', auth.required, accountController.active)
 
 router.get('/cart', cartController.index)
 router.get('/cart/add', cartController.add)
+
+router.get('/checkout', auth.required, checkoutController.index)
+router.get('/checkout/create', auth.required, checkoutController.create)
+router.get('/checkout/pay', auth.required, checkoutController.pay)
 
 router.get('/member', auth.required, memberController.index)
 router.get('/member/order', auth.required, memberController.order)

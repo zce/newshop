@@ -163,18 +163,23 @@ a.increment {
 	font: 16px "微软雅黑";
 }
 
-a.sum-btn {
+.sum-btn {
 	position: relative;
 	display: block;
 	overflow: hidden;
 	width: 96px;
 	height: 52px;
 	background: #e54346;
+	border: 0;
 	color: #fff;
 	text-align: center;
 	font-size: 18px;
 	font-family: "Microsoft YaHei";
 	line-height: 52px;
+}
+
+.sum-btn:hover {
+	background: #bf3a3c;
 }
 
 .del {
@@ -521,7 +526,21 @@ ul.send-detail li {
 }
 
 .sendGoods {
-	background: #feedef;
+	background: #fff5f6;
+}
+
+.sendGoods ul {
+	padding: 10px 0;
+}
+
+.sendGoods ul + ul {
+	border-top: 1px dashed #ccc;
+}
+
+.sendGoods img {
+	max-height: 100px;
+	display: block;
+	margin: 0 auto;
 }
 
 .num,.exit {
@@ -562,8 +581,9 @@ ul.send-detail li {
 	font-weight: 700;
 }
 
-.sendGoods img {
-	max-height: 100px;
-	display: block;
-	margin: 0 auto;
+.static {
+	font-size: 20px;
+	font-weight: 100;
+	line-height: 1.2;
+	color: #555;
 }
