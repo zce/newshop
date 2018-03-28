@@ -81,7 +81,7 @@ class User extends Base
             'update_time' => time()
         ]);
 
-        if (empty($user->user_id)) {
+        if (empty($user) || empty($user->user_id)) {
             // abort(500, 'Internal Server Error');
             abort(500, '注册用户失败');
         }

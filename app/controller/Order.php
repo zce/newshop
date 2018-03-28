@@ -60,6 +60,10 @@ class Order extends Base
             $item->pay_status = $item->pay_status === '1' ? '已付款' : '未付款';
             $item->send_status = $item->send_status === '是' ? '已发货' : '未发货';
             $item->products = $this->getOrderProducts($item->id);
+            $item->total_amount = 0;
+            foreach ($item->products as $p) {
+                $item->total_amount += $p->amount;
+            }
         }
 
         return json($records);
@@ -171,6 +175,11 @@ class Order extends Base
         $order->send_status = $order->send_status === '是' ? '已发货' : '未发货';
 
         $order->products = $this->getOrderProducts($order->id);
+
+        $order->total_amount = 0;
+        foreach ($order->products as $p) {
+            $order->total_amount += $p->amount;
+        }
 
         return json($order);
     }
