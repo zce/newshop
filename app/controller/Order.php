@@ -222,7 +222,9 @@ class Order extends Base
      * - order_num: 订单编号
      *
      * body
-     * - items: 待添加到订单的商品ID数组
+     * - pay_status: 支付状态，支持 0: 未支付 / 1: 已支付
+     * - send_status: 发货状态，支持 0: 未发货 / 1: 已发货
+     * - express_address: 收货地址，格式：<name> <address> <phone> <code>
      */
     public function update($id, $order_num)
     {
@@ -232,7 +234,36 @@ class Order extends Base
             abort(400, '必须提供订单编号');
         }
 
-        // TODO: 修改订单信息
+        $pay_status = input('patch.pay_status/b');
+        $send_status = input('patch.send_status/b');
+        $express_address = input('patch.express_address/s');
+
+        if (!isset($pay_status) && !isset($send_status) && !isset($express_address)) {
+            abort(422, '必须提供一个以上的修改字段');
+        }
+
+        // 查询当前数据
+        $order = model('Order')::where('user_id', $user_id)->where('order_number', $order_num)->find();
+
+        if (empty($order)) {
+            abort(404, '此订单记录不存在');
+        }
+
+        if (isset($pay_status)) {
+            $order->pay_status = intval($pay_status);
+        }
+
+        if (isset($send_status)) {
+            $order->is_send = $send_status ? '是' : '否';
+        }
+
+        if (isset($express_address)) {
+            $order->consignee_addr = $express_address;
+        }
+
+        $order->save();
+
+        return $this->read($user_id, $order_num);
     }
 
     /**
