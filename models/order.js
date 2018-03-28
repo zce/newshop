@@ -20,6 +20,6 @@ exports.get = (userId, number) => {
  * @param {Array}  products 结算商品 ID 数组
  */
 exports.add = (userId, products) => {
-  return api.post(`/users/${userId}/order`, { id: products.toString() })
+  return api.post(`/users/${userId}/order`, { items: products.toString() })
     .then(res => res.data)
 }
