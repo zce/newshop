@@ -3,7 +3,9 @@
  */
 
 const mail = require('./mail')
+const alipay = require('./alipay')
 
 module.exports = {
-  mail
+  mail,
+  alipay
 }

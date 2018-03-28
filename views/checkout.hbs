@@ -73,7 +73,7 @@
 </div>
 <div class="order-summary py-container">
   <div class="static fl">总共 <i>{{order.products.length}}</i> 件商品，总商品金额 <i>￥{{order.total_price}}</i></div>
-  <a class="sui-btn btn-danger btn-xlarge fr" href="pay.html">去支付</a>
+  <a class="sui-btn btn-danger btn-xlarge fr" href="/checkout/pay?n={{order.order_number}}">去支付</a>
 </div>
 
 <div id="add_address" class="sui-modal hide fade">
