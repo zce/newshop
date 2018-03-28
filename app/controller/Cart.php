@@ -9,25 +9,24 @@ class Cart extends Base
 {
     private $locker = null;
 
-    function __construct() {
+    function __construct()
+    {
         // 文件锁，解决并发问题
         // 在服务端解决并发问题后建议使用并行结构
         $this->locker = fopen(__DIR__ . '/../../runtime/shopping_cart.lock', 'w+');
     }
 
-    private function getCart($id)
+    private function getCart($user_id)
     {
-        $id = intval($id);
-
-        if (empty($id)) {
+        if (empty($user_id)) {
             abort(400, '必须提供用户ID');
         }
 
-        $cart = model('UserCart')::where('user_id', $id)->find();
+        $cart = model('UserCart')::where('user_id', $user_id)->find();
 
         if (empty($cart)) {
             $cart = model('UserCart')::create([
-                'user_id' =>  $id,
+                'user_id' =>  $user_id,
                 'cart_info' => '[]',
                 'created_at' => time(),
                 'updated_at' => time()
@@ -38,95 +37,115 @@ class Cart extends Base
     }
 
     /**
-     * 显示资源列表
+     * 获取用户的全部购物车记录
      *
-     * @param  int  $id  用户ID
-     * @return \think\Response
+     * GET /users/:id/cart
+     *
+     * params
+     * - id: 用户ID
      */
     public function index($id)
     {
+        $user_id = intval($id);
+
         if (flock($this->locker, LOCK_EX)) {
-            $cart_info = $this->getCart($id)->cart_info;
-
-            if (empty($cart_info)) return json();
-
-            $cart = json_decode($cart_info) ?: [];
-
-            foreach ($cart as $item) {
-                $product = model('Goods')::get($item->id);
-                $item->name = $product->goods_name;
-                $item->thumbnail = $product->goods_small_logo;
-                $item->price = $product->goods_price;
-                $item->total = number_format($product->goods_price * $item->amount, 2, '.', '');
-            }
+            $cart_info = $this->getCart($user_id)->cart_info;
 
             flock($this->locker, LOCK_UN);
+        }
+
+        if (empty($cart_info)) return json();
+
+        $cart = json_decode($cart_info) ?: [];
+
+        foreach ($cart as $item) {
+            $product = model('Goods')::get($item->id);
+            $item->name = $product->goods_name;
+            $item->thumbnail = $product->goods_small_logo;
+            $item->price = $product->goods_price;
+            $item->total = number_format($product->goods_price * $item->amount, 2, '.', '');
         }
 
         return json($cart);
     }
 
     /**
-     * 保存新建的资源
+     * 添加用户购物车记录
      *
-     * @param  int  $id  用户ID
-     * @return \think\Response
+     * POST /users/:id/cart
+     *
+     * params
+     * - id: 用户ID
+     *
+     * body
+     * - id: 商品ID
+     * - amount: 商品数量
      */
     public function save($id)
     {
-        $cart_id = input('post.id/d');
+        $user_id = intval($id);
+
+        $product_id = input('post.id/d');
         $amount = input('post.amount/d');
 
-        if (empty($cart_id) || empty($amount)) {
+        if (empty($product_id) || empty($amount)) {
             abort(422, '必须提供商品ID和数量');
         }
 
-        if (model('Goods')::where('goods_id', $cart_id)->count() === 0) {
+        if (model('Goods')::where('goods_id', $product_id)->count() === 0) {
             abort(422, '商品ID不存在');
         }
 
         if (flock($this->locker, LOCK_EX)) {
-            $cart = $this->getCart($id);
-
+            // 获取当前购物车记录
+            $cart = $this->getCart($user_id);
             $cart_info = json_decode($cart->cart_info) ?: [];
 
+            // 尝试查找是否已有该商品
             foreach ($cart_info as $item) {
-                if ($item->id === $cart_id) {
+                if ($item->id === $product_id) {
                     $exists = $item;
                 }
             }
 
+            // 添加
             if (isset($exists)) {
                 $exists->amount += $amount;
             } else {
                 $cart_info[] = [
-                    'id' => $cart_id,
+                    'id' => $product_id,
                     'amount' => $amount
                 ];
             }
 
+            // 保存
             $cart->cart_info = json_encode($cart_info);
-
             $cart->save();
 
             flock($this->locker, LOCK_UN);
         }
 
-        return $this->index($id);
+        return $this->index($user_id);
     }
 
     /**
-     * 保存更新的资源
+     * 更新用户单条购物车记录
      *
-     * @param  int  $id  用户ID
-     * @param  int  $cart_id  购物车商品ID
-     * @return \think\Response
+     * PATCH /users/:id/cart/:cart_id
+     *
+     * params
+     * - id: 用户ID
+     * - cart_id: 购物车商品ID
+     *
+     * body
+     * - amount: 更新后的商品数量
      */
     public function update($id, $cart_id)
     {
-        $cart_id = intval($cart_id);
+        $user_id = intval($id);
+        $product_id = intval($cart_id);
 
-        if (empty($cart_id)) {
+        if (empty($product_id)) {
             abort(400, '必须提供商品ID');
         }
 
@@ -137,49 +156,50 @@ class Cart extends Base
         }
 
         if (flock($this->locker, LOCK_EX)) {
-            $cart = $this->getCart($id);
-
+            $cart = $this->getCart($user_id);
             $cart_info = json_decode($cart->cart_info) ?: [];
 
             foreach ($cart_info as $item) {
-                if ($item->id === $cart_id) {
+                if ($item->id === $product_id) {
                     $item->amount = $amount;
                 }
             }
 
             $cart->cart_info = json_encode($cart_info);
-
             $cart->save();
 
             flock($this->locker, LOCK_UN);
         }
 
-        return $this->index($id);
+        return $this->index($user_id);
     }
 
     /**
-     * 删除指定资源
+     * 删除用户单条购物车记录
      *
-     * @param  int  $id  用户ID
-     * @param  int  $cart_id  购物车商品ID
-     * @return \think\Response
+     * DELETE /users/:id/cart/:cart_id
+     *
+     * params
+     * - id: 用户ID
+     * - cart_id: 购物车商品ID
      */
     public function delete($id, $cart_id)
     {
-        $cart_id = intval($cart_id);
+        $user_id = intval($id);
+        $product_id = intval($cart_id);
 
-        if (empty($cart_id)) {
+        if (empty($product_id)) {
             abort(400, '必须提供商品ID');
         }
 
         if (flock($this->locker, LOCK_EX)) {
-            $cart = $this->getCart($id);
+            $cart = $this->getCart($user_id);
 
             $cart_info = json_decode($cart->cart_info) ?: [];
 
             $remain = [];
             foreach ($cart_info as $key => $item) {
-                if ($item->id !== $cart_id) {
+                if ($item->id !== $product_id) {
                     $remain[] = $item;
                 }
             }
@@ -191,6 +211,6 @@ class Cart extends Base
             flock($this->locker, LOCK_UN);
         }
 
-        return $this->index($id);
+        return $this->index($user_id);
     }
 }

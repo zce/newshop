@@ -20,7 +20,7 @@ class Address extends Base
      *
      * GET /user/:id/address
      *
-     * param
+     * params
      * - id: 用户ID
      */
     public function index($id)
@@ -39,7 +39,7 @@ class Address extends Base
      *
      * GET /user/:id/address/:address_id
      *
-     * param
+     * params
      * - id: 用户ID
      * - address_id: 收货地址ID
      */
@@ -68,7 +68,7 @@ class Address extends Base
      *
      * POST /user/:id/address
      *
-     * param
+     * params
      * - id: 用户ID
      *
      * body
@@ -114,7 +114,7 @@ class Address extends Base
      *
      * PATCH /user/:id/address/:address_id
      *
-     * param
+     * params
      * - id: 用户ID
      * - address_id: 收货地址ID
      *
@@ -174,7 +174,7 @@ class Address extends Base
      *
      * DELETE /user/:id/address/:address_id
      *
-     * param
+     * params
      * - id: 用户ID
      * - address_id: 收货地址ID
      */

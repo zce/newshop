@@ -9,7 +9,8 @@ class Order extends Base
 {
     private $locker = null;
 
-    function __construct() {
+    function __construct()
+    {
         // 文件锁，解决并发问题
         // 在服务端解决并发问题后建议使用并行结构
         $this->locker = fopen(__DIR__ . '/../../runtime/shopping_cart.lock', 'w+');
@@ -18,22 +19,34 @@ class Order extends Base
     /**
      * 生成订单号
      */
-    function generateOrderNumber () {
+    private function generateOrderNumber ()
+    {
         $time = explode (' ', microtime());
         $time = $time[1] . ($time[0] * 1000);
         $time = explode ('.', $time)[0];
         return $time . rand(10000, 99999);
     }
 
+    /**
+     * 获取查询对象
+     */
     private function getQuery($user_id)
     {
+        if (empty($user_id)) {
+            abort(400, '必须提供用户ID');
+        }
+
         $fields = 'o.order_id as id, o.order_number as order_number, o.order_price as total_price, o.trade_no as trade_no, o.pay_status as pay_status, o.consignee_addr as express_address, e.express_com as express_company, e.express_nu as express_number, o.is_send as send_status, o.user_id as user_id';
+
         return model('Order')::alias('o')
             ->leftJoin('Express e', 'o.order_id = e.order_id')
             ->where('o.user_id', $user_id)
             ->field($fields);
     }
 
+    /**
+     * 获取订单商品
+     */
     private function getOrderProducts($order_id)
     {
         return model('OrderGoods')::alias('og')
@@ -44,19 +57,20 @@ class Order extends Base
     }
 
     /**
-     * 显示资源列表
+     * 获取用户的全部订单记录
+     *
+     * GET /users/:id/order
+     *
+     * params
+     * - id: 用户ID
      */
     public function index($id)
     {
         $user_id = intval($id);
 
-        if (empty($user_id)) {
-            abort(400, '必须提供用户ID');
-        }
+        $orders = $this->getQuery($user_id)->select();
 
-        $records = $this->getQuery($user_id)->select();
-
-        foreach ($records as $item) {
+        foreach ($orders as $item) {
             $item->pay_status = $item->pay_status === '1' ? '已付款' : '未付款';
             $item->send_status = $item->send_status === '是' ? '已发货' : '未发货';
             $item->products = $this->getOrderProducts($item->id);
@@ -66,11 +80,55 @@ class Order extends Base
             }
         }
 
-        return json($records);
+        return json($orders);
     }
 
     /**
-     * 保存新建的资源
+     * 获取用户的单个订单记录
+     *
+     * GET /users/:id/order/:order_num
+     *
+     * params
+     * - id: 用户ID
+     * - order_num: 订单编号
+     */
+    public function read($id, $order_num)
+    {
+        $user_id = intval($id);
+
+        if (empty($order_num)) {
+            abort(400, '必须提供订单编号');
+        }
+
+        $order = $this->getQuery($user_id)->where('o.order_number', $order_num)->find();
+
+        if (empty($order)) {
+            abort(404, '未找到对应订单信息');
+        }
+
+        $order->pay_status = $order->pay_status === '1' ? '已付款' : '未付款';
+        $order->send_status = $order->send_status === '是' ? '已发货' : '未发货';
+
+        $order->products = $this->getOrderProducts($order->id);
+
+        $order->total_amount = 0;
+        foreach ($order->products as $p) {
+            $order->total_amount += $p->amount;
+        }
+
+        return json($order);
+    }
+
+    /**
+     * 添加用户订单记录
+     *
+     * POST /users/:id/order
+     *
+     * params
+     * - id: 用户ID
+     *
+     * body
+     * - items: 待添加到订单的商品ID数组
      */
     public function save($id)
     {
@@ -81,7 +139,7 @@ class Order extends Base
         }
 
         // 待添加到订单的商品ID数组 => [ '<id>' ]
-        $ids = explode(',', input('post.id/s'));
+        $items = explode(',', input('post.items/s'));
 
 
         if (flock($this->locker, LOCK_EX)) {
@@ -99,14 +157,14 @@ class Order extends Base
             $remain = []; // 购物车剩下
             $wants = []; // 当前结算
             foreach ($cart_info as $item) {
-                if (in_array($item->id, $ids)) {
+                if (in_array($item->id, $items)) {
                     $wants[] = $item;
                 } else {
                     $remain[] = $item;
                 }
             }
 
-            if (count($wants) !== count($ids)) {
+            if (count($wants) !== count($items)) {
                 abort(422, '购物车记录不匹配');
             }
 
@@ -155,68 +213,59 @@ class Order extends Base
     }
 
     /**
-     * 显示指定的资源
+     * 更新用户单条订单记录
+     *
+     * PATCH /users/:id/order/:order_num
+     *
+     * params
+     * - id: 用户ID
+     * - order_num: 订单编号
+     *
+     * body
+     * - items: 待添加到订单的商品ID数组
      */
-    public function read($id, $number)
+    public function update($id, $order_num)
     {
         $user_id = intval($id);
 
-        if (empty($user_id) || empty($number)) {
-            abort(400, '必须提供用户ID和订单编号');
+        if (empty($order_num)) {
+            abort(400, '必须提供订单编号');
         }
 
-        $order = $this->getQuery($user_id)->where('o.order_number', $number)->find();
+        // TODO: 修改订单信息
+    }
+
+    /**
+     * 删除用户单条订单记录
+     *
+     * DELETE /users/:id/order/:order_num
+     *
+     * params
+     * - id: 用户ID
+     * - order_num: 订单编号
+     */
+    public function delete($id, $order_num)
+    {
+        $user_id = intval($id);
+
+        if (empty($user_id)) {
+            abort(400, '必须提供用户ID');
+        }
+
+        if (empty($order_num)) {
+            abort(400, '必须提供订单编号');
+        }
+
+        $order = model('Order')::where('user_id', $user_id)->where('order_number', $order_num)->find();
 
         if (empty($order)) {
-            abort(404, '未找到对应订单信息');
+            abort(404, '此订单记录不存在');
         }
 
-        $order->pay_status = $order->pay_status === '1' ? '已付款' : '未付款';
-        $order->send_status = $order->send_status === '是' ? '已发货' : '未发货';
+        model('OrderGoods')::where('order_id', $order->order_id)->delete();
 
-        $order->products = $this->getOrderProducts($order->id);
+        $order->delete();
 
-        $order->total_amount = 0;
-        foreach ($order->products as $p) {
-            $order->total_amount += $p->amount;
-        }
-
-        return json($order);
-    }
-
-    /**
-     * 显示编辑资源表单页
-     */
-    public function edit($id, $number)
-    {
-        $user_id = intval($id);
-
-        if (empty($user_id) || empty($number)) {
-            abort(400, '必须提供用户ID和订单编号');
-        }
-    }
-
-    /**
-     * 保存更新的资源
-     */
-    public function update($id, $number)
-    {
-        $user_id = intval($id);
-
-        if (empty($user_id) || empty($number)) {
-            abort(400, '必须提供用户ID和订单编号');
-        }
-    }
-
-    /**
-     * 删除指定资源
-     */
-    public function delete($id, $number)
-    {
-        $user_id = intval($id);
-
-        if (empty($user_id) || empty($number)) {
-            abort(400, '必须提供用户ID和订单编号');
-        }
+        abort(204);
     }
 }

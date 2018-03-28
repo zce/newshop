@@ -170,9 +170,20 @@ class Product extends Base
     }
 
     /**
-     * 显示资源列表
+     * 获取全部商品信息列表
      *
-     * @return \think\Response
+     * GET /products
+     *
+     * query
+     * - page: 页码
+     * - per_page: 每页数量
+     * - limit: 限制数量（与 per_page 等效，优先使用 limit，不必同时使用）
+     * - offset: 越过条数（与 page 类似，优先使用 offset，不必同时使用）
+     * - sort: 排序规则，支持：commend / quantity / market_time / price / -price
+     * - filter: 筛选器，支持：cat，格式：key:value,key:value
+     * - include: 包含额外资源，支持：introduce, category
+     * - type: 资源类型，支持：like（猜你喜欢）
+     * - q: 搜索字段，多个关键词中间用空格分割
      */
     public function index()
     {
@@ -192,26 +203,45 @@ class Product extends Base
     }
 
     /**
-     * 根据分类显示资源列表
+     * 获取指定分类下商品信息列表
      *
-     * @return \think\Response
+     * GET /categories/:id/products
+     *
+     * params
+     * - id: 分类ID
+     *
+     * query
+     * - page: 页码
+     * - per_page: 每页数量
+     * - limit: 限制数量（与 per_page 等效，优先使用 limit，不必同时使用）
+     * - offset: 越过条数（与 page 类似，优先使用 offset，不必同时使用）
+     * - sort: 排序规则，支持：commend / quantity / market_time / price / -price
+     * - include: 包含额外资源，支持：introduce, category
+     * - q: 搜索字段，多个关键词中间用空格分割
      */
     public function category($id)
     {
         return $this->list($id);
     }
 
+
     /**
-     * 显示指定的资源
+     * 获取指定商品信息对象
      *
-     * @param  int  $id
-     * @return \think\Response
+     * GET /products/:id
+     *
+     * params
+     * - id: 商品ID
+     *
+     * query
+     * - include: 包含额外资源，支持：introduce, category, pictures
      */
     public function read($id)
     {
         $id = intval($id);
+
         if (empty($id)) {
-            abort(400, 'Bad Request');
+            abort(400, '必须提供商品ID');
         }
 
         // 查询商品记录
@@ -222,7 +252,7 @@ class Product extends Base
             ->select();
 
         if (!count($records)) {
-            abort(404, 'Not Found');
+            abort(404, '此商品不存在');
         }
 
         $result = $this->parseResult($records)[0];

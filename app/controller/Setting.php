@@ -35,9 +35,9 @@ class Setting extends Base
     }
 
     /**
-     * 显示资源列表
+     * 获取全部设置信息列表
      *
-     * @return \think\Response
+     * GET /settings
      */
     public function index()
     {
@@ -45,19 +45,21 @@ class Setting extends Base
     }
 
     /**
-     * 显示指定的资源
+     * 获取单个设置信息对象
      *
-     * @param  int  $id
-     * @return \think\Response
+     * GET /settings/:key
+     *
+     * params
+     * - key: 设置键
      */
     public function read($key)
     {
         if (empty($key)) {
-            abort(400, 'Bad Request');
+            abort(400, '必须提供设置键');
         }
 
         if (!isset($this->settings[$key])) {
-            abort(404, 'Not Found');
+            abort(404, '此设置信息不存在');
         }
 
         return json($this->settings[$key]);

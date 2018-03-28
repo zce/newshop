@@ -25,7 +25,7 @@ class Category extends Base
     private function getCategoryChildren($id)
     {
         // TODO caching
-        $children = null;
+        $children = [];
         foreach ($this->categories as $key=>$item) {
             if ($item->pid !== $id) continue;
 
@@ -40,9 +40,12 @@ class Category extends Base
     }
 
     /**
-     * 显示资源列表
+     * 获取全部分类列表
      *
-     * @return \think\Response
+     * GET /categories
+     *
+     * query
+     * - format: 输出格式，支持：tree（树状结构）
      */
     public function index()
     {
@@ -54,10 +57,12 @@ class Category extends Base
     }
 
     /**
-     * 显示指定的资源
+     * 获取指定分类对象
      *
-     * @param  int  $id
-     * @return \think\Response
+     * GET /categories/:id
+     *
+     * query
+     * - include: 包含额外资源，支持：parent, children
      */
     public function read($id)
     {
@@ -86,7 +91,7 @@ class Category extends Base
             ->find();
 
         if (empty($record->id)) {
-            abort(404, 'Not Found');
+            abort(404, '此分类不存在');
         }
 
         $result['id'] = $record->id;
@@ -110,7 +115,7 @@ class Category extends Base
 
         if (is_include('children')) {
             $children = $this->getCategoryChildren($record->id);
-            if (isset($children)) {
+            if (count($children)) {
                 $result['children'] = $children;
             }
         }
@@ -119,9 +124,9 @@ class Category extends Base
     }
 
     /**
-     * 显示资源列表
+     * 获取指定ID对应的所有子分类列表
      *
-     * @return \think\Response
+     * GET /categories/:id/children
      */
     public function children($id)
     {

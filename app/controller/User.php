@@ -10,111 +10,12 @@ class User extends Base
     private $fields = 'user_id as id, username as username, password as password, user_email as email, user_email_code as email_verify, is_active as actived, user_sex as gender, user_qq as qq, user_tel as phone, user_hobby as hobby, user_introduce as introduce, qq_open_id as open_id';
 
     /**
-     * 登录
+     * 获取单个用户信息对象
      *
-     * @return \think\Response
-     */
-    public function login()
-    {
-        $username = input('post.username/s');
-        $password = input('post.password/s');
-
-        if (empty($username) || empty($password)) {
-            // abort(400, 'Bad Request');
-            abort(422, '必须提供用户名和密码');
-        }
-
-        $user = model('User')
-            ::whereOr('username', $username)
-            ->whereOr('user_email', $username)
-            ->field($this->fields)
-            ->find();
-
-        if (empty($user)) {
-            abort(422, '用户名错误');
-        }
-
-        if (!password_verify($password, $user->password)) {
-            // abort(401, 'Unauthorized');
-            abort(422, '密码错误');
-        }
-
-        $user->actived = $user->actived === '是';
-
-        return json($user);
-    }
-
-    /**
-     * 注册新用户
+     * GET /users/:id
      *
-     * @return \think\Response
-     */
-    public function register()
-    {
-        $username = input('post.username/s');
-        $email = input('post.email/s');
-        $password = input('post.password/s');
-
-        if (empty($username) || empty($email) || empty($password)) {
-            // abort(400, 'Bad Request');
-            abort(422, '必须提供用户名、邮箱和密码');
-        }
-
-        if (model('User')::where('username', $username)->count()) {
-            // abort(422, 'Unprocesable Entity');
-            abort(422, '用户名已存在');
-        }
-
-        if (model('User')::where('user_email', $email)->count()) {
-            // abort(422, 'Unprocesable Entity');
-            abort(422, '邮箱已存在');
-        }
-
-        $password = password_hash($password, PASSWORD_DEFAULT);
-
-        $user = model('User')::create([
-            'username' => $username,
-            'user_email' => $email,
-            'password' => $password,
-            'user_email_code' => uniqid(),
-            'create_time' => time(),
-            'update_time' => time()
-        ]);
-
-        if (empty($user) || empty($user->user_id)) {
-            // abort(500, 'Internal Server Error');
-            abort(500, '注册用户失败');
-        }
-
-        return $this->read($user->user_id);
-    }
-
-    /**
-     * 获取用户名或邮箱的存在情况
-     */
-    public function exists()
-    {
-        $username = input('get.username/s');
-        $email = input('get.email/s');
-
-        if (!empty($username)) {
-            $result['username'] = !!model('User')::where('username', $username)->count();
-        }
-
-        if (!empty($email)) {
-            $result['email'] = !!model('User')::where('user_email', $email)->count();
-        }
-
-        if (empty($result)) {
-            // abort(400, 'Bad Request');
-            abort(400, '必须提供用户名或邮箱');
-        }
-
-        return json($result);
-    }
-
-    /**
-     * 获取单个资源
+     * params
+     * - id: 用户ID
      */
     public function read($id)
     {
@@ -125,14 +26,34 @@ class User extends Base
             abort(400, '必须提供用户ID');
         }
 
-        $record = model('User')::where('user_id', $id)->field($this->fields)->find();
-        $record->actived = $record->actived === '是';
+        $user = model('User')::where('user_id', $id)->field($this->fields)->find();
 
-        return json($record);
+        if (empty($user)) {
+            abort(404, '此用户不存在');
+        }
+
+        $user->actived = $user->actived === '是';
+
+        return json($user);
     }
 
     /**
-     * 更新单个资源
+     * 更新单个用户信息
+     *
+     * PATCH /users/:id
+     *
+     * params
+     * - id: 用户ID
+     *
+     * body
+     * - email: 邮箱
+     * - password: 密码
+     * - gender: 性别
+     * - qq: QQ
+     * - phone: 手机
+     * - hobby: 兴趣爱好
+     * - introduce: 个人简介
+     * - open_id: 开放登录ID
      */
     public function update($id)
     {
@@ -153,13 +74,16 @@ class User extends Base
         $open_id = input('patch.open_id/s');
 
         if (empty($email) && empty($password) && empty($gender) && empty($qq) && empty($phone) && empty($hobby) && empty($introduce)&& empty($open_id)) {
-            // abort(400, 'Bad Request');
             abort(422, '必须提供一个以上的修改字段');
         }
 
         $user = model('User')::get($id);
 
-        if (!empty($email)) {
+        if (empty($user)) {
+            abort(404, '此用户不存在');
+        }
+
+        if (!empty($email) && $email !== $user->user_email) {
             if (model('User')::where('user_email', $email)->count()) {
                 // abort(422, 'Unprocesable Entity');
                 abort(422, '邮箱已存在');
@@ -203,29 +127,14 @@ class User extends Base
     }
 
     /**
-     * 删除指定资源
+     * 删除单个用户信息对象
      *
-     * @param  int  $id
-     * @return \think\Response
+     * DELETE /users/:id
+     *
+     * params
+     * - id: 用户ID
      */
     public function delete($id)
-    {
-        $id = intval($id);
-
-        if (empty($id)) {
-            // abort(400, 'Bad Request');
-            abort(400, '必须提供用户ID');
-        }
-
-        model('User')::destroy($id);
-
-        abort(204);
-    }
-
-    /**
-     * 激活单个资源
-     */
-    public function active($id)
     {
         $id = intval($id);
 
@@ -237,7 +146,156 @@ class User extends Base
         $user = model('User')::get($id);
 
         if (empty($user)) {
-            abort(404, '不存在的用户');
+            abort(404, '此用户不存在');
+        }
+
+        model('UserCart')::where('user_id', $id)->delete();
+        model('Consignee')::where('user_id', $id)->delete();
+
+        $user->delete();
+
+        abort(204);
+    }
+
+    /**
+     * 用户登录
+     *
+     * POST /users/login
+     *
+     * params
+     * - username: 用户名或邮箱
+     * - password: 密码（明文）
+     */
+    public function login()
+    {
+        $username = input('post.username/s');
+        $password = input('post.password/s');
+
+        if (empty($username) || empty($password)) {
+            // abort(400, 'Bad Request');
+            abort(422, '必须提供用户名和密码');
+        }
+
+        $user = model('User')
+            ::whereOr('username', $username)
+            ->whereOr('user_email', $username)
+            ->field($this->fields)
+            ->find();
+
+        if (empty($user)) {
+            abort(422, '用户名错误');
+        }
+
+        if (!password_verify($password, $user->password)) {
+            // abort(401, 'Unauthorized');
+            abort(422, '密码错误');
+        }
+
+        $user->actived = $user->actived === '是';
+
+        return json($user);
+    }
+
+    /**
+     * 用户注册
+     *
+     * POST /users/register
+     *
+     * body
+     * - username: 用户名
+     * - email: 邮箱
+     * - password: 密码
+     */
+    public function register()
+    {
+        $username = input('post.username/s');
+        $email = input('post.email/s');
+        $password = input('post.password/s');
+
+        if (empty($username) || empty($email) || empty($password)) {
+            // abort(400, 'Bad Request');
+            abort(422, '必须提供用户名、邮箱和密码');
+        }
+
+        if (model('User')::where('username', $username)->count()) {
+            // abort(422, 'Unprocesable Entity');
+            abort(422, '用户名已存在');
+        }
+
+        if (model('User')::where('user_email', $email)->count()) {
+            // abort(422, 'Unprocesable Entity');
+            abort(422, '邮箱已存在');
+        }
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        $user = model('User')::create([
+            'username' => $username,
+            'user_email' => $email,
+            'password' => $password,
+            'user_email_code' => uniqid(),
+            'create_time' => time(),
+            'update_time' => time()
+        ]);
+
+        if (empty($user) || empty($user->user_id)) {
+            // abort(500, 'Internal Server Error');
+            abort(500, '注册用户失败');
+        }
+
+        return $this->read($user->user_id);
+    }
+
+    /**
+     * 获取用户名或邮箱的存在情况
+     *
+     * GET /users/exists
+     *
+     * query
+     * - username: 用户名（可选）
+     * - email: 邮箱（可选）
+     */
+    public function exists()
+    {
+        $username = input('get.username/s');
+        $email = input('get.email/s');
+
+        if (!empty($username)) {
+            $result['username'] = !!model('User')::where('username', $username)->count();
+        }
+
+        if (!empty($email)) {
+            $result['email'] = !!model('User')::where('user_email', $email)->count();
+        }
+
+        if (empty($result)) {
+            // abort(400, 'Bad Request');
+            abort(400, '必须提供用户名或邮箱');
+        }
+
+        return json($result);
+    }
+
+    /**
+     * 激活单个用户
+     *
+     * POST /users/:id/active
+     *
+     * params
+     * - id: 用户ID
+     */
+    public function active($id)
+    {
+        $id = intval($id);
+
+        if (empty($id)) {
+            abort(400, '必须提供用户ID');
+        }
+
+        $user = model('User')::get($id);
+
+        if (empty($user)) {
+            abort(404, '此用户不存在');
         }
 
         $user->user_email_code = null;
@@ -250,7 +308,12 @@ class User extends Base
     }
 
     /**
-     * 取消激活单个资源
+     * 取消激活单个用户
+     *
+     * DELETE /users/:id/active
+     *
+     * params
+     * - id: 用户ID
      */
     public function unactive($id)
     {
@@ -264,7 +327,7 @@ class User extends Base
         $user = model('User')::get($id);
 
         if (empty($user)) {
-            abort(404, '不存在的用户');
+            abort(404, '此用户不存在');
         }
 
         $user->user_email_code = uniqid();
