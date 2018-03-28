@@ -36,7 +36,7 @@ class Order extends Base
             abort(400, '必须提供用户ID');
         }
 
-        $fields = 'o.order_id as id, o.order_number as order_number, o.order_price as total_price, o.trade_no as trade_no, o.pay_status as pay_status, o.consignee_addr as express_address, e.express_com as express_company, e.express_nu as express_number, o.is_send as send_status, o.user_id as user_id';
+        $fields = 'o.order_id as id, o.order_number as order_number, o.order_price as total_price, o.create_time as create_time, o.trade_no as trade_no, o.pay_status as pay_status, o.consignee_addr as express_address, e.express_com as express_company, e.express_nu as express_number, o.is_send as send_status, o.user_id as user_id';
 
         return model('Order')::alias('o')
             ->leftJoin('Express e', 'o.order_id = e.order_id')
