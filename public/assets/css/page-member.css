@@ -56,7 +56,8 @@ input {
 }
 
 .u-name {
-	font-size: 14px;
+	font-size: 24px;
+	line-height: 2;
 }
 
 .u-rank {
@@ -294,7 +295,7 @@ input {
 
 .control-group .control-label {
 	float: left;
-	o overflow: hidden;
+	overflow: hidden;
 	width: 96px;
 }
 
@@ -463,14 +464,16 @@ input {
 	margin-right: 5px;
 }
 
-.orders table {
-	margin-bottom: 0;
-}
-
 .goods-info + .goods-info {
 	border-top: 1px solid #eee;
 }
 
 .goods-info img {
-	max-height: 100px;
+	height: 60px;
+	float: left;
+}
+
+.goods-info {
+	overflow: hidden;
+	padding: 10px 0;
 }

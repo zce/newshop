@@ -5,6 +5,9 @@
 const createError = require('http-errors')
 const { Product, Category } = require('../models')
 
+/**
+ * GET /item/:id
+ */
 exports.index = (req, res, next) => {
   const id = ~~req.params.id
   if (!id) throw createError(400, 'Bad Request')

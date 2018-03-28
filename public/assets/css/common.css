@@ -578,6 +578,10 @@ ul.brand-list li {
 	font-size: 16px;
 }
 
+.Mod-list img {
+	height: 90px;
+}
+
 .Mod-copyright ul.helpLink li {
 	display: inline-block;
 	list-style-type: none;
@@ -2486,7 +2490,7 @@ sub {
 
 img {
 	width: auto\9;
-	height: auto;
+	/* height: auto; */
 	max-width: 100%;
 	border: 0;
 	vertical-align: middle;

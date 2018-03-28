@@ -34,7 +34,7 @@ exports.resolve = (req, res, next) => {
       if (!(uid && pwd)) throw new Error('Cookie 格式不正确')
 
       // 通过 uid 查询出对应的用户对象
-      return User.getUser(uid)
+      return User.get(uid)
     })
     .then(user => {
       // user => 有这个用户 or 不存在

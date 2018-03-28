@@ -256,51 +256,37 @@
             <label class="control-label">性别：</label>
             <div class="controls">
               <label>
-                <input type="radio" name="user_sex" value="男" checked>
+                <input type="radio" name="gender" value="男" checked>
                 <span>男</span>
               </label>
               <label>
-                <input type="radio" name="user_sex" value="女">
+                <input type="radio" name="gender" value="女">
                 <span>女</span>
               </label>
             </div>
           </div>
           <div class="control-group">
-            <label for="user_qq" class="control-label">QQ：</label>
+            <label for="qq" class="control-label">QQ：</label>
             <div class="controls">
-              <input type="text" id="user_qq" class="input-xfat" name="user_qq" value="27102514">
+              <input type="text" id="qq" class="input-xfat" name="qq" value="27102514">
             </div>
           </div>
           <div class="control-group">
-            <label for="user_tel" class="control-label">手机：</label>
+            <label for="phone" class="control-label">手机：</label>
             <div class="controls">
-              <input type="text" id="user_tel" class="input-xfat" name="user_tel" value="">
+              <input type="text" id="phone" class="input-xfat" name="phone" value="">
             </div>
           </div>
           <div class="control-group">
-            <label for="user_xueli" class="control-label">学历：</label>
+            <label for="hobby" class="control-label">兴趣：</label>
             <div class="controls">
-              <select name="user_xueli" id="user_xueli" class="input-xfat">
-                <option>小学</option>
-                <option>初中</option>
-                <option>高中</option>
-                <option>专科</option>
-                <option selected>本科</option>
-                <option>硕士</option>
-                <option>博士</option>
-              </select>
+              <textarea id="hobby" class="input-xfat" name="hobby" cols="80" rows="3"></textarea>
             </div>
           </div>
           <div class="control-group">
-            <label for="user_hobby" class="control-label">兴趣：</label>
+            <label for="introduce" class="control-label">简介：</label>
             <div class="controls">
-              <textarea id="user_hobby" class="input-xfat" name="user_hobby" cols="80" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="control-group">
-            <label for="user_introduce" class="control-label">简介：</label>
-            <div class="controls">
-              <textarea id="user_introduce" class="input-xfat" name="user_introduce" cols="80" rows="6"></textarea>
+              <textarea id="introduce" class="input-xfat" name="introduce" cols="80" rows="6"></textarea>
             </div>
           </div>
           <div class="control-group">
@@ -411,7 +397,7 @@
             </div>
             <div class="yui3-u-1-6">
               <h4>帮助中心</h4>
-              <img src="assets/img/wx_cz.jpg">
+              <img src="uploads/qrcode.jpg">
             </div>
           </div>
         </div>
@@ -539,9 +525,6 @@
   </div>
 
   <script src="assets/js/jquery.js"></script>
-  <script src="assets/js/sui.carousel.js"></script>
-  <script src="assets/js/sui.tab.js"></script>
-  <script src="assets/js/sui.transition.js"></script>
   <script src="assets/js/common.js"></script>
 </body>
 

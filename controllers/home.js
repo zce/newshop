@@ -4,6 +4,9 @@
 
 const { Product } = require('../models')
 
+/**
+ * GET /
+ */
 exports.index = (req, res) => {
   Product.getLikeProducts()
     .then(likes => {
@@ -12,6 +15,9 @@ exports.index = (req, res) => {
     })
 }
 
+/**
+ * GET /likes
+ */
 exports.likes = (req, res) => {
   Product.getLikeProducts()
     .then(likes => res.json(likes))

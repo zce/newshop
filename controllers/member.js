@@ -2,22 +2,75 @@
  * Member Controller
  */
 
-// GET /member
+const fs = require('fs')
+const path = require('path')
+const util = require('util')
+const multer = require('multer')
+
+const { User, Order } = require('../models')
+
+const uploader = multer({ dest: path.join(__dirname, '../public/uploads/') })
+
+const rename = util.promisify(fs.rename)
+
+/**
+ * GET /member
+ */
 exports.index = (req, res) => {
   res.render('member-index', { title: '会员中心' })
 }
 
-// GET /member/order
+/**
+ * GET /member/order
+ */
 exports.order = (req, res) => {
-  res.send('order')
+  Order.getAll(req.session.user.id)
+    .then(orders => {
+      res.locals.orders = orders
+      res.render('member-order', { title: '我的订单' })
+    })
 }
 
-// GET /member/profile
+/**
+ * GET /member/profile
+ */
 exports.profile = (req, res) => {
-  res.send('profile')
+  res.render('member-profile', { title: '我的个人资料' })
 }
 
-// GET /member/address
+/**
+ * POST /member/profile
+ * 如果表单的类型不是 urlencoded 格式 body-parser 解析不到数据
+ * 可以使用 multer 中间件完成
+ */
+exports.profilePost = [uploader.single('avatar'), (req, res) => {
+  // 头像的目标位置
+  const target = path.join(__dirname, `../public/uploads/avatar-${req.session.user.id}.png`)
+
+  Promise.resolve()
+    .then(() => {
+      if (!req.file) return
+      return rename(req.file.path, target)
+    })
+    .then(() => {
+      // 移动头像成功，修改数据
+      return User.update(req.session.user.id, req.body)
+    })
+    .then(user => {
+      // 由于 session 中的数据还是上一个版本所以同步一下
+      Object.assign(req.session.user, user)
+
+      res.render('member-profile', { title: '我的个人资料' })
+    })
+    .catch(e => {
+      res.locals.message = '更新失败，请稍后重试'
+      res.render('member-profile', { title: '我的个人资料' })
+    })
+}]
+
+/**
+ * GET /member/address
+ */
 exports.address = (req, res) => {
-  res.send('address')
+  res.render('member-address', { title: '我的收货地址' })
 }

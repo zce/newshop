@@ -46,6 +46,7 @@ router.get('/checkout/pay', auth.required, checkoutController.pay)
 router.get('/member', auth.required, memberController.index)
 router.get('/member/order', auth.required, memberController.order)
 router.get('/member/profile', auth.required, memberController.profile)
+router.post('/member/profile', auth.required, memberController.profilePost)
 router.get('/member/address', auth.required, memberController.address)
 
 router.get('/captcha', commonController.captcha)

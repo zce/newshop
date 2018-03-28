@@ -36,10 +36,23 @@ exports.register = (username, email, password) => {
  * 根据 ID 获取用户信息
  * @param {Number} id 用户 ID
  */
-exports.getUser = id => {
+exports.get = id => {
   if (!id) throw new Error('Missing required parameter: id.')
 
   return api.get(`/users/${id}`)
+    .then(res => res.data)
+}
+
+/**
+ * 根据 ID 更新用户
+ * @param {Number} id   需要更新的用户 ID
+ * @param {Object} user 更新后的用户数据
+ */
+exports.update = (id, user) => {
+  if (!id) throw new Error('Missing required parameter: id.')
+  if (!user) throw new Error('Missing required parameter: user.')
+
+  return api.patch(`/users/${id}`, user)
     .then(res => res.data)
 }
 
@@ -56,11 +69,23 @@ exports.delete = id => {
 
 /**
  * 根据 ID 激活用户
- * @param {Numerb} id 需要激活的用户 ID
+ * @param {Number} id 需要激活的用户 ID
  */
 exports.active = id => {
   if (!id) throw new Error('Missing required parameter: id.')
 
   return api.put(`/users/${id}/active`)
+    .then(res => res.data)
+}
+
+
+/**
+ * 根据 ID 取消激活用户
+ * @param {Number} id 需要激活的用户 ID
+ */
+exports.unactive = id => {
+  if (!id) throw new Error('Missing required parameter: id.')
+
+  return api.put(`/users/${id}/unactive`)
     .then(res => res.data)
 }
