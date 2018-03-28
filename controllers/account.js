@@ -2,11 +2,16 @@
  * Account Controller
  */
 
+const fs = require('fs')
+const path = require('path')
+const util = require('util')
 const createError = require('http-errors')
 
 const { User, Cart } = require('../models')
 const { mail } = require('../utils')
 const config = require('../config')
+
+const copyFile = util.promisify(fs.copyFile)
 
 // GET /account
 exports.index = (req, res) => {
@@ -121,6 +126,12 @@ exports.registerPost = (req, res) => {
       userId = user.id
       // 发送激活邮件
       return mail.sendActiveEmail(user)
+    })
+    .then(() => {
+      const defaultAvatar = path.join(__dirname, '../public/uploads/default-avatar.png')
+      const userAvatar = path.join(__dirname, `../public/uploads/avatar-${userId}.png`)
+
+      return copyFile(defaultAvatar, userAvatar)
     })
     .then(() => {
       res.locals.flash = '注册成功！请查收邮件激活您的邮箱！'

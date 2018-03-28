@@ -78,7 +78,6 @@ exports.active = id => {
     .then(res => res.data)
 }
 
-
 /**
  * 根据 ID 取消激活用户
  * @param {Number} id 需要激活的用户 ID
@@ -88,4 +87,34 @@ exports.unactive = id => {
 
   return api.put(`/users/${id}/unactive`)
     .then(res => res.data)
+}
+
+/**
+ * 获取用户的地址列表
+ * @param {Number} id 用户ID
+ */
+exports.getAddress = id => {
+  return api.get(`/users/${id}/address`)
+    .then(res => res.data)
+    .catch(e => [])
+}
+
+/**
+ * 添加一个用户的收货地址
+ * @param {Number} id 用户ID
+ * @param {Object} address 添加的地址对象
+ */
+exports.addAddress = (id, address) => {
+  return api.post(`/users/${id}/address`, address)
+    .then(res => res.data)
+}
+
+/**
+ * 删除用户的地址
+ * @param {Number} id 用户ID
+ * @param {Number} addressId 地址ID
+ */
+exports.deleteAddress = (id, addressId) => {
+  return api.delete(`/users/${id}/address/${addressId}`)
+    .then(res => undefined)
 }

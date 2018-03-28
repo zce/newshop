@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const util = require('util')
 const multer = require('multer')
+const createError = require('http-errors')
 
 const { User, Order } = require('../models')
 
@@ -72,5 +73,39 @@ exports.profilePost = [uploader.single('avatar'), (req, res) => {
  * GET /member/address
  */
 exports.address = (req, res) => {
-  res.render('member-address', { title: '我的收货地址' })
+  User.getAddress(req.session.user.id)
+    .then(addresses => {
+      res.locals.addresses = addresses
+      res.render('member-address', { title: '我的收货地址' })
+    })
+}
+
+/**
+ * POST /member/address
+ */
+exports.addressPost = (req, res) => {
+  const { name, address, phone, code } = req.body
+  Promise.resolve()
+    .then(() => {
+      if (!(name && address && phone && code)) throw new Error('必须完整填写表单信息')
+      return User.addAddress(req.session.user.id, { name, address, phone, code })
+    })
+    .then(() => {
+      res.redirect(req.headers.referer)
+    })
+    .catch(e => {
+      res.render('member-address', { title: '我的收货地址' })
+    })
+}
+
+/**
+ * DELETE /member/address/delete
+ */
+exports.addressDelete = (req, res) => {
+  const id = ~~req.query.id
+  if (!id) throw createError(400, '必须提供正确的地址 ID')
+  User.deleteAddress(req.session.user.id, id)
+    .then(() => {
+      res.redirect(req.headers.referer)
+    })
 }
