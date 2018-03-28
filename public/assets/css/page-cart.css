@@ -465,6 +465,10 @@ ul.payType li {
 	_bottom: -1px;
 }
 
+.addr-item .name:hover {
+	border: 1px solid #c81623;
+}
+
 .addr-item .name.selected span {
 	display: block;
 }
@@ -586,4 +590,8 @@ ul.send-detail li {
 	font-weight: 100;
 	line-height: 1.2;
 	color: #555;
+}
+
+.sui-modal {
+	width: 565px;
 }

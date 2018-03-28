@@ -73,7 +73,7 @@ exports.profilePost = [uploader.single('avatar'), (req, res) => {
  * GET /member/address
  */
 exports.address = (req, res) => {
-  User.getAddress(req.session.user.id)
+  User.getAllAddress(req.session.user.id)
     .then(addresses => {
       res.locals.addresses = addresses
       res.render('member-address', { title: '我的收货地址' })

@@ -41,3 +41,18 @@ exports.add = (userId, products) => {
   return api.post(`/users/${userId}/order`, { items: products.toString() })
     .then(res => res.data)
 }
+
+/**
+ * 更新单个订单信息
+ * @param {Number} userId   用户 ID
+ * @param {String} orderNumber  订单编号
+ * @param {Array}  order 更新后的订单信息
+ */
+exports.update = (userId, orderNumber, order) => {
+  if (!userId) throw new Error('Missing required parameter: userId.')
+  if (!orderNumber) throw new Error('Missing required parameter: orderNumber.')
+  if (!order) throw new Error('Missing required parameter: order.')
+
+  return api.patch(`/users/${userId}/order/${orderNumber}`, order)
+    .then(res => res.data)
+}

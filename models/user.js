@@ -93,10 +93,20 @@ exports.unactive = id => {
  * 获取用户的地址列表
  * @param {Number} id 用户ID
  */
-exports.getAddress = id => {
+exports.getAllAddress = id => {
   return api.get(`/users/${id}/address`)
     .then(res => res.data)
     .catch(e => [])
+}
+
+/**
+ * 获取单个用户的地址信息
+ * @param {Number} id 用户ID
+ * @param {Number} address 地址ID
+ */
+exports.getAddress = (id, address) => {
+  return api.get(`/users/${id}/address/${address}`)
+    .then(res => res.data)
 }
 
 /**

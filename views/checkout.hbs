@@ -10,68 +10,28 @@
     <!--收件人信息-->
     <div class="step-tit">
       <h5>
-        <span>收件人信息</span>
+        <span>当前收货人信息</span>
+      </h5>
+    </div>
+    <div class="step-cont">
+      <p>{{order.express_address}}</p>
+    </div>
+    <div class="step-tit">
+      <h5>
+        <span>选择收货地址</span>
         <a class="newadd" data-toggle="modal" data-target="#add_address" data-keyboard="false" href="#">新增收货地址</a>
       </h5>
     </div>
     <div class="step-cont">
       <div class="addressInfo">
         <ul class="addr-detail">
-          <li class="addr-item selected">
-            <div class="con name"><a href="#">张默</a></div>
-            <div class="con address">张默 北京市海淀区三环内 中关村软件园9号楼 <span>159****3201</span></div>
-          </li>
+          {{#each addresses}}
           <li class="addr-item">
-            <div class="con name"><a href="#">张默</a></div>
-            <div class="con address">张默 北京市海淀区三环内 中关村软件园9号楼 <span>159****3201</span></div>
+            <div class="con name"><a href="/checkout/address?n={{../order.order_number}}&address={{id}}">{{name}}</a></div>
+            <div class="con address">{{name}} {{address}} <span>{{mask phone}}</span></div>
           </li>
-          <li class="addr-item">
-            <div class="con name"><a href="#">张默</a></div>
-            <div class="con address">张默 北京市海淀区三环内 中关村软件园9号楼 <span>159****3201</span></div>
-          </li>
+          {{/each}}
         </ul>
-      </div>
-      <div id="add_address" class="sui-modal hide fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
-              <h4 id="myModalLabel" class="modal-title">添加收货地址</h4>
-            </div>
-            <div class="modal-body">
-              <form action="" class="sui-form form-horizontal">
-                <div class="control-group">
-                  <label class="control-label">收货人：</label>
-                  <div class="controls">
-                    <input type="text" class="input-xfat">
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label">详细地址：</label>
-                  <div class="controls">
-                    <input type="text" class="input-xfat input-xlarge">
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label">手机：</label>
-                  <div class="controls">
-                    <input type="text" class="input-xfat">
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label">邮编：</label>
-                  <div class="controls">
-                    <input type="text" class="input-xfat">
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确定</button>
-              <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="hr"></div>
@@ -89,34 +49,25 @@
       <div class="step-tit">
         <h5>送货清单</h5>
       </div>
-      <div class="step-cont">
-        <ul class="send-detail">
-          <li>
-            <div class="sendGoods">
-              <span>商品清单：</span>
-              {{#each order.products}}
-              <ul class="yui3-g">
-                <li class="yui3-u-1-6">
-                  <img src="{{thumbnail}}">
-                </li>
-                <li class="yui3-u-2-3">
-                  <div class="desc">{{name}}</div>
-                </li>
-                <li class="yui3-u-1-12">
-                  <div class="price">￥{{price}}</div>
-                </li>
-                <li class="yui3-u-1-12">
-                  <div class="num">x<strong>{{amount}}</strong></div>
-                </li>
-              </ul>
-              {{/each}}
-            </div>
+      <div class="sendGoods">
+        <span>商品清单：</span>
+        {{#each order.products}}
+        <ul class="yui3-g">
+          <li class="yui3-u-1-6">
+            <img src="{{thumbnail}}">
           </li>
-          <li></li>
-          <li></li>
+          <li class="yui3-u-2-3">
+            <div class="desc">{{name}}</div>
+          </li>
+          <li class="yui3-u-1-12">
+            <div class="price">￥{{price}}</div>
+          </li>
+          <li class="yui3-u-1-12">
+            <div class="num">x<strong>{{amount}}</strong></div>
+          </li>
         </ul>
+        {{/each}}
       </div>
-    </div>
     </div>
   </div>
 </div>
@@ -124,3 +75,51 @@
   <div class="static fl">总共 <i>{{order.products.length}}</i> 件商品，总商品金额 <i>￥{{order.total_price}}</i></div>
   <a class="sui-btn btn-danger btn-xlarge fr" href="pay.html">去支付</a>
 </div>
+
+<div id="add_address" class="sui-modal hide fade">
+  <div class="modal-dialog">
+    <form class="modal-content" action="/member/address" method="post">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
+        <h4 id="myModalLabel" class="modal-title">添加收货地址</h4>
+      </div>
+      <div class="modal-body">
+        <div class="sui-form form-horizontal">
+          <div class="control-group">
+            <label class="control-label">收货人：</label>
+            <div class="controls">
+              <input type="text" name="name" class="input-xfat" required>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">详细地址：</label>
+            <div class="controls">
+              <input type="text" name="address" class="input-xfat input-xlarge" required>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">手机：</label>
+            <div class="controls">
+              <input type="text" name="phone" class="input-xfat" maxlength="11" required>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">邮编：</label>
+            <div class="controls">
+              <input type="text" name="code" class="input-xfat" maxlength="6" required>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="sui-btn btn-primary btn-large">确定</button>
+        <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{#contentFor 'scripts'}}
+<script src="/assets/js/sui.modal.js"></script>
+<script src="/assets/js/sui.transition.js"></script>
+{{/contentFor}}

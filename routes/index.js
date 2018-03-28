@@ -41,6 +41,7 @@ router.get('/cart/add', cartController.add)
 
 router.get('/checkout', auth.required, checkoutController.index)
 router.get('/checkout/create', auth.required, checkoutController.create)
+router.get('/checkout/address', auth.required, checkoutController.address)
 router.get('/checkout/pay', auth.required, checkoutController.pay)
 
 router.get('/member', auth.required, memberController.index)
