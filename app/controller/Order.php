@@ -177,7 +177,11 @@ class Order extends Base
             }
 
             // 默认收货地址
-            $address = model('Consignee')::where('user_id', $user_id)->value('cgn_address') ?: '';
+            $address = '';
+            $cgn = model('Consignee')::where('user_id', $user_id)->find();
+            if (isset($cgn)) {
+                $address = $cgn->cgn_name . ' ' . $cgn->cgn_address . ' ' . $cgn->cgn_tel . ' ' . $cgn->cgn_code;
+            }
 
             // 创建订单
             $order = model('Order')::create([
