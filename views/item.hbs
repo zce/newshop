@@ -74,7 +74,7 @@
           <form class="summary-wrap" action="/cart/add">
             <input type="hidden" name="id" value="{{product.id}}">
             <div class="controls">
-              <input type="text" name="amount" value="1" minnum="{{product.amount}}" autocomplete="off" class="itxt">
+              <input type="text" name="amount" value="1" max="{{product.amount}}" autocomplete="off" class="itxt">
               <a href="#" class="increment plus">+</a>
               <a href="#" class="increment mins">-</a>
             </div>

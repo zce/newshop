@@ -1,58 +1,85 @@
+/**
+ * Route mappings
+ */
+
 const { Router } = require('express')
 
-// 认证中间件
+// auth middleware
 const auth = require('../middlewares/auth')
 
-// 载入全部控制器
-const homeController = require('../controllers/home')
-const listController = require('../controllers/list')
-const itemController = require('../controllers/item')
-const searchController = require('../controllers/search')
-const accountController = require('../controllers/account')
-const memberController = require('../controllers/member')
-const cartController = require('../controllers/cart')
-const checkoutController = require('../controllers/checkout')
+/**
+ * Load controllers
+ */
 
-const commonController = require('../controllers/common')
+const home = require('../controllers/home')
+const list = require('../controllers/list')
+const item = require('../controllers/item')
+const account = require('../controllers/account')
+const member = require('../controllers/member')
+const cart = require('../controllers/cart')
+const checkout = require('../controllers/checkout')
+const order = require('../controllers/order')
+const pay = require('../controllers/pay')
 
-// 创建路由对象
+const common = require('../controllers/common')
+
+/**
+ * Create router object
+ */
+
 const router = new Router()
 
-// 路由规则配置
-router.get('/', homeController.index)
-router.get('/likes', homeController.likes)
+// resolve logged in user info for all route
+router.use(auth.resolve)
 
-router.get('/list/:id', listController.index)
+/**
+ * mapping rules
+ */
 
-router.get('/item/:id', itemController.index)
+// home page
+router.get('/', home.index)
+router.get('/likes', home.likes)
 
-router.get('/search', searchController.index)
+// list page
+router.get('/list/:id(\\d+)', list.index)
+router.get('/search', list.search)
 
-router.get('/account', accountController.index)
-router.get('/account/login', accountController.login)
-router.post('/account/login', accountController.loginPost)
-router.get('/account/logout', accountController.logout)
-router.get('/account/register', accountController.register)
-router.post('/account/register', accountController.registerPost)
-router.get('/account/active', auth.required, accountController.active)
+// item page
+router.get('/item/:id(\\d+)', item.index)
 
-router.get('/cart', cartController.index)
-router.get('/cart/add', cartController.add)
+// account center
+router.get('/account', account.index)
+router.get('/account/login', account.login)
+router.post('/account/login', account.loginPost)
+router.get('/account/register', account.register)
+router.post('/account/register', account.registerPost)
+router.get('/account/logout', account.logout)
+router.get('/account/active', auth.required, account.active)
 
-router.get('/checkout', auth.required, checkoutController.index)
-router.get('/checkout/create', auth.required, checkoutController.create)
-router.get('/checkout/address', auth.required, checkoutController.address)
-router.get('/checkout/pay', auth.required, checkoutController.pay)
+// shopping cart
+router.get('/cart', cart.index)
+router.get('/cart/add', cart.add)
 
-router.get('/member', auth.required, memberController.index)
-router.get('/member/order', auth.required, memberController.order)
-router.get('/member/profile', auth.required, memberController.profile)
-router.post('/member/profile', auth.required, memberController.profilePost)
-router.get('/member/address', auth.required, memberController.address)
-router.post('/member/address', auth.required, memberController.addressPost)
-router.get('/member/address/delete', auth.required, memberController.addressDelete)
+// order
+router.get('/checkout', auth.required, checkout.index)
+router.get('/order', auth.required, order.index)
+router.get('/order/address', auth.required, order.address)
+router.get('/pay', auth.required, pay.index)
 
-router.get('/captcha', commonController.captcha)
+// member center
+router.get('/member', auth.required, member.index)
+router.get('/member/order', auth.required, member.order)
+router.get('/member/profile', auth.required, member.profile)
+router.post('/member/profile', auth.required, member.profilePost)
+router.get('/member/address', auth.required, member.address)
+router.post('/member/address', auth.required, member.addressPost)
+router.get('/member/address/delete', auth.required, member.addressDelete)
 
-// 导出路由对象
+// common actions
+router.get('/captcha', common.captcha)
+
+/**
+ * export router
+ */
+
 module.exports = router

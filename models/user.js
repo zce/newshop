@@ -74,7 +74,7 @@ exports.delete = id => {
 exports.active = id => {
   if (!id) throw new Error('Missing required parameter: id.')
 
-  return api.put(`/users/${id}/active`)
+  return api.post(`/users/${id}/active`)
     .then(res => res.data)
 }
 

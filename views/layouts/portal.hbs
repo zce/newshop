@@ -18,7 +18,7 @@
               {{#@user}}
               欢迎【<a href="/member">{{username}}</a>】 <a href="/account/logout">退出</a>
               {{else}}
-              请 <a href="/account/login?redirect={{escape @req.url}}">登录</a> <a href="/account/register?redirect={{escape @req.url}}">免费注册</a>
+              请 <a href="/account/login{{^equal @req.url '/'}}?redirect={{escape @req.url}}{{/equal}}">登录</a> <a href="/account/register{{^equal @req.url '/'}}?redirect={{escape @req.url}}{{/equal}}">免费注册</a>
               {{/@user}}
             </li>
           </ul>

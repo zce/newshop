@@ -55,10 +55,10 @@
       <div class="sui-navbar">
         <div class="navbar-inner filter">
           <ul class="sui-nav">
-            <li{{#equal sort 'commend'}} class="active"{{/equal}}><a href="?sort=commend">综合</a></li>
-            <li{{#equal sort 'quantity'}} class="active"{{/equal}}><a href="?sort=quantity">销量</a></li>
-            <li{{#equal sort 'market_time'}} class="active"{{/equal}}><a href="?sort=market_time">新品</a></li>
-            <li{{#equal sort '-price'}} class="active"{{/equal}}{{#equal sort 'price'}} class="active"{{/equal}}><a href="?sort={{^equal sort '-price'}}-{{/equal}}price">价格</a></li>
+            <li{{#equal sort 'commend'}} class="active"{{/equal}}><a href="?{{#if q}}q={{q}}&{{/if}}sort=commend">综合</a></li>
+            <li{{#equal sort 'quantity'}} class="active"{{/equal}}><a href="?{{#if q}}q={{q}}&{{/if}}sort=quantity">销量</a></li>
+            <li{{#equal sort 'market_time'}} class="active"{{/equal}}><a href="?{{#if q}}q={{q}}&{{/if}}sort=market_time">新品</a></li>
+            <li{{#equal sort '-price'}} class="active"{{/equal}}{{#equal sort 'price'}} class="active"{{/equal}}><a href="?{{#if q}}q={{q}}&{{/if}}sort={{^equal sort '-price'}}-{{/equal}}price">价格{{#equal sort '-price'}} ⬆️{{/equal}}{{#equal sort 'price'}} ⬇️{{/equal}}</a></li>
           </ul>
         </div>
       </div>
@@ -67,8 +67,8 @@
           {{#each products}}
           <li class="yui3-u-1-5">
             <div class="p-img"><a href="/item/{{id}}"><img data-src="{{thumbnail}}"></a></div>
-            <div class="price"><strong><em>¥</em><i>{{price}}</i></strong></div>
-            <div class="attr"><em>{{name}}</em></div>
+            <div class="price">￥<strong>{{price}}</strong></div>
+            <div class="attr"><a href="/item/{{id}}" title="{{name}}">{{name}}</a></div>
             <div class="commit"><i class="command">已售出{{sales}}</i></div>
             <div class="operate">
               <a href="/cart/add?id={{id}}" class="sui-btn btn-bordered btn-danger" target="_blank">加入购物车</a>

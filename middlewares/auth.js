@@ -6,8 +6,8 @@
 
 const qs = require('querystring')
 
-const { User } = require('../models')
 const config = require('../config')
+const { User } = require('../models')
 
 /**
  * 从 session 或者 cookie 中找到当前登录用户信息

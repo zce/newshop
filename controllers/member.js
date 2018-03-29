@@ -2,29 +2,31 @@
  * Member Controller
  */
 
-const fs = require('fs')
 const path = require('path')
-const util = require('util')
+
 const multer = require('multer')
 const createError = require('http-errors')
 
+const { avatar } = require('../utils')
 const { User, Order } = require('../models')
 
 const uploader = multer({ dest: path.join(__dirname, '../public/uploads/') })
 
-const rename = util.promisify(fs.rename)
-
 /**
+ * 会员中心
+ *
  * GET /member
  */
-exports.index = (req, res) => {
-  res.render('member-index', { title: '会员中心' })
+exports.index = (req, res, next) => {
+  res.render('member', { title: '会员中心' })
 }
 
 /**
+ * 我的订单
+ *
  * GET /member/order
  */
-exports.order = (req, res) => {
+exports.order = (req, res, next) => {
   Order.getAll(req.session.user.id)
     .then(orders => {
       res.locals.orders = orders
@@ -33,26 +35,24 @@ exports.order = (req, res) => {
 }
 
 /**
+ * 我的个人资料
+ *
  * GET /member/profile
  */
-exports.profile = (req, res) => {
+exports.profile = (req, res, next) => {
   res.render('member-profile', { title: '我的个人资料' })
 }
 
 /**
+ * 修改个人资料表单提交
+ *
  * POST /member/profile
+ *
  * 如果表单的类型不是 urlencoded 格式 body-parser 解析不到数据
  * 可以使用 multer 中间件完成
  */
-exports.profilePost = [uploader.single('avatar'), (req, res) => {
-  // 头像的目标位置
-  const target = path.join(__dirname, `../public/uploads/avatar-${req.session.user.id}.png`)
-
-  Promise.resolve()
-    .then(() => {
-      if (!req.file) return
-      return rename(req.file.path, target)
-    })
+exports.profilePost = [uploader.single('avatar'), (req, res, next) => {
+  avatar.update(req.file.path, req.session.user.id)
     .then(() => {
       // 移动头像成功，修改数据
       return User.update(req.session.user.id, req.body)
@@ -70,21 +70,36 @@ exports.profilePost = [uploader.single('avatar'), (req, res) => {
 }]
 
 /**
+ * 我的收货地址
+ *
  * GET /member/address
  */
-exports.address = (req, res) => {
+exports.address = (req, res, next) => {
   User.getAllAddress(req.session.user.id)
     .then(addresses => {
       res.locals.addresses = addresses
       res.render('member-address', { title: '我的收货地址' })
     })
+    .catch(e => {
+      res.locals.addresses = []
+      res.render('member-address', { title: '我的收货地址' })
+    })
 }
 
 /**
+ * 添加收货地址表单提交
+ *
  * POST /member/address
+ *
+ * body
+ * - name: 收货人姓名
+ * - address: 收货地址
+ * - phone: 收货人手机
+ * - code: 收货人邮编
  */
-exports.addressPost = (req, res) => {
+exports.addressPost = (req, res, next) => {
   const { name, address, phone, code } = req.body
+
   Promise.resolve()
     .then(() => {
       if (!(name && address && phone && code)) throw new Error('必须完整填写表单信息')
@@ -94,18 +109,24 @@ exports.addressPost = (req, res) => {
       res.redirect(req.headers.referer)
     })
     .catch(e => {
+      res.locals.message = e.message
       res.render('member-address', { title: '我的收货地址' })
     })
 }
 
 /**
- * DELETE /member/address/delete
+ * 删除单条收货地址
+ *
+ * GET /member/address/delete
+ *
+ * query
+ * - id: 删除的地址ID
  */
-exports.addressDelete = (req, res) => {
+exports.addressDelete = (req, res, next) => {
   const id = ~~req.query.id
-  if (!id) throw createError(400, '必须提供正确的地址 ID')
+  if (!id) throw createError(400)
+
   User.deleteAddress(req.session.user.id, id)
-    .then(() => {
-      res.redirect(req.headers.referer)
-    })
+    .then(() => res.redirect(req.headers.referer))
+    .catch(e => next(createError(500, e)))
 }

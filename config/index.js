@@ -20,6 +20,9 @@ module.exports = {
     // socketTimeout: 2000,
     debug: process.env.NODE_ENV === 'development'
   },
+  alipay: {
+    app_id: '2016081600257580'
+  },
   session: {
     secret: 'MAKE IT BETTER!'
   },

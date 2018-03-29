@@ -15,7 +15,7 @@
           <div class="u-info">
             <div class="u-name">{{@user.username}}</div>
             <div class="u-rank">VIP俱乐部</div>
-            <div class="u-safe">账号安全：安全</div>
+            <div class="u-safe">账号状态：{{#if @user.actived}}已{{else}}未{{/if}}激活</div>
             <div class="u-medal">我的勋章：无</div>
           </div>
         </div>

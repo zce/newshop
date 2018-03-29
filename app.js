@@ -15,6 +15,10 @@ const routes = require('./routes')
 // 创建应用程序对象
 const app = express()
 
+// 额外配置
+app.set('x-powered-by', false)
+app.set('strict routing', true)
+
 // 配置应用所使用的模板引擎
 app.set('view engine', 'hbs')
 

@@ -3,9 +3,11 @@
  */
 
 const hbs = require('express-hbs')
-const { Setting, Category, Cart, Product } = require('../models')
-const config = require('../config')
 
+const config = require('../config')
+const { Setting, Category, Cart, Product } = require('../models')
+
+// 获取购物车信息
 function getCart (req, res) {
   return Promise.resolve()
     .then(() => {
@@ -33,22 +35,34 @@ function getCart (req, res) {
     })
 }
 
+// 获取网站配置信息
 function getSettings (req, res) {
   return Setting.getSettings().then(settings => { res.locals.settings = settings })
 }
 
+// 获取分类数据
 function getCategories (req, res) {
+  // TODO: 数据缓存
   return Category.getCascadingTree().then(categories => { res.locals.categories = categories })
 }
 
 module.exports = (req, res, next) => {
-  res.locals.config = config
-
-  const user = req.session.user
-
   hbs.updateTemplateOptions({
-    data: { req, res, user }
+    data: {
+      get req () {
+        return req
+      },
+      get res () {
+        return res
+      },
+      get user () {
+        // must be a getter
+        return req.session.user
+      }
+    }
   })
+
+  res.locals.config = config
 
   Promise.all([
     getCart(req, res),

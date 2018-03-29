@@ -2,29 +2,57 @@
  * Account Controller
  */
 
-const fs = require('fs')
-const path = require('path')
-const util = require('util')
 const createError = require('http-errors')
 
-const { User, Cart } = require('../models')
-const { mail } = require('../utils')
 const config = require('../config')
+const { mail, avatar } = require('../utils')
+const { User, Cart } = require('../models')
 
-const copyFile = util.promisify(fs.copyFile)
-
-// GET /account
-exports.index = (req, res) => {
+/**
+ * 默认页面
+ *
+ * GET /account
+ */
+exports.index = (req, res, next) => {
   res.redirect('login')
 }
 
-// GET /account/login
-exports.login = (req, res) => {
+/**
+ * 登录页
+ *
+ * GET /account/login
+ *
+ * query
+ * - redirect: 跳转地址
+ */
+exports.login = (req, res, next) => {
+  if (req.session.user) {
+    // 已经登录了，没必要继续
+    return res.redirect(req.query.redirect || '/')
+  }
   res.render('login', { title: '登录' })
 }
 
-// POST /account/login
-exports.loginPost = (req, res) => {
+/**
+ * 登录表单提交
+ *
+ * POST /account/login
+ *
+ * query
+ * - redirect: 跳转地址
+ *
+ * body
+ * - username: 用户名
+ * - password: 密码
+ * - captcha: 验证码
+ * - remember: 记住我
+ */
+exports.loginPost = (req, res, next) => {
+  if (req.session.user) {
+    // 已经登录了，没必要继续
+    return res.redirect(req.query.redirect || '/')
+  }
+
   const { username, password, captcha, remember } = req.body
 
   Promise.resolve()
@@ -43,10 +71,7 @@ exports.loginPost = (req, res) => {
         throw new Error('请正确填写验证码')
       }
 
-      return User.login(username, password)
-        .catch(e => {
-          throw new Error('用户名或密码错误')
-        })
+      return User.login(username, password).catch(e => { throw new Error('用户名或密码错误') })
     })
     .then(user => {
       req.session.user = user
@@ -67,7 +92,7 @@ exports.loginPost = (req, res) => {
 
       // 需要同步购物车信息
       // 由于服务端有并发修改数据问题，所以必须使用串行结构任务
-      return Promise.all(cart.map(item => Cart.add(user.id, item.id, item.amount)));
+      return Promise.all(cart.map(item => Cart.add(user.id, item.id, item.amount)))
 
       // // 在服务端解决并发问题后建议使用并行结构
       // return cart.reduce((promise, item) => promise.then(() => Cart.add(user.id, item.id, item.amount)), Promise.resolve())
@@ -82,20 +107,43 @@ exports.loginPost = (req, res) => {
     })
 }
 
-// GET /account/logout
-exports.logout = (req, res) => {
-  delete req.session.user
-  res.clearCookie(config.cookie.remember_key)
-  res.redirect('/account/login')
-}
-
-// GET /account/register
-exports.register = (req, res) => {
+/**
+ * 注册页
+ *
+ * GET /account/register
+ *
+ * query
+ * - redirect: 跳转地址
+ */
+exports.register = (req, res, next) => {
+  if (req.session.user) {
+    // 已经登录了，没必要继续
+    return res.redirect(req.query.redirect || '/')
+  }
   res.render('register', { title: '注册' })
 }
 
-// POST /account/register
-exports.registerPost = (req, res) => {
+/**
+ * 注册表单提交
+ *
+ * POST /account/register
+ *
+ * query
+ * - redirect: 跳转地址
+ *
+ * body
+ * - username: 用户名
+ * - email: 邮箱
+ * - password: 密码
+ * - confirm: 确认密码
+ * - agree: 同意协议
+ */
+exports.registerPost = (req, res, next) => {
+  if (req.session.user) {
+    // 已经登录了，没必要继续
+    return res.redirect(req.query.redirect || '/')
+  }
+
   // 处理表单接收逻辑
   const { username, email, password, confirm, agree } = req.body
 
@@ -125,13 +173,11 @@ exports.registerPost = (req, res) => {
 
       userId = user.id
       // 发送激活邮件
-      return mail.sendActiveEmail(user)
+      return mail.sendActiveEmail(user).catch(e => { throw new Error('发送激活邮件失败') })
     })
     .then(() => {
-      const defaultAvatar = path.join(__dirname, '../public/uploads/default-avatar.png')
-      const userAvatar = path.join(__dirname, `../public/uploads/avatar-${userId}.png`)
-
-      return copyFile(defaultAvatar, userAvatar)
+      // 生成默认头像
+      return avatar.generate(userId)
     })
     .then(() => {
       res.locals.flash = '注册成功！请查收邮件激活您的邮箱！'
@@ -145,7 +191,26 @@ exports.registerPost = (req, res) => {
     })
 }
 
-exports.active = (req, res) => {
+/**
+ * 退出登录
+ *
+ * GET /account/logout
+ */
+exports.logout = (req, res, next) => {
+  delete req.session.user
+  res.clearCookie(config.cookie.remember_key)
+  res.redirect('/account/login')
+}
+
+/**
+ * 激活用户邮箱
+ *
+ * GET /account/active
+ *
+ * query
+ * - v: 验证码
+ */
+exports.active = (req, res, next) => {
   const { v } = req.query
 
   if (!v) throw createError(400)
@@ -159,7 +224,5 @@ exports.active = (req, res) => {
       req.session.user = user
       res.redirect('/member')
     })
-    .catch(e => {
-      throw createError(500, '激活失败，请重试')
-    })
+    .catch(e => next(createError(500, '激活失败，请重试')))
 }

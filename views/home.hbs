@@ -253,22 +253,17 @@
 <script src="/assets/js/sui.transition.js"></script>
 <script>
   $(function ($) {
+    var likesTemplate = '<li class="yui3-u-1-6"><a href="/item/{id}" class="pic"><img src="{thumbnail}"></a><p>{name}</p><h3>¥{price}</h3></li>'
     var $likesList = $('#likes_list')
-    var likesTemplate = '<li class="yui3-u-1-6">\
-          <a href="/item/{id}" class="pic"><img src="{thumbnail}"></a>\
-          <p>{name}</p><h3>¥{price}</h3>\
-        </li>'
 
     $('#btn_refresh_likes').on('click', function () {
       $.get('/likes', function (data) {
-        $likesList.empty()
-        $(data).each(function (i, item) {
-          var li = likesTemplate
-            .replace('{id}', item.id)
-            .replace('{thumbnail}', item.thumbnail)
-            .replace('{name}', item.name)
-            .replace('{price}', item.price)
-          $likesList.append(li)
+        var html = $(data).map(function () {
+          return likesTemplate.replace('{id}', this.id).replace('{thumbnail}', this.thumbnail).replace('{name}', this.name).replace('{price}', this.price)
+        }).get().join('')
+
+        $likesList.fadeOut(function () {
+          $(this).html(html).fadeIn()
         })
       })
       return false

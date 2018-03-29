@@ -5,7 +5,6 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 
 const globals = require('./globals')
-const auth = require('./auth')
 
 const config = require('../config')
 
@@ -25,9 +24,6 @@ middlewares.push(bodyParser.urlencoded({ extended: false }))
 
 // 支持 Session
 middlewares.push(session({ secret: config.session.secret, resave: false, saveUninitialized: false }))
-
-// 自动获取登录用户信息
-middlewares.push(auth.resolve)
 
 // 获取全局所需数据
 middlewares.push(globals)

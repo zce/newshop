@@ -13707,3 +13707,14 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 #yui3-css-stamp.cssgrids {
 	display: none;
 }
+
+
+
+.error-message {
+	color: #f60;
+	margin: -15px 0 5px;
+}
+
+.error-message::before {
+	content: '!!! '
+}

@@ -174,10 +174,18 @@ ul.logo-list li {
 	opacity: 1;
 }
 
-.attr,.cu,.commit {
+.price strong {
+	font-size: 1.4em;
+}
+
+.attr {
 	height: 45px;
 	overflow: hidden;
 	line-height: 1.8;
+}
+
+.attr a {
+	color: #444;
 }
 
 .price {
@@ -185,15 +193,8 @@ ul.logo-list li {
 	font-size: 18px;
 }
 
-.cu span {
-	margin-right: 3px;
-	padding: 3px;
-	background: #c81623;
-	color: #fff;
-}
-
 .operate {
-	padding: 12px 0;
+	padding: 5px 0;
 }
 
 .page {
