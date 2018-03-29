@@ -10,7 +10,7 @@ const copyFile = util.promisify(fs.copyFile)
 const rename = util.promisify(fs.rename)
 
 exports.generate = id => {
-  const defaultAvatar = path.join(__dirname, 'default-avatar.png')
+  const defaultAvatar = path.join(__dirname, 'templates/default-avatar.png')
   const userAvatar = path.join(__dirname, `../public/uploads/avatar-${id}.png`)
 
   return copyFile(defaultAvatar, userAvatar)

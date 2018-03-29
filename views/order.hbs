@@ -72,8 +72,16 @@
   </div>
 </div>
 <div class="order-summary py-container">
+  {{#equal order.pay_status '未付款'}}
   <div class="static fl">总共 <i>{{order.products.length}}</i> 件商品，总商品金额 <i>￥{{order.total_price}}</i></div>
-  <a class="sui-btn btn-danger btn-xlarge fr" href="/pay?n={{order.order_number}}">去支付</a>
+  <a class="sui-btn btn-danger btn-xlarge fr" href="/pay?n={{order.order_number}}" target="alipay_window">去支付</a>
+  {{else}}
+  {{#equal order.send_status '未发货'}}
+  <div class="static fl">订单支付成功，我们将尽快发货！</div>
+  {{else}}
+  <div class="static fl">我们已经发货，请耐心等候！</div>
+  {{/equal}}
+  {{/equal}}
 </div>
 
 <div id="add_address" class="sui-modal hide fade">

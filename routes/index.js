@@ -64,7 +64,11 @@ router.get('/cart/add', cart.add)
 router.get('/checkout', auth.required, checkout.index)
 router.get('/order', auth.required, order.index)
 router.get('/order/address', auth.required, order.address)
+
+// pay
 router.get('/pay', auth.required, pay.index)
+router.get('/pay/callback', auth.required, pay.callback)
+router.all('/pay/notify', pay.notify)
 
 // member center
 router.get('/member', auth.required, member.index)
