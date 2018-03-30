@@ -54,7 +54,7 @@ exports.address = (req, res, next) => {
     .then(address => {
       const addr = `${address.name} ${address.address} ${address.phone} ${address.code}`
       // 更新订单收货地址
-      return Order.update(req.session.user.id, n, { express_address: addr })
+      return Order.update(n, { express_address: addr })
     })
     .then(order => {
       res.redirect(req.headers.referer)
