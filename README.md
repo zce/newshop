@@ -10,3 +10,13 @@
 ## Docs
 
 - https://documenter.getpostman.com/view/130308/newshop/RVncfwwX
+
+## Deploy
+
+```shell
+$ sudo ln -s /var/www/ns-api.uieee.com/ns-api.uieee.com.conf /etc/nginx/sites-available/ns-api.uieee.com.conf
+$ sudo ln -s /etc/nginx/sites-available/ns-api.uieee.com.conf /etc/nginx/sites-enabled/ns-api.uieee.com.conf
+$ sudo rm -rf /etc/nginx/sites-enabled/default
+$ sudo rm -rf /etc/nginx/sites-available/default
+$ sudo systemctl reload nginx
+```
