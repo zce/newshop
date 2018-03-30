@@ -67,7 +67,7 @@ class Order extends Base
             abort(400, '必须提供用户ID');
         }
 
-        $orders = $this->getQuery()->where('o.user_id', $user_id)->select();
+        $orders = $this->getQuery()->where('o.user_id', $user_id)->order('o.create_time', 'desc')->select();
 
         foreach ($orders as $item) {
             $item->pay_status = $item->pay_status === '1' ? '已付款' : '未付款';

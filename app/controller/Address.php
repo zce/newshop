@@ -28,6 +28,7 @@ class Address extends Base
         $user_id = intval($id);
 
         $records = $this->getQuery($user_id)
+            ->order('cgn_id', 'desc')
             ->field('cgn_id as id, cgn_name as name, cgn_address as address, cgn_tel as phone, cgn_code as code')
             ->select();
 
