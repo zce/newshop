@@ -29,9 +29,10 @@ function ends_with ($needle, $haystack) {
  */
 function get_current_origin () {
     $origin = 'http';
-    $origin .= $_SERVER['SERVER_PORT'] == '443' ? 's' : '';
+    $origin .= $_SERVER['SERVER_PORT'] === '443' ? 's' : '';
     $origin .= '://' . $_SERVER['SERVER_NAME'];
-    $origin .= $_SERVER['SERVER_PORT'] !== '80' ? ':' . $_SERVER['SERVER_PORT'] : '';
+    $default_port = $_SERVER['SERVER_PORT'] === '443' ? '443' : '80';
+    $origin .= $_SERVER['SERVER_PORT'] !== $default_port ? ':' . $_SERVER['SERVER_PORT'] : '';
     return $origin;
 }
 
