@@ -13,6 +13,8 @@
 // | API 路由规则
 // +----------------------------------------------------------------------
 
+Route::get('demo', 'Demo/index');
+
 Route::group('api/v1', function () {
     // settings
     Route::get('settings/:key', 'Setting/read');
