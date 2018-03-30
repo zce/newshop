@@ -5,7 +5,7 @@ module.exports = {
     per_page: 10
   },
   api: {
-    base: 'https://ns-api.uieee.com/api/v1',
+    base: 'https://ns-api.uieee.com/v1',
     key: 'newshop-frontend',
     secret: 'd8667837fce5a0270a35f4a8fa14be479fadc774'
   },
