@@ -8,6 +8,7 @@ const express = require('express')
 
 const hbsEngine = require('./engine')
 const middlewares = require('./middlewares')
+const error = require('./middlewares/error')
 
 // 载入路由表
 const routes = require('./routes')
@@ -34,20 +35,8 @@ app.use(middlewares)
 // 挂载路由表
 app.use(routes)
 
-// 处理 404 请求，转发到错误处理器
-app.use((req, res) => {
-  const err = new Error('Not Found')
-  err.status = 404
-  throw err
-})
-
-// 错误处理器
-app.use((err, req, res, next) => {
-  res.locals.status = err.status || 500
-  res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
-  res.status(res.locals.status).render('error')
-})
+// 错误处理
+app.use(error)
 
 // 导出应用程序对象
 module.exports = app
