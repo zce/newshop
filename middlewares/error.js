@@ -8,7 +8,6 @@ const middlewares = []
 
 // 处理 404 请求，转发到错误处理器
 middlewares.push((req, res, next) => {
-  next()
   const err = new Error('Not Found')
   err.status = 404
   throw err
