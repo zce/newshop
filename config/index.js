@@ -1,7 +1,7 @@
 module.exports = {
   site: {
     name: '品优购',
-    url: 'http://localhost:2080',
+    url: 'http://ad5fa3db.ngrok.io',
     per_page: 10
   },
   api: {

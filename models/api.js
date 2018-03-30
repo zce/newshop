@@ -16,8 +16,13 @@ module.exports = axios.create({
 })
 
 module.exports.interceptors.response.use(response => response, e => {
-  e.name = e.response.data.error
-  e.message = e.response.data.message
+  if (e.response) {
+    e.name = e.response.data.error
+    e.message = e.response.data.message
+  }
+  if (e.code === 'ECONNREFUSED') {
+    e.message = '数据接口链接异常'
+  }
   return Promise.reject(e)
 })
 

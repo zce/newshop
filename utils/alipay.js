@@ -1,5 +1,6 @@
 /**
  * 支付宝
+ * https://docs.open.alipay.com/api_1/
  * https://github.com/fym201/alipay-node-sdk#alipay-node-sdk
  */
 
@@ -38,7 +39,7 @@ exports.pay = order => {
     subject: subject,
     body: body,
     outTradeId: order.order_number,
-    timeout: '20m',
+    timeout: '30m',
     // 需要支付的金额
     amount: order.total_price,
     goodsType: 1,
@@ -47,4 +48,8 @@ exports.pay = order => {
   })
 
   return `${alipay.gateway}?${params}`
+}
+
+exports.verify = body => {
+  return alipay.signVerify(body)
 }

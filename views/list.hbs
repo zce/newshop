@@ -63,6 +63,7 @@
         </div>
       </div>
       <div class="goods-list">
+        {{#if products.length}}
         <ul class="yui3-g">
           {{#each products}}
           <li class="yui3-u-1-5">
@@ -78,10 +79,11 @@
           </li>
           {{/each}}
         </ul>
+        {{else}}
+        <h1 class="empty">啊哦！没有找到任何商品~</h1>
+        {{/if}}
       </div>
-      <div class="fr page">
-        {{pagination page totalPages}}
-      </div>
+      {{pagination page totalPages}}
     </div>
   </div>
 </div>

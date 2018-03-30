@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="/assets/css/page-cart.css">
 {{/contentFor}}
 
+{{#equal order.pay_status '未付款'}}
+
 <div class="checkout py-container">
   <div class="checkout-tit"><h4 class="tit-txt">填写并核对订单信息</h4></div>
   <div class="checkout-steps">
@@ -71,18 +73,48 @@
     </div>
   </div>
 </div>
+
 <div class="order-summary py-container">
-  {{#equal order.pay_status '未付款'}}
   <div class="static fl">总共 <i>{{order.products.length}}</i> 件商品，总商品金额 <i>￥{{order.total_price}}</i></div>
   <a class="sui-btn btn-danger btn-xlarge fr" href="/pay?n={{order.order_number}}" target="alipay_window">去支付</a>
-  {{else}}
-  {{#equal order.send_status '未发货'}}
-  <div class="static fl">订单支付成功，我们将尽快发货！</div>
-  {{else}}
-  <div class="static fl">我们已经发货，请耐心等候！</div>
-  {{/equal}}
-  {{/equal}}
 </div>
+
+{{else}}
+
+<div class="checkout py-container">
+  {{#equal order.send_status '未发货'}}
+  <div class="order-status">订单支付成功，我们将尽快发货！</div>
+  {{else}}
+  <div class="order-status">我们已经发货，请耐心等候！</div>
+  {{/equal}}
+
+  <div class="checkout-steps">
+    <div class="step-tit">
+      <h5>送货清单</h5>
+    </div>
+    <div class="sendGoods">
+      <span>商品清单：</span>
+      {{#each order.products}}
+      <ul class="yui3-g">
+        <li class="yui3-u-1-6">
+          <img src="{{thumbnail}}">
+        </li>
+        <li class="yui3-u-2-3">
+          <div class="desc">{{name}}</div>
+        </li>
+        <li class="yui3-u-1-12">
+          <div class="price">￥{{price}}</div>
+        </li>
+        <li class="yui3-u-1-12">
+          <div class="num">x<strong>{{amount}}</strong></div>
+        </li>
+      </ul>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+{{/equal}}
 
 <div id="add_address" class="sui-modal hide fade">
   <div class="modal-dialog">

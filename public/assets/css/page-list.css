@@ -197,10 +197,11 @@ ul.logo-list li {
 	padding: 5px 0;
 }
 
-.page {
-	height: 66px;
+.sui-pagination {
+	float: right;
+	margin-top: 10px;
+	margin-bottom: 50px;
 }
-
 
 .sui-pagination ul>.active>a, .sui-pagination ul>.active>span {
 	border-color: #e8351f;

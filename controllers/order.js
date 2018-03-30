@@ -20,16 +20,20 @@ exports.index = (req, res, next) => {
 
   Promise.all([
     // 订单信息
-    Order.get(req.session.user.id, n),
+    Order.get(n),
     // 用户收货地址
     User.getAllAddress(req.session.user.id)
   ])
     .then(([ order, addresses ]) => {
+      if (order.user_id !== req.session.user.id) {
+        // 当前订单不属于该用户
+        throw createError(404)
+      }
       res.locals.addresses = addresses
       res.locals.order = order
       res.render('order')
     })
-    .catch(e => next(createError(500, e)))
+    .catch(next)
 }
 
 /**

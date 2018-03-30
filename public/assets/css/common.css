@@ -13718,3 +13718,13 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 .error-message::before {
 	content: '!!! '
 }
+
+.empty {
+	margin: 50px 0 100px;
+	padding: 100px;
+	border: 1px solid #e0e0e0;
+	text-align: center;
+	font-size: 3em;
+	font-weight: normal;
+	color: #444;
+}

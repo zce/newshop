@@ -1,13 +1,3 @@
-.empty {
-	margin: 50px 0 100px;
-	padding: 100px;
-	border: 1px solid #e0e0e0;
-	text-align: center;
-	font-size: 3em;
-	font-weight: normal;
-	color: #444;
-}
-
 .allgoods {
 	margin-bottom: 30px;
 	min-height: 500px;
@@ -593,4 +583,15 @@ ul.send-detail li {
 
 .sui-modal {
 	width: 565px;
+}
+
+.order-status {
+  margin: 50px 0;
+  padding: 50px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  font-size: 3em;
+	font-weight: normal;
+	line-height: 1;
+  color: #c81623;
 }

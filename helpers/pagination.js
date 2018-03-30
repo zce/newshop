@@ -6,6 +6,9 @@ const url = require('url')
 const { SafeString } = require('express-hbs')
 
 module.exports = (current, total, opts) => {
+  // 没有更多的页面 分个毛呀
+  if (total < 2) return
+
   const urlObj = url.parse(opts.data.req.originalUrl, true)
 
   // 获取当前访问链接
