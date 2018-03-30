@@ -59,6 +59,8 @@ router.get('/account/active', auth.required, account.active)
 // shopping cart
 router.get('/cart', cart.index)
 router.get('/cart/add', cart.add)
+router.get('/cart/delete', cart.delete)
+router.get('/cart/update', cart.update)
 
 // order
 router.get('/checkout', auth.required, checkout.index)

@@ -33,15 +33,15 @@
                 <span class="price">￥{{price}}</span>
               </li>
               <li class="yui3-u-3-24">
-                <a href="#" class="increment mins">-</a>
+                <a href="{{#equal amount 1}}#{{else}}/cart/update?id={{id}}&amount={{calc amount '-' 1}}{{/equal}}" class="increment mins">-</a>
                 <input type="text" class="itxt" value="{{amount}}" minnum="1" autocomplete="off">
-                <a href="#" class="increment plus">+</a>
+                <a href="/cart/update?id={{id}}&amount={{calc amount '+' 1}}" class="increment plus">+</a>
               </li>
               <li class="yui3-u-4-24">
                 <span class="sum">￥{{format total}}</span>
               </li>
               <li class="yui3-u-1-24">
-                <a href="#none">删除</a>
+                <a href="/cart/delete?id={{id}}">删除</a>
               </li>
             </ul>
             {{/each}}

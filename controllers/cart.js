@@ -19,9 +19,13 @@ exports.index = (req, res, next) => {
 }
 
 /**
- * 添加购物车
+ * 添加购物车记录
  *
- * GET /cart/add?id=1&amount=1
+ * GET /cart/add
+ *
+ * query
+ * - id: 商品ID
+ * - amount: 商品数量
  */
 exports.add = (req, res, next) => {
   const id = ~~req.query.id
@@ -93,4 +97,75 @@ exports.add = (req, res, next) => {
       res.render('cart-add', { title: '添加购物车成功' })
     })
     .catch(e => next(createError(404, e)))
+}
+
+/**
+ * 删除购物车记录
+ *
+ * GET /cart/delete
+ *
+ * query
+ * - id: 商品ID
+ */
+exports.delete = (req, res, next) => {
+  const id = ~~req.query.id
+
+  if (!id) throw createError(400)
+
+  // 在线购物车
+  if (req.session.user) {
+    return Cart.delete(req.session.user.id, id)
+      .then(cart => res.redirect(req.headers.referer))
+  }
+
+  // 离线购物车
+  const cart = req.cookies[config.cookie.cart_key] || []
+
+  const remain = []
+  cart.forEach(item => {
+    if (item.id !== id) {
+      remain.push(item)
+    }
+  })
+
+  // 保存购物车信息到Cookie
+  const expires = new Date(Date.now() + config.cookie.cart_expires)
+  res.cookie(config.cookie.cart_key, remain, { expires })
+  res.redirect(req.headers.referer)
+}
+
+/**
+ * 修改购物车记录
+ *
+ * GET /cart/update
+ *
+ * query
+ * - id: 商品ID
+ * - amount: 商品数量
+ */
+exports.update = (req, res, next) => {
+  const id = ~~req.query.id
+  const amount = ~~req.query.amount
+
+  if (!id || amount < 1) throw createError(400)
+
+  // 在线购物车
+  if (req.session.user) {
+    return Cart.update(req.session.user.id, id, amount)
+      .then(cart => res.redirect(req.headers.referer))
+  }
+
+  // 离线购物车
+  const cart = req.cookies[config.cookie.cart_key] || []
+
+  cart.forEach(item => {
+    if (item.id === id) {
+      item.amount = amount
+    }
+  })
+
+  // 保存购物车信息到Cookie
+  const expires = new Date(Date.now() + config.cookie.cart_expires)
+  res.cookie(config.cookie.cart_key, cart, { expires })
+  res.redirect(req.headers.referer)
 }
