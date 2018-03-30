@@ -13,7 +13,7 @@
 // | API 路由规则
 // +----------------------------------------------------------------------
 
-Route::group('api/v1', function () {
+Route::group('v1', function () {
     // settings
     Route::get('settings/:key', 'Setting/read');
     Route::get('settings', 'Setting/index');
