@@ -45,7 +45,7 @@
 }
 
 .price,.sum,.shopname,.itxt {
-	font-family: "微软雅黑";
+	font-family: "å¾®è½¯é›…é»‘";
 }
 
 .shopname {
@@ -149,7 +149,7 @@ a.increment {
 
 .summoney {
 	color: #c81623;
-	font: 16px "微软雅黑";
+	font: 16px "å¾®è½¯é›…é»‘";
 }
 
 .sum-btn {
@@ -193,7 +193,7 @@ a.increment {
 .sui-nav.nav-tabs>li>a {
 	padding: 10px 20px;
 	border: 0;
-	font-family: "微软雅黑";
+	font-family: "å¾®è½¯é›…é»‘";
 }
 
 .sui-nav.nav-tabs>.active>a {
@@ -237,7 +237,7 @@ a.increment {
 
 .money {
 	color: #c81623;
-	font: 14px "微软雅黑";
+	font: 14px "å¾®è½¯é›…é»‘";
 }
 
 .incar {
@@ -358,7 +358,7 @@ a.increment {
 .checkout-steps {
 	padding: 25px;
 	border: 1px solid #ddd;
-	font-family: "微软雅黑";
+	font-family: "å¾®è½¯é›…é»‘";
 }
 
 .step-tit {
@@ -388,7 +388,7 @@ a.increment {
 
 .price {
 	color: #e12228;
-	font: 14px "微软雅黑";
+	font: 14px "å¾®è½¯é›…é»‘";
 	font-weight: 700;
 }
 
@@ -550,7 +550,7 @@ ul.send-detail li {
 }
 
 .list em {
-	font-family: "微软雅黑";
+	font-family: "å¾®è½¯é›…é»‘";
 }
 
 .trade {
@@ -570,15 +570,17 @@ ul.send-detail li {
 	margin: 0 0 10px;
 	padding: 15px 45px;
 	border-radius: 0;
-	font: 18px "微软雅黑";
+	font-size: 20px;
 	font-weight: 700;
 }
 
 .static {
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 100;
 	line-height: 1.2;
-	color: #555;
+	color: #444;
+	text-align: right;
+	margin-bottom: 20px;
 }
 
 .sui-modal {

@@ -75,8 +75,10 @@
 </div>
 
 <div class="order-summary py-container">
-  <div class="static fl">总共 <i>{{order.products.length}}</i> 件商品，总商品金额 <i>￥{{order.total_price}}</i></div>
-  <a class="sui-btn btn-danger btn-xlarge fr" href="/pay?n={{order.order_number}}" target="alipay_window">去支付</a>
+  <div class="static">总共 <i>{{order.products.length}}</i> 件商品，总商品金额 <i>￥{{order.total_price}}</i></div>
+  {{!-- dev only --}}
+  <p align="right">🐵: 账户: itjkek0510@sandbox.com, 密码: 111111, 支付密码: 111111</p>
+  <a class="sui-btn btn-danger btn-xlarge" href="/pay?n={{order.order_number}}" target="alipay_window">去支付</a>
 </div>
 
 {{else}}
