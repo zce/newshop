@@ -16,6 +16,7 @@ middlewares.push((req, res, next) => {
 // 错误处理器
 middlewares.push((err, req, res, next) => {
   if (req.app.get('env') === 'development') {
+    console.error(err)
     return new Youch(err, req).toHTML().then(html => res.send(html))
   }
 
