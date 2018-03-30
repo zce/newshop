@@ -198,6 +198,6 @@ class Address extends Base
 
         $record->save();
 
-        abort(204);
+        return response(null, 204);
     }
 }

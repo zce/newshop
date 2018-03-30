@@ -154,7 +154,7 @@ class User extends Base
 
         $user->delete();
 
-        abort(204);
+        return response(null, 204);
     }
 
     /**

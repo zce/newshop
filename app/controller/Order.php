@@ -291,6 +291,6 @@ class Order extends Base
 
         $order->delete();
 
-        abort(204);
+        return response(null, 204);
     }
 }
