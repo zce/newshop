@@ -14,8 +14,6 @@
 // +----------------------------------------------------------------------
 
 Route::group('api/v1', function () {
-    Route::get('', 'Index/index');
-
     // settings
     Route::get('settings/:key', 'Setting/read');
     Route::get('settings', 'Setting/index');
@@ -65,4 +63,7 @@ Route::group('api/v1', function () {
     Route::get('orders/:num', 'Order/read');
     Route::post('orders', 'Order/save');
     Route::get('orders', 'Order/index');
+
+    // index
+    Route::get('', 'Index/index');
 });
