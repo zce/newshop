@@ -1,7 +1,7 @@
 module.exports = {
   site: {
     name: '品优购',
-    url: 'https://ns-api.uieee.com',
+    url: 'https://ns.uieee.com',
     per_page: 10
   },
   api: {
