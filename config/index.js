@@ -35,6 +35,6 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'development') {
-  module.exports.site.url = 'http://localhost:51786'
-  module.exports.api.base = 'http://newshop.me/api/v1'
+  module.exports.site.url = 'http://localhost:3080'
+  module.exports.api.base = 'http://localhost:8000/v1'
 }
