@@ -30,17 +30,12 @@ class Order extends Base
     /**
      * 获取查询对象
      */
-    private function getQuery($user_id)
+    private function getQuery()
     {
-        if (empty($user_id)) {
-            abort(400, '必须提供用户ID');
-        }
-
         $fields = 'o.order_id as id, o.order_number as order_number, o.order_price as total_price, o.create_time as create_time, o.trade_no as trade_no, o.pay_status as pay_status, o.consignee_addr as express_address, e.express_com as express_company, e.express_nu as express_number, o.is_send as send_status, o.user_id as user_id';
 
         return model('Order')::alias('o')
             ->leftJoin('Express e', 'o.order_id = e.order_id')
-            ->where('o.user_id', $user_id)
             ->field($fields);
     }
 
@@ -59,16 +54,20 @@ class Order extends Base
     /**
      * 获取用户的全部订单记录
      *
-     * GET /users/:id/order
+     * GET /orders
      *
-     * params
-     * - id: 用户ID
+     * query
+     * - user_id: 用户ID
      */
-    public function index($id)
+    public function index()
     {
-        $user_id = intval($id);
+        $user_id = input('get.user_id/d');
 
-        $orders = $this->getQuery($user_id)->select();
+        if (empty($user_id)) {
+            abort(400, '必须提供用户ID');
+        }
+
+        $orders = $this->getQuery()->where('o.user_id', $user_id)->select();
 
         foreach ($orders as $item) {
             $item->pay_status = $item->pay_status === '1' ? '已付款' : '未付款';
@@ -86,21 +85,18 @@ class Order extends Base
     /**
      * 获取用户的单个订单记录
      *
-     * GET /users/:id/order/:order_num
+     * GET /orders/:num
      *
      * params
-     * - id: 用户ID
-     * - order_num: 订单编号
+     * - num: 订单编号
      */
-    public function read($id, $order_num)
+    public function read($num)
     {
-        $user_id = intval($id);
-
-        if (empty($order_num)) {
+        if (empty($num)) {
             abort(400, '必须提供订单编号');
         }
 
-        $order = $this->getQuery($user_id)->where('o.order_number', $order_num)->find();
+        $order = $this->getQuery()->where('o.order_number', $num)->find();
 
         if (empty($order)) {
             abort(404, '未找到对应订单信息');
@@ -111,6 +107,7 @@ class Order extends Base
 
         $order->products = $this->getOrderProducts($order->id);
 
+        // 总商品数量
         $order->total_amount = 0;
         foreach ($order->products as $p) {
             $order->total_amount += $p->amount;
@@ -122,17 +119,15 @@ class Order extends Base
     /**
      * 添加用户订单记录
      *
-     * POST /users/:id/order
-     *
-     * params
-     * - id: 用户ID
+     * POST /orders
      *
      * body
+     * - user_id: 用户ID
      * - items: 待添加到订单的商品ID数组
      */
-    public function save($id)
+    public function save()
     {
-        $user_id = intval($id);
+        $user_id = input('post.user_id/d');
 
         if (empty($user_id)) {
             abort(400, '必须提供用户ID');
@@ -140,7 +135,6 @@ class Order extends Base
 
         // 待添加到订单的商品ID数组 => [ '<id>' ]
         $items = explode(',', input('post.items/s'));
-
 
         if (flock($this->locker, LOCK_EX)) {
             // 获取用户购物车记录
@@ -213,41 +207,40 @@ class Order extends Base
         }
 
 
-        return $this->read($user_id, $order->order_number);
+        return $this->read($order->order_number);
     }
 
     /**
      * 更新用户单条订单记录
      *
-     * PATCH /users/:id/order/:order_num
+     * PATCH /orders/:num
      *
      * params
-     * - id: 用户ID
-     * - order_num: 订单编号
+     * - num: 订单编号
      *
      * body
      * - pay_status: 支付状态，支持 0: 未支付 / 1: 已支付
      * - send_status: 发货状态，支持 0: 未发货 / 1: 已发货
+     * - trade_no: 支付宝流水号
      * - express_address: 收货地址，格式：<name> <address> <phone> <code>
      */
-    public function update($id, $order_num)
+    public function update($num)
     {
-        $user_id = intval($id);
-
-        if (empty($order_num)) {
+        if (empty($num)) {
             abort(400, '必须提供订单编号');
         }
 
         $pay_status = input('patch.pay_status/b');
         $send_status = input('patch.send_status/b');
+        $trade_no = input('patch.trade_no/s');
         $express_address = input('patch.express_address/s');
 
-        if (!isset($pay_status) && !isset($send_status) && !isset($express_address)) {
+        if (!isset($pay_status) && !isset($send_status) && !isset($trade_no) && !isset($express_address)) {
             abort(422, '必须提供一个以上的修改字段');
         }
 
         // 查询当前数据
-        $order = model('Order')::where('user_id', $user_id)->where('order_number', $order_num)->find();
+        $order = model('Order')::where('order_number', $num)->find();
 
         if (empty($order)) {
             abort(404, '此订单记录不存在');
@@ -261,37 +254,34 @@ class Order extends Base
             $order->is_send = $send_status ? '是' : '否';
         }
 
+        if (isset($send_status)) {
+            $order->trade_no = $trade_no;
+        }
+
         if (isset($express_address)) {
             $order->consignee_addr = $express_address;
         }
 
         $order->save();
 
-        return $this->read($user_id, $order_num);
+        return $this->read($num);
     }
 
     /**
      * 删除用户单条订单记录
      *
-     * DELETE /users/:id/order/:order_num
+     * DELETE /order/:num
      *
      * params
-     * - id: 用户ID
-     * - order_num: 订单编号
+     * - num: 订单编号
      */
-    public function delete($id, $order_num)
+    public function delete($num)
     {
-        $user_id = intval($id);
-
-        if (empty($user_id)) {
-            abort(400, '必须提供用户ID');
-        }
-
-        if (empty($order_num)) {
+        if (empty($num)) {
             abort(400, '必须提供订单编号');
         }
 
-        $order = model('Order')::where('user_id', $user_id)->where('order_number', $order_num)->find();
+        $order = model('Order')::where('order_number', $num)->find();
 
         if (empty($order)) {
             abort(404, '此订单记录不存在');

@@ -45,7 +45,7 @@ class Category extends Base
      * GET /categories
      *
      * query
-     * - format: 输出格式，支持：tree（树状结构）
+     * - format: 输出格式，支持：tree（树状结构）（可选）
      */
     public function index()
     {
@@ -62,7 +62,7 @@ class Category extends Base
      * GET /categories/:id
      *
      * query
-     * - include: 包含额外资源，支持：parent, children
+     * - include: 包含额外资源，支持：parent, children（可选）
      */
     public function read($id)
     {

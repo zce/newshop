@@ -4,7 +4,8 @@
 
 ## TODOS
 
-- [] cart * order endpoint?
+- [ ] cart * order endpoint?
+- [ ] updated field update
 
 ## Docs
 

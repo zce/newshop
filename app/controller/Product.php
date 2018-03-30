@@ -175,15 +175,15 @@ class Product extends Base
      * GET /products
      *
      * query
-     * - page: 页码
-     * - per_page: 每页数量
-     * - limit: 限制数量（与 per_page 等效，优先使用 limit，不必同时使用）
-     * - offset: 越过条数（与 page 类似，优先使用 offset，不必同时使用）
-     * - sort: 排序规则，支持：commend / quantity / market_time / price / -price
-     * - filter: 筛选器，支持：cat，格式：key:value,key:value
-     * - include: 包含额外资源，支持：introduce, category
-     * - type: 资源类型，支持：like（猜你喜欢）
-     * - q: 搜索字段，多个关键词中间用空格分割
+     * - page: 页码（可选）
+     * - per_page: 每页数量（可选）
+     * - limit: 限制数量（与 per_page 等效，优先使用 limit，不必同时使用）（可选）
+     * - offset: 越过条数（与 page 类似，优先使用 offset，不必同时使用）（可选）
+     * - sort: 排序规则，支持：commend / quantity / market_time / price / -price（可选）
+     * - filter: 筛选器，支持：cat，格式：key:value,key:value（可选）
+     * - include: 包含额外资源，支持：introduce, category（可选）
+     * - type: 资源类型，支持：like（猜你喜欢）（可选）
+     * - q: 搜索字段，多个关键词中间用空格分割（可选）
      */
     public function index()
     {
@@ -211,13 +211,13 @@ class Product extends Base
      * - id: 分类ID
      *
      * query
-     * - page: 页码
-     * - per_page: 每页数量
-     * - limit: 限制数量（与 per_page 等效，优先使用 limit，不必同时使用）
-     * - offset: 越过条数（与 page 类似，优先使用 offset，不必同时使用）
-     * - sort: 排序规则，支持：commend / quantity / market_time / price / -price
-     * - include: 包含额外资源，支持：introduce, category
-     * - q: 搜索字段，多个关键词中间用空格分割
+     * - page: 页码（可选）
+     * - per_page: 每页数量（可选）
+     * - limit: 限制数量（与 per_page 等效，优先使用 limit，不必同时使用）（可选）
+     * - offset: 越过条数（与 page 类似，优先使用 offset，不必同时使用）（可选）
+     * - sort: 排序规则，支持：commend / quantity / market_time / price / -price（可选）
+     * - include: 包含额外资源，支持：introduce, category（可选）
+     * - q: 搜索字段，多个关键词中间用空格分割（可选）
      */
     public function category($id)
     {
@@ -234,7 +234,7 @@ class Product extends Base
      * - id: 商品ID
      *
      * query
-     * - include: 包含额外资源，支持：introduce, category, pictures
+     * - include: 包含额外资源，支持：introduce, category, pictures（可选）
      */
     public function read($id)
     {
