@@ -1,11 +1,11 @@
 module.exports = {
   site: {
     name: '品优购',
-    url: 'http://ad5fa3db.ngrok.io',
+    url: 'https://ns-api.uieee.com',
     per_page: 10
   },
   api: {
-    base: 'http://newshop.me/api/v1',
+    base: 'https://ns-api.uieee.com/api/v1',
     key: 'newshop-frontend',
     secret: 'd8667837fce5a0270a35f4a8fa14be479fadc774'
   },
@@ -32,4 +32,9 @@ module.exports = {
     cart_key: 'shopping_cart',
     cart_expires: 30 * 24 * 60 * 60 * 1000
   }
+}
+
+if (process.env.NODE_ENV === 'development') {
+  module.exports.site.url = 'http://localhost:51786'
+  module.exports.api.base = 'http://newshop.me/api/v1'
 }
