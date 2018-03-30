@@ -5,7 +5,7 @@
 
 namespace app\controller;
 
-class Demo extends Base
+class Index extends Base
 {
     public function index()
     {

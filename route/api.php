@@ -13,9 +13,9 @@
 // | API 路由规则
 // +----------------------------------------------------------------------
 
-Route::get('demo', 'Demo/index');
-
 Route::group('api/v1', function () {
+    Route::get('', 'Index/index');
+
     // settings
     Route::get('settings/:key', 'Setting/read');
     Route::get('settings', 'Setting/index');
