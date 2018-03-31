@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard --fix",
-    "dev": "cross-env NODE_ENV=development nodemon .",
-    "start": "cross-env NODE_ENV=production forever start .",
-    "restart": "cross-env NODE_ENV=production forever restart .",
-    "stop": "cross-env NODE_ENV=production forever stop ."
+    "dev": "cross-env NODE_ENV=development nodemon app",
+    "start": "cross-env NODE_ENV=production forever start app",
+    "restart": "cross-env NODE_ENV=production forever restart app",
+    "stop": "cross-env NODE_ENV=production forever stop app"
   },
   "repository": {
     "type": "git",

@@ -15,9 +15,6 @@ module.exports = {
     secure: true,
     name: '品优购',
     auth: { user: 'it@zce.me', pass: 'wtfijkthhxuvbjjg' },
-    // connectionTimeout: 1000,
-    // greetingTimeout: 1000,
-    // socketTimeout: 2000,
     debug: process.env.NODE_ENV === 'development'
   },
   alipay: {
@@ -34,7 +31,7 @@ module.exports = {
   }
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   module.exports.site.url = 'http://localhost:3080'
   module.exports.api.base = 'http://localhost:8000/v1'
 }

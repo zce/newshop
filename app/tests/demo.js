@@ -2,7 +2,7 @@
 const net = require('net')
 
 const client = net.createConnection(8000, 'localhost', () => {
-  //'connect' listener
+  // 'connect' listener
   console.log('connected to server!')
   client.write(`GET / HTTP/1.1
 Host: newshop.me
@@ -16,9 +16,6 @@ Accept: */*
 client.on('data', data => {
   console.log(data.toString())
 })
-
-
-
 
 // // const sleep = timeout => new Promise(resolve => {
 // //   setTimeout(() => resolve(new Date()), timeout)
@@ -40,7 +37,7 @@ client.on('data', data => {
 // //   console.timeEnd('timer')
 // // })
 
-// const { Cart } = require('./models')
+// const { Cart } = require('../models')
 
 // const cart = [
 //   { id: 738, amount: 1 },
@@ -64,4 +61,3 @@ client.on('data', data => {
 // //   .then(() => console.log('done'))
 
 // // 在服务端解决并发问题后建议使用并行结构
-

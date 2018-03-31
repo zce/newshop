@@ -10,23 +10,25 @@ const config = require('../config')
 
 const middlewares = []
 
-// public 文件夹的静态文件服务
-middlewares.push(serveStatic(path.join(__dirname, '../public')))
+// public static serve（Dev only）
+if (process.env.NODE_ENV !== 'production') {
+  middlewares.push(serveStatic(path.join(__dirname, '../public')))
+}
 
-// 请求头中的 cookie 解析
+// Cookie parser
 middlewares.push(cookieParser())
 
-// // json 格式请求体解析
+// // application/json request body parser
 // middlewares.push(bodyParser.json())
 
-// urlencoded 格式请求体解析
+// application/x-www-form-urlencoded request body parser
 middlewares.push(bodyParser.urlencoded({ extended: false }))
 
-// 支持 Session
+// Session support
 middlewares.push(session({ secret: config.session.secret, resave: false, saveUninitialized: false }))
 
-// 获取全局所需数据
+// got globals
 middlewares.push(globals)
 
-// 导出模块
+// export all middlewares
 module.exports = middlewares

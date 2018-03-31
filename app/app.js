@@ -3,7 +3,7 @@
  * https://www.imooc.com/article/13313
  */
 
-// 内置模块依赖
+const path = require('path')
 const express = require('express')
 
 const hbsEngine = require('./engine')
@@ -24,7 +24,7 @@ app.set('strict routing', true)
 app.set('view engine', 'hbs')
 
 // 配置模板文件所在目录
-app.set('views', './views')
+app.set('views', path.join(__dirname, './views'))
 
 // 配置 hbs 模板文件的模板引擎
 app.engine('hbs', hbsEngine)

@@ -3,5 +3,6 @@
  */
 
 module.exports = (a, opt, b, opts) => {
-  return eval(`${a} ${opt} ${b}`);
+  /* eslint no-eval: 0 */
+  return eval(`${a} ${opt} ${b}`)
 }
