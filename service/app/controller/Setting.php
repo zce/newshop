@@ -8,9 +8,9 @@ namespace app\controller;
 class Setting extends Base
 {
     private $settings = [
-        'site_title' => '品优购 - 品质、优选、安心购！',
-        'site_description' => '品优购 - 品质、优选、安心购！',
-        'site_keywords' => '品优购, 品质, 优选, 安心购',
+        'site_title' => '极光心选 - 用心选',
+        'site_description' => '极光心选 - 用心选',
+        'site_keywords' => '极光心选 - 用心选',
         'site_footer' => '<p>Copyright &copy; zce.me</p><p>Source: https://github.com/zce/newshop</p>',
         'home_slides' => [
             [ 'title' => '人气好书榜', 'image' => '/static/banner1.jpg', 'link' => 'https://ns.uieee.com/sale/1' ],
