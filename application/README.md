@@ -9,7 +9,7 @@
 ## Deploy
 
 ```shell
-$ sudo ln -s /var/www/ns.uieee.com/ns.uieee.com.conf /etc/nginx/sites-available/ns.uieee.com.conf
+$ sudo ln -s /var/www/newshop/application/ns.uieee.com.conf /etc/nginx/sites-available/ns.uieee.com.conf
 $ sudo ln -s /etc/nginx/sites-available/ns.uieee.com.conf /etc/nginx/sites-enabled/ns.uieee.com.conf
 $ sudo rm -rf /etc/nginx/sites-enabled/default
 $ sudo rm -rf /etc/nginx/sites-available/default
