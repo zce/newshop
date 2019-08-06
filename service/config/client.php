@@ -14,5 +14,6 @@
 // +----------------------------------------------------------------------
 
 return [
-    'newshop-frontend' => 'd8667837fce5a0270a35f4a8fa14be479fadc774'
+    'newshop-frontend' => 'd8667837fce5a0270a35f4a8fa14be479fadc774',
+    'zce' => 'zce'
 ];
