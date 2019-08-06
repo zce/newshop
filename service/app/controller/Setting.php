@@ -11,7 +11,7 @@ class Setting extends Base
         'site_title' => '品优购 - 品质、优选、安心购！',
         'site_description' => '品优购 - 品质、优选、安心购！',
         'site_keywords' => '品优购, 品质, 优选, 安心购',
-        'site_footer' => '<p>地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100</p><p>京ICP备08001421号京公网安备110108007702</p>',
+        'site_footer' => '<p>Copyright &copy; zce.me</p><p>Source: https://github.com/zce/newshop</p>',
         'home_slides' => [
             [ 'title' => '人气好书榜', 'image' => '/static/banner1.jpg', 'link' => 'https://ns.uieee.com/sale/1' ],
             [ 'title' => '低至一元秒杀', 'image' => '/static/banner2.jpg', 'link' => 'https://ns.uieee.com/sale/2' ],
