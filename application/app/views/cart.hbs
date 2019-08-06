@@ -1,0 +1,67 @@
+{{!< portal}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-cart.css">
+{{/contentFor}}
+
+<div class="py-container">
+  {{#if cart.totalAmount}}
+  <form class="allgoods" action="/checkout">
+    <h4>全部商品</h4>
+    <div class="cart-main">
+      <div class="yui3-g cart-th">
+        <div class="yui3-u-1-24"><input type="checkbox" checked></div>
+        <div class="yui3-u-12-24">商品</div>
+        <div class="yui3-u-3-24">单价（元）</div>
+        <div class="yui3-u-3-24">数量</div>
+        <div class="yui3-u-4-24">小计（元）</div>
+        <div class="yui3-u-1-24">操作</div>
+      </div>
+      <div class="cart-item-list">
+        <div class="cart-body">
+          <div class="cart-list">
+            {{#each cart.products}}
+            <ul class="goods-list yui3-g">
+              <li class="yui3-u-1-24"><input type="checkbox" name="choose" value="{{id}}" checked></li>
+              <li class="yui3-u-12-24">
+                <div class="good-item">
+                  <div class="item-img"><a href="/item/{{id}}"><img src="{{thumbnail}}"></a></div>
+                  <div class="item-msg"><a href="/item/{{id}}">{{name}}</a></div>
+                </div>
+              </li>
+              <li class="yui3-u-3-24">
+                <span class="price">￥{{price}}</span>
+              </li>
+              <li class="yui3-u-3-24">
+                <a href="{{#equal amount 1}}#{{else}}/cart/update?id={{id}}&amount={{calc amount '-' 1}}{{/equal}}" class="increment mins">-</a>
+                <input type="text" class="itxt" value="{{amount}}" minnum="1" autocomplete="off">
+                <a href="/cart/update?id={{id}}&amount={{calc amount '+' 1}}" class="increment plus">+</a>
+              </li>
+              <li class="yui3-u-4-24">
+                <span class="sum">￥{{format total}}</span>
+              </li>
+              <li class="yui3-u-1-24">
+                <a href="/cart/delete?id={{id}}">删除</a>
+              </li>
+            </ul>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-tool">
+      <div class="money-box">
+        <div class="sumprice">
+          <span><strong>{{cart.totalAmount}}</strong> 件商品</span><br>
+          <span><em>总价（不含运费）：</em><i class="summoney">￥{{format cart.totalPrice}}</i></span>
+        </div>
+        <div class="sumbtn">
+          <button class="sum-btn">结算</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  {{else}}
+  <h1 class="empty">啊哦！您的购物车空空如也~</h1>
+  {{/if}}
+</div>

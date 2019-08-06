@@ -1,0 +1,121 @@
+{{!< portal}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-member.css">
+{{/contentFor}}
+
+<div class="py-container">
+  <div class="yui3-g home">
+    {{> member-sidebar}}
+    <!--右侧主内容-->
+    <div class="yui3-u-5-6 body">
+      <div class="aboutme yui3-g">
+        <div class="yui3-u-1-4 set info">
+          <div class="u-pic"><img src="/uploads/avatar-{{@user.id}}.png"></div>
+          <div class="u-info">
+            <div class="u-name">{{@user.username}}</div>
+            <div class="u-rank">VIP俱乐部</div>
+            <div class="u-safe">账号状态：{{#if @user.actived}}已{{else}}未{{/if}}激活</div>
+            <div class="u-medal">我的勋章：无</div>
+          </div>
+        </div>
+        <div class="yui3-u-1-4 set fixed">
+          <div class="title"><strong>我的资产</strong></div>
+          <div class="acc-item">
+            <div class="list1"><i></i><b>积分兑换商品</b><span><em>0</em>分</span></div>
+            <div class="list2"><i></i><b>抵用券</b><span><em>0</em>分</span></div>
+            <div class="list3"><i></i><b>礼品卡余额</b><span><em>0</em>分</span></div>
+            <div class="list4"><i></i><b>账号余额</b><span><em>0</em>分</span></div>
+          </div>
+        </div>
+        <div class="yui3-u-1-4 set package">
+          <div class="title">
+            <strong>我的钱包</strong>
+          </div>
+          <div class="td">
+            <ul class="yui3-g">
+              <li class="yui3-u-1-2"><span>能购物</span><i class="td1"></i></li>
+              <li class="yui3-u-1-2"><span>高收益</span><i class="td2"></i></li>
+              <li class="yui3-u-1-2"><span>够安全</span><i class="td3"></i></li>
+              <li class="yui3-u-1-2"><span>够灵活</span><i class="td4"></i></li>
+            </ul>
+            <div class="space-x"></div>
+            <div class="space-y"></div>
+          </div>
+        </div>
+        <div class="yui3-u-5-24 ads">
+          <img src="/uploads/account.png">
+        </div>
+      </div>
+      <div class="discount yui3-g">
+        <div class="yui3-u-1-3 minus">
+          <div class="title"><strong>优惠券</strong></div>
+          <div class="quan">
+            <div id="quan-list" data-ride="carousel" data-interval="4000" class="sui-carousel slide">
+              <ul class="carousel-inner">
+                <li class="active item"><img src="/uploads/quan.png"></li>
+                <li class="item"><img src="/uploads/quan.png"></li>
+                <li class="item"><img src="/uploads/quan.png"></li>
+              </ul>
+              <a href="#quan-list" data-slide="prev" class="carousel-control left">‹</a>
+              <a href="#quan-list" data-slide="next" class="carousel-control right">›</a>
+            </div>
+          </div>
+        </div>
+        <div class="yui3-u-1-3 change">
+          <div class="title"><strong>积分兑换</strong></div>
+          <div class="jifen">
+            <div class="fl"><img src="uploads/duihuan.png"></div>
+            <div class="fr">
+              <span>FancyFeast珍致 猫头鹰 精选金枪鱼肉配人工蟹肉条</span>
+              <br>
+              <span class="fen"><i>1000</i>积分</span>
+            </div>
+          </div>
+          <div class="fr dui"><a href="#">立即兑换>></a></div>
+        </div>
+        <div class="yui3-u-1-3 charge">
+          <div class="title"><strong>立即充值</strong></div>
+          <div class="chong">
+            <form class="sui-form form-horizontal">
+              <div class="control-group">
+                <label for="inputPhone" class="control-label">手机号码：</label>
+                <div class="controls">
+                  <input type="text" id="inputPhone" placeholder="请输入手机号码">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">&nbsp;</label>
+                <button type="submit" class="sui-btn btn-primary">立即充值</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="ever">
+        <ul class="sui-nav nav-tabs">
+          <li class="active"><a href="#collect" data-toggle="tab">商品收藏</a></li>
+          <li><a href="#orders" data-toggle="tab">购物踪迹</a></li>
+        </ul>
+        <div class="clearfix"></div>
+        <div class="tab-content">
+          <div id="collect" class="tab-pane active">
+            <div class="like-list">
+              <ul class="yui3-g">
+                <li class="yui3-u-1-4">
+                  <div class="p-img"><img src="uploads/mobile.png"></div>
+                  <div class="attr"><em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em></div>
+                  <div class="price"><strong>¥3699.00</strong></div>
+                  <div class="commit"><i class="command">已有6人评价</i></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="orders" class="tab-pane">
+            <p>购物踪迹</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

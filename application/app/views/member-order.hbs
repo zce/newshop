@@ -1,0 +1,54 @@
+{{!< portal}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-member.css">
+{{/contentFor}}
+
+<div class="py-container">
+  <div class="yui3-g home">
+    {{> member-sidebar}}
+    <!--右侧主内容-->
+    <div class="yui3-u-5-6 body">
+      <div class="order-detail">
+        <div class="ever">
+          <div id="all" class="tab-pane active">
+            <div class="orders">
+              {{#each orders}}
+              <table class="sui-table table-bordered">
+                <thead>
+                  <tr>
+                    <th colspan="4">
+                      <span class="ordertitle">{{create_time}}　订单编号：<a href="/order?n={{order_number}}">{{order_number}}</a></span>
+                      <span class="pull-right delete"><img src="/assets/img/delete.png"></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      {{#each products}}
+                      <div class="goods-info">
+                        <img src="{{thumbnail}}">
+                        <a href="/item/{{id}}" class="block-text">{{name}}</a>
+                        <span>x{{amount}}</span>
+                      </div>
+                      {{/each}}
+                    </td>
+                    <td width="10%" class="center">{{express_address}}</td>
+                    <td width="13%" class="center">
+                      <span>总金额 ￥<em>{{total_price}}</em></span><br><span>在线支付</span>
+                    </td>
+                    <td width="10%" class="center">
+                      <span>{{pay_status}}</span><br><span>{{send_status}}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

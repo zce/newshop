@@ -1,0 +1,113 @@
+{{!< portal}}
+
+{{#contentFor 'styles'}}
+<link rel="stylesheet" href="/assets/css/page-member.css">
+{{/contentFor}}
+
+<div class="py-container">
+  <div class="yui3-g home">
+    {{> member-sidebar}}
+    <!--右侧主内容-->
+    <div class="yui3-u-5-6 body">
+      {{#@user}}
+      <form class="sui-form form-horizontal profile-form" action="/member/profile" method="post" enctype="multipart/form-data">
+        <div class="control-group">
+          <label for="username" class="control-label">用户名：</label>
+          <div class="controls">
+            <input type="text" id="username" class="input-xfat" value="{{username}}" readonly title="用户名不可以被修改">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="avatar" class="control-label">头像：</label>
+          <div class="controls">
+            <label class="avatar-box">
+              <img src="/uploads/avatar-{{id}}.png" width="80" title="点击上传新头像">
+              <input type="file" id="avatar" name="avatar">
+            </label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">性别：</label>
+          <div class="controls">
+            <label>
+              <input type="radio" name="gender" value="男"{{#equal gender '男'}} checked{{/equal}}>
+              <span>男</span>
+            </label>
+            <label>
+              <input type="radio" name="gender" value="女"{{#equal gender '女'}} checked{{/equal}}>
+              <span>女</span>
+            </label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="qq" class="control-label">QQ：</label>
+          <div class="controls">
+            <input type="text" id="qq" class="input-xfat" name="qq" value="{{qq}}">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="phone" class="control-label">手机：</label>
+          <div class="controls">
+            <input type="text" id="phone" class="input-xfat" name="phone" value="{{phone}}">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="hobby" class="control-label">兴趣：</label>
+          <div class="controls">
+            <textarea id="hobby" class="input-xfat" name="hobby" cols="80" rows="3">{{hobby}}</textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="introduce" class="control-label">简介：</label>
+          <div class="controls">
+            <textarea id="introduce" class="input-xfat" name="introduce" cols="80" rows="6">{{introduce}}</textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">&nbsp;</label>
+          <div class="controls">
+            {{#if message}}<p class="error-message">{{message}}</p>{{/if}}
+            <button type="submit" class="sui-btn btn-primary btn-xlarge">保存</button>
+          </div>
+        </div>
+      </form>
+      {{/@user}}
+    </div>
+  </div>
+</div>
+
+{{#contentFor 'scripts'}}
+<script>
+  $(function ($) {
+    // dataUri data:<mimetype>[; charset], <content>
+    $('#avatar').on('change', function () {
+      // var $this = $(this)
+      // // 将用户选择的图片显示出来
+      // // 判断当前文件域有没有选中文件
+      // // attr 是文档属性
+      // // prop 是访问dom属性
+      // if (!$this.prop('files')[0]) return
+      // var file = $this.prop('files')[0]
+      //
+      // var reader = new FileReader()
+      // reader.readAsDataURL(file)
+      //
+      // reader.onload = function () {
+      //   $this.prev().fadeOut(function () {
+      //     $(this).attr('src', reader.result).fadeIn()
+      //   })
+      // }
+
+      // Object URL
+      // 是一种页面级别给媒体对象分配的临时 URL 生命周期到 DOM 销毁为止或者手动吊销
+      var $this = $(this)
+      if (!$this.prop('files')[0]) return
+      var file = $this.prop('files')[0]
+      var url = URL.createObjectURL(file)
+      $this.prev().fadeOut(function () {
+        $(this).attr('src', url).fadeIn()
+      })
+    })
+  })
+</script>
+{{/contentFor}}

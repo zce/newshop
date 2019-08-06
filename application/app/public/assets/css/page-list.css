@@ -1,0 +1,218 @@
+.main {
+	margin: 10px 0;
+}
+
+em,i {
+	font-style: normal;
+}
+
+.bread,.selector,.type-wrap,.value {
+	overflow: hidden;
+}
+
+.bread,.details,.hot-sale {
+	margin-bottom: 5px;
+}
+
+.selector {
+	margin-bottom: 25px;
+}
+
+.bread .form-dark {
+	margin-bottom: 5px;
+}
+
+.hot-sale,.selector,.filter {
+	border: 1px solid #ddd;
+}
+
+.key {
+	padding: 10px 10px 0 15px;
+}
+
+.type-wrap ul li {
+	float: left;
+	list-style-type: none;
+}
+
+.sui-btn {
+	border-radius: 0;
+}
+
+.bread .sui-breadcrumb {
+	margin: 0;
+	padding: 3px 15px;
+}
+
+.type-wrap {
+	position: relative;
+	margin: 0;
+	border-top: 1px solid #ddd;
+}
+
+.type-wrap:first-child {
+	border-top: 0;
+}
+
+.type-wrap .key {
+	width: 100px;
+	background: #f1f1f1;
+	text-align: right;
+	line-height: 26px;
+}
+
+.logo .brand {
+	padding-bottom: 87px;
+}
+
+.type-wrap .value {
+	padding: 10px 0 0 15px;
+	color: #333;
+}
+
+.type-wrap .logos {
+	margin-left: 120px;
+	padding-right: 90px;
+}
+
+.type-wrap .ext {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.ext .sui-btn {
+	padding: 0 10px;
+	background: #fff;
+}
+
+.ext a {
+	color: #666;
+}
+
+ul.type-list li {
+	display: block;
+	margin-right: 30px;
+	line-height: 26px;
+}
+
+ul.type-list li a {
+	padding: 2px;
+	color: #555;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+ul.type-list li a.redhover {
+	padding: 2px;
+	background: #C81623;
+	color: #fff;
+	text-decoration: none;
+}
+
+ul.type-list li a.grayhover {
+	color: #555;
+}
+
+ul.logo-list li {
+	margin: -1px -1px 0 0;
+	width: 105px;
+	border: 1px solid #E4E4E4;
+}
+
+.filter {
+	background: #F1F1F1;
+}
+
+.sui-navbar {
+	margin-bottom: 0;
+}
+
+.sui-navbar .navbar-inner {
+	padding-left: 0;
+	border-radius: 0;
+}
+
+.sui-navbar .sui-nav>.active>a {
+	background: #c81623;
+	color: #fff;
+}
+
+.sui-navbar .sui-nav>.active>a:hover {
+	background: #d01926;
+	color: #fff;
+}
+
+.goods-list {
+	margin: 20px 0;
+}
+
+.goods-list ul li {
+	padding: 15px;
+	box-sizing: border-box;
+	line-height: 28px;
+	transition: box-shadow .3s;
+}
+
+.goods-list ul li:hover {
+	box-shadow: 0 0 10px 2px #ededed;
+}
+
+.goods-list .p-img {
+	margin-bottom: 10px;
+}
+
+.goods-list .p-img img {
+	width: 215px;
+	height: 245px;
+	background: #fafafa center center no-repeat url(../img/loading.svg);
+	opacity: .4;
+	transition: opacity 1.5s;
+}
+
+.goods-list .p-img img[src] {
+	opacity: 1;
+}
+
+.price strong {
+	font-size: 1.4em;
+}
+
+.attr {
+	height: 45px;
+	overflow: hidden;
+	line-height: 1.8;
+}
+
+.attr a {
+	color: #444;
+}
+
+.price {
+	color: #c81623;
+	font-size: 18px;
+}
+
+.operate {
+	padding: 5px 0;
+}
+
+.sui-pagination {
+	float: right;
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+
+.sui-pagination ul>.active>a, .sui-pagination ul>.active>span {
+	border-color: #e8351f;
+	background-color: #ea4a36;
+}
+
+.sui-pagination ul>li>a, .sui-pagination ul>li>span {
+	color: #555;
+}
+
+.sui-pagination ul>.active>a:focus, .sui-pagination ul>.active>a:hover, .sui-pagination ul>.active>span:focus, .sui-pagination ul>.active>span:hover {
+	border-color: #e33019;
+	background-color: #e64630;
+}

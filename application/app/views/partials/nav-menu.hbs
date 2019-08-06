@@ -1,0 +1,28 @@
+<div class="all-sorts-list">
+  <div class="yui3-u Left all-sort">
+    <h4>全部商品分类</h4>
+  </div>
+  <div class="sort">
+    <div class="all-sort-list2">
+      {{#each categories}}
+      <div class="item">
+        <h3><a href="/list/{{id}}">{{name}}</a></h3>
+        <div class="item-list clearfix">
+          <div class="subitem">
+            {{#each children}}
+            <dl>
+              <dt><a href="/list/{{id}}">{{name}}</a></dt>
+              <dd>
+                {{#each children}}
+                <em><a href="/list/{{id}}">{{name}}</a></em>
+                {{/each}}
+              </dd>
+            </dl>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

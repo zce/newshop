@@ -1,0 +1,27 @@
+{{!< portal}}
+
+{{#contentFor 'head'}}
+<style>
+.error {
+  padding: 100px 0 160px;
+  text-align: center;
+}
+
+.status {
+  font-size: 160px;
+  line-height: 1.2;
+  color: rgba(0, 0, 0, .1);
+}
+
+.message {
+  font-size: 20px;
+  line-height: 2;
+  color: #555;
+}
+</style>
+{{/contentFor}}
+<div class="py-container error">
+  <h1 class="status">{{status}}</h1>
+  <p class="message">{{message}}</p>
+  <a href="/">&larr; 返回首页</a>
+</div>
